@@ -1,40 +1,30 @@
-name: Validate Datasets
+name: Validate datasets
 
 on:
   pull_request:
-    paths:
-      - 'data/*.json'
   push:
-    branches: [main]
-    paths:
-      - 'data/*.json'
+    branches: ["main"]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '18'
+          python-version: "3.11"
 
-      - name: Install dependencies
-        run: npm install ajv ajv-formats
-
-      - name: Validate JSON Schema
+      - name: Install deps
         run: |
-          node scripts/validate-schema.js
+          python -m pip install --upgrade pip
+          pip install jsonschema
 
-      - name: Check for duplicates
+      - name: Validate data
         run: |
-          node scripts/check-duplicates.js
-
-      - name: Verify alphabetical order
-        run: |
-          node scripts/check-sort.js
-
-      - name: Validate domain format
-        run: |
-          node scripts/validate-domains.js
+          python scripts/validate_data.py
