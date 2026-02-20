@@ -1,6 +1,29 @@
+# Dependencies (install with npm install)
 node_modules/
-.DS_Store
-*.log
+
+# API / backend (lives in dontpoke.me or separate backend repo)
+api/
+includes/
+
+# Environment and secrets
 .env
 .env.local
+.env.*.local
+
+# Local / OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Build / IDE (non-essential to dataset and CI)
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Generated at runtime (e.g. by parse-issue.js)
 submission.json
+
+# Local docs (audit notes, not part of public repo)
+docs/GIT_AUDIT.md
