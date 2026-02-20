@@ -1,0 +1,6 @@
+# Default owners for everything in the repo
+*       @DontPokeMe
+
+# Data and schema - require maintainer review
+/data/  @DontPokeMe
+/schema/ @DontPokeMe

@@ -1,0 +1,16 @@
+{
+  "name": "known-link-shorteners",
+  "private": true,
+  "description": "Community-maintained database of URL shorteners, redirectors, and tracking links",
+  "scripts": {
+    "validate": "node scripts/validate-schema.js",
+    "check-duplicates": "node scripts/check-duplicates.js",
+    "check-sort": "node scripts/check-sort.js",
+    "validate-domains": "node scripts/validate-domains.js",
+    "ci": "npm run validate && npm run check-duplicates && npm run check-sort && npm run validate-domains"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
+  }
+}

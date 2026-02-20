@@ -1,0 +1,40 @@
+name: Validate Datasets
+
+on:
+  pull_request:
+    paths:
+      - 'data/*.json'
+  push:
+    branches: [main]
+    paths:
+      - 'data/*.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install ajv ajv-formats
+
+      - name: Validate JSON Schema
+        run: |
+          node scripts/validate-schema.js
+
+      - name: Check for duplicates
+        run: |
+          node scripts/check-duplicates.js
+
+      - name: Verify alphabetical order
+        run: |
+          node scripts/check-sort.js
+
+      - name: Validate domain format
+        run: |
+          node scripts/validate-domains.js

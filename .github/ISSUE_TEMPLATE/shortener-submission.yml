@@ -1,0 +1,60 @@
+name: Shortener / Redirector / Tracking Submission
+description: Submit a new domain for the known link shorteners database
+title: "[Submission] "
+labels: ["shortener-submission", "submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! Please fill out the form below. See [CONTRIBUTING.md](https://github.com/DontPokeMe/known-link-shorteners/blob/main/CONTRIBUTING.md) for requirements.
+
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: "Lowercase domain only (e.g. bit.ly). No paths or protocol."
+      placeholder: "example.co"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: "Category of this domain"
+      options:
+        - shortener
+        - redirector
+        - tracking
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      description: "Current status of the service"
+      options:
+        - active
+        - defunct
+        - malicious
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (URLs)
+      description: "At least one URL as evidence (one per line). e.g. service homepage, documentation, or dontpoke.me expander result."
+      placeholder: |
+        https://example.co/
+        https://dontpoke.me/tools/link-expander?url=https://example.co/abc
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (optional)
+      description: "Any additional context"
+      placeholder: "Optional description or context"

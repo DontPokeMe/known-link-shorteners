@@ -1,0 +1,514 @@
+[
+  {
+    "domain": "adf.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://adf.ly/"],
+    "notes": "Ad-supported URL shortener"
+  },
+  {
+    "domain": "amzn.to",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://affiliate-program.amazon.com/"],
+    "notes": "Amazon affiliate link shortener"
+  },
+  {
+    "domain": "apple.co",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://developer.apple.com/"],
+    "notes": "Apple URL shortener"
+  },
+  {
+    "domain": "bbc.in",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.bbc.com/"],
+    "notes": "BBC short links"
+  },
+  {
+    "domain": "bit.do",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://bit.do/"],
+    "notes": "Free URL shortener with custom slugs"
+  },
+  {
+    "domain": "bit.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://dontpoke.me/tools/link-expander?url=https://bit.ly/test"],
+    "notes": "One of the most popular URL shorteners"
+  },
+  {
+    "domain": "bl.ink",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://bl.ink/"],
+    "notes": "Short link service with analytics"
+  },
+  {
+    "domain": "buff.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://buffer.com/"],
+    "notes": "Buffer social media link shortener"
+  },
+  {
+    "domain": "clck.ru",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://clck.ru/"],
+    "notes": "Yandex URL shortener"
+  },
+  {
+    "domain": "clk.ink",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://clk.ink/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "cutt.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://cutt.ly/"],
+    "notes": "Custom short URLs with analytics"
+  },
+  {
+    "domain": "dailym.ai",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.dailymail.co.uk/"],
+    "notes": "Daily Mail short links"
+  },
+  {
+    "domain": "db.tt",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.dropbox.com/"],
+    "notes": "Dropbox file link shortener"
+  },
+  {
+    "domain": "fb.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://developers.facebook.com/docs/sharing/reference/share-dialog"],
+    "notes": "Facebook short links"
+  },
+  {
+    "domain": "fb.watch",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.facebook.com/"],
+    "notes": "Facebook Watch video short links"
+  },
+  {
+    "domain": "flip.it",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://flipboard.com/"],
+    "notes": "Flipboard short links"
+  },
+  {
+    "domain": "g.co",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://support.google.com/webmasters/answer/76329"],
+    "notes": "Google short links"
+  },
+  {
+    "domain": "goo.gl",
+    "type": "shortener",
+    "status": "defunct",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://support.google.com/websearch/answer/9012508"],
+    "notes": "Google URL Shortener, discontinued in 2019"
+  },
+  {
+    "domain": "ig.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.instagram.com/"],
+    "notes": "Instagram short links"
+  },
+  {
+    "domain": "is.gd",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://is.gd/"],
+    "notes": "Simple privacy-focused shortener"
+  },
+  {
+    "domain": "j.mp",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://bitly.com/"],
+    "notes": "Bitly alternate domain"
+  },
+  {
+    "domain": "kutt.it",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://kutt.it/"],
+    "notes": "Open-source URL shortener"
+  },
+  {
+    "domain": "link.host",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://link.host/"],
+    "notes": "Short link hosting service"
+  },
+  {
+    "domain": "link.to",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://link.to/"],
+    "notes": "URL shortener"
+  },
+  {
+    "domain": "linktr.ee",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://linktr.ee/"],
+    "notes": "Link-in-bio and short link service"
+  },
+  {
+    "domain": "lnkd.in",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.linkedin.com/help/linkedin/answer/46788"],
+    "notes": "LinkedIn short links"
+  },
+  {
+    "domain": "mcaf.ee",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.mcafee.com/"],
+    "notes": "McAfee link scanner shortener"
+  },
+  {
+    "domain": "nbcnews.to",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.nbcnews.com/"],
+    "notes": "NBC News short links"
+  },
+  {
+    "domain": "nyti.ms",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.nytimes.com/"],
+    "notes": "New York Times short links"
+  },
+  {
+    "domain": "ouo.io",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://ouo.io/"],
+    "notes": "Ad-supported shortener"
+  },
+  {
+    "domain": "ow.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.hootsuite.com/"],
+    "notes": "Hootsuite URL shortener"
+  },
+  {
+    "domain": "po.st",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.radiumone.com/"],
+    "notes": "RadiumOne short links"
+  },
+  {
+    "domain": "prf.hn",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.proofhq.com/"],
+    "notes": "Proof short links"
+  },
+  {
+    "domain": "rb.gy",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://rebrand.ly/"],
+    "notes": "Rebrandly alternate domain"
+  },
+  {
+    "domain": "rebrand.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.rebrandly.com/"],
+    "notes": "Branded short link service"
+  },
+  {
+    "domain": "reut.rs",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.reuters.com/"],
+    "notes": "Reuters short links"
+  },
+  {
+    "domain": "s.id",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://s.id/"],
+    "notes": "Indonesian short link service"
+  },
+  {
+    "domain": "share.as",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://share.as/"],
+    "notes": "Share link shortener"
+  },
+  {
+    "domain": "short.cm",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://short.cm/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "short.io",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://short.io/"],
+    "notes": "Custom domain short links"
+  },
+  {
+    "domain": "short.link",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://short.link/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "shorturl.at",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.shorturl.at/"],
+    "notes": "Free URL shortener"
+  },
+  {
+    "domain": "shorturl.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://shorturl.com/"],
+    "notes": "URL shortening service"
+  },
+  {
+    "domain": "shrinkme.io",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://shrinkme.io/"],
+    "notes": "URL shortener with analytics"
+  },
+  {
+    "domain": "small.su",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://small.su/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "soo.gd",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://soo.gd/"],
+    "notes": "Privacy-focused shortener"
+  },
+  {
+    "domain": "t.co",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://help.twitter.com/en/using-twitter/url-shortener"],
+    "notes": "Twitter's official URL shortener"
+  },
+  {
+    "domain": "t.ly",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://t.ly/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "telegra.ph",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://telegra.ph/"],
+    "notes": "Telegram instant view / publishing"
+  },
+  {
+    "domain": "t.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://telegram.org/"],
+    "notes": "Telegram share links"
+  },
+  {
+    "domain": "tiny.cc",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://tiny.cc/"],
+    "notes": "Custom short URLs"
+  },
+  {
+    "domain": "tinyurl.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://tinyurl.com/"]
+  },
+  {
+    "domain": "trib.al",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://trib.al/"],
+    "notes": "Tribal Fusion / outbrain short links"
+  },
+  {
+    "domain": "v.gd",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://v.gd/"],
+    "notes": "Privacy-focused shortener (same operator as is.gd)"
+  },
+  {
+    "domain": "v.ht",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://v.ht/"],
+    "notes": "Short link service"
+  },
+  {
+    "domain": "wp.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://wordpress.com/support/wordpress-com-shortlinks/"],
+    "notes": "WordPress.com short links"
+  },
+  {
+    "domain": "youtu.be",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://support.google.com/youtube/answer/9233684"],
+    "notes": "YouTube short share links"
+  }
+]

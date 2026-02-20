@@ -1,0 +1,47 @@
+[
+  {
+    "domain": "click.google-analytics.com",
+    "type": "tracking",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://developers.google.com/analytics"],
+    "notes": "Google Analytics click tracking"
+  },
+  {
+    "domain": "click.linksynergy.com",
+    "type": "tracking",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.linksynergy.com/"],
+    "notes": "LinkShare / Rakuten affiliate tracking"
+  },
+  {
+    "domain": "doubleclick.net",
+    "type": "tracking",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.google.com/doubleclick/"],
+    "notes": "Google advertising and conversion tracking"
+  },
+  {
+    "domain": "go.redirectingat.com",
+    "type": "tracking",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.impact.com/"],
+    "notes": "Impact affiliate redirect/tracking"
+  },
+  {
+    "domain": "tracking.truthfinder.com",
+    "type": "tracking",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": ["https://www.truthfinder.com/"],
+    "notes": "TruthFinder outbound link tracking"
+  }
+]

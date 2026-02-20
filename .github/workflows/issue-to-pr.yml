@@ -1,0 +1,75 @@
+name: Auto-create PR from Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-pr:
+    if: contains(github.event.issue.labels.*.name, 'shortener-submission')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Extract submission data
+        id: extract
+        run: node .github/scripts/parse-issue.js
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          SUBMISSION_JSON: ${{ runner.temp }}/submission.json
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
+      - name: Validate submission
+        run: node scripts/validate-submission.js
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          SUBMISSION_JSON: ${{ runner.temp }}/submission.json
+
+      - name: Add entry to dataset
+        run: node .github/scripts/add-entry.js
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          SUBMISSION_JSON: ${{ runner.temp }}/submission.json
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add ${{ steps.extract.outputs.domain }} (${{ steps.extract.outputs.type }})"
+          branch: submission-${{ github.event.issue.number }}
+          title: "Add ${{ steps.extract.outputs.domain }}"
+          body: |
+            Automated PR from issue #${{ github.event.issue.number }}
+
+            **Domain**: ${{ steps.extract.outputs.domain }}
+            **Type**: ${{ steps.extract.outputs.type }}
+            **Evidence**: ${{ steps.extract.outputs.evidence }}
+
+            Closes #${{ github.event.issue.number }}
+          labels: auto-generated
+
+      - name: Comment on issue
+        if: steps.create-pr.outputs.pull-request-number != ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNum = '${{ steps.create-pr.outputs.pull-request-number }}';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Submission validated! Pull request created for review: [#' + prNum + '](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/pull/' + prNum + ')'
+            });
+      - name: Comment on issue (no PR)
+        if: steps.create-pr.outputs.pull-request-number == ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ Submission could not be turned into a PR automatically. A maintainer will review manually.'
+            });
