@@ -1,0 +1,152 @@
+# Monthly release: probe domains, update inactive list, export active/inactive, publish release.
+# Schedule: 1st of every month at 00:00 UTC. Also manual (workflow_dispatch).
+name: Monthly release
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_tag: ${{ steps.meta.outputs.release_tag }}
+      release_title: ${{ steps.meta.outputs.release_title }}
+      dist_date: ${{ steps.meta.outputs.dist_date }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set release date (UTC)
+        id: meta
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            D="${{ github.event.inputs.date }}"
+          else
+            D=$(date -u +%Y-%m-%d)
+          fi
+          echo "dist_date=${D}" >> $GITHUB_OUTPUT
+          echo "release_tag=release-${D}" >> $GITHUB_OUTPUT
+          TITLE=$(date -u -d "${D}" +"%B %-d" 2>/dev/null || date -u -j -f "%Y-%m-%d" "${D}" +"%B %e" 2>/dev/null || echo "${D}")
+          echo "release_title=${TITLE}" >> $GITHUB_OUTPUT
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-monthly.txt
+
+      - name: Validate data (pre-probe)
+        run: python scripts/validate_data.py
+
+      - name: Probe domains
+        id: probe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/probe_domains.py 2>&1 | tee probe.log
+
+      - name: Validate data (post-probe)
+        run: python scripts/validate_data.py
+
+      - name: Export lists
+        run: |
+          mkdir -p dist
+          python scripts/export_lists.py "${{ steps.meta.outputs.dist_date }}"
+
+      - name: Create archive
+        run: |
+          cd dist
+          zip -r "known-link-shorteners-release-${{ steps.meta.outputs.release_tag }}.zip" "${{ steps.meta.outputs.dist_date }}"
+          cd ..
+
+      - name: Commit updated data (inactive + active if restored)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/inactive.json data/shorteners.json data/redirectors.json data/tracking.json
+          if git diff --staged --quiet; then
+            echo "No changes to data files"
+          else
+            git commit -m "Update inactive list (monthly release ${{ steps.meta.outputs.release_title }})"
+            git push origin HEAD:main
+          fi
+
+      - name: Ensure domain-review label exists
+        run: |
+          gh label create "domain-review" --description "Domain probe needs review (redirect/5xx/429/connection)" --color "FBCA04" 2>/dev/null || true
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.release_tag }}
+          name: ${{ steps.meta.outputs.release_title }}
+          body: |
+            Monthly release of known link shorteners and inactive links.
+            - **Active**: combined shorteners + redirectors + tracking (excluding inactive).
+            - **Inactive**: domains that returned 403, 404, or DNS error at probe time.
+            Generated on ${{ steps.meta.outputs.dist_date }} (UTC).
+          draft: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release assets (combined + inactive)
+        run: |
+          DIST_DIR="dist/${{ steps.meta.outputs.dist_date }}"
+          for f in "$DIST_DIR"/known-link-shorteners.{json,csv,xml} "$DIST_DIR"/inactive-links.{json,csv,xml}; do
+            [ -f "$f" ] && gh release upload "${{ steps.meta.outputs.release_tag }}" "$f" --clobber
+          done
+
+      - name: Upload release assets (split)
+        run: |
+          DIST_DIR="dist/${{ steps.meta.outputs.dist_date }}"
+          for f in "$DIST_DIR"/shorteners.{json,csv,xml} "$DIST_DIR"/redirectors.{json,csv,xml} "$DIST_DIR"/tracking.{json,csv,xml}; do
+            [ -f "$f" ] && gh release upload "${{ steps.meta.outputs.release_tag }}" "$f" --clobber
+          done
+
+      - name: Upload release archive
+        run: |
+          ARCHIVE="dist/known-link-shorteners-release-${{ steps.meta.outputs.release_tag }}.zip"
+          [ -f "$ARCHIVE" ] && gh release upload "${{ steps.meta.outputs.release_tag }}" "$ARCHIVE" --clobber
+
+      - name: Upload run artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-release-${{ steps.meta.outputs.dist_date }}
+          path: |
+            dist/report.json
+            dist/probe_issue_failures.log
+            probe.log
+          if-no-files-found: ignore
+
+      - name: Job summary
+        run: |
+          if [ -f dist/report.json ]; then
+            python3 - << 'PY'
+          import json
+          r = json.load(open("dist/report.json"))
+          print("## Monthly release summary")
+          print(f"- **Total probed**: {r.get('total_probed', 0)}")
+          print(f"- **Active (200)**: {r.get('active_200', 0)}")
+          print(f"- **Inactive (403/404/dns_error)**: {r.get('inactive', 0)}")
+          print(f"- **Review (issues created)**: {r.get('review', 0)} (created: {r.get('issues_created', 0)}, failed: {r.get('issues_failed', 0)})")
+          print(f"- **Inactive list size**: {r.get('inactive_list_count', 0)}")
+          PY
+          fi
+        >> $GITHUB_STEP_SUMMARY

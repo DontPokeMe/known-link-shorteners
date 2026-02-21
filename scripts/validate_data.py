@@ -39,7 +39,9 @@ def validate_active_schema(entries: list, path: Path) -> list[str]:
     if not schema_path.exists():
         return errors
     schema = load_json(schema_path)
-    validator = jsonschema.Draft7Validator(schema)
+    # Validate each entry against the "items" subschema (object), not the root (array)
+    item_schema = schema.get("items", schema)
+    validator = jsonschema.Draft7Validator(item_schema)
     for i, item in enumerate(entries):
         for err in validator.iter_errors(item):
             errors.append(f"{path}: entry[{i}] {err.message}")
@@ -54,7 +56,8 @@ def validate_inactive_schema(entries: list, path: Path) -> list[str]:
     if jsonschema is None:
         return errors
     schema = load_json(schema_path)
-    validator = jsonschema.Draft7Validator(schema)
+    item_schema = schema.get("items", schema)
+    validator = jsonschema.Draft7Validator(item_schema)
     for i, item in enumerate(entries):
         for err in validator.iter_errors(item):
             errors.append(f"{path}: entry[{i}] {err.message}")

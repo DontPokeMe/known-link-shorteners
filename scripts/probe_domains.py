@@ -243,25 +243,24 @@ def main() -> int:
     to_probe: list[tuple[str, str]] = []
     for e in inactive_list:
         to_probe.append((e["domain"], e["origin"]))
-    # Then all active (domain may appear in only one file)
+    # Then all active (domain may appear in only one file; use entry["type"] as origin)
     seen_active = set()
     for name in ACTIVE_FILES:
         for entry in active[name]:
             d = entry.get("domain")
+            o = entry.get("type") or ORIGIN_TO_FILE[name].replace(".json", "")
+            if o == "shorteners":
+                o = "shortener"
+            elif o == "redirectors":
+                o = "redirector"
             if d and d not in seen_active:
                 seen_active.add(d)
-                to_probe.append((d, ORIGIN_TO_FILE[name].replace(".json", "").replace("shorteners", "shortener").replace("redirectors", "redirector").replace("tracking", "tracking")))
-
-    # Fix origin: we have "shortener" not "shorteners"
-    origin_map = {"shorteners": "shortener", "redirectors": "redirector", "tracking": "tracking"}
-    to_probe_fixed: list[tuple[str, str]] = []
-    for d, o in to_probe:
-        to_probe_fixed.append((d, origin_map.get(o, o)))
+                to_probe.append((d, o))
 
     # Dedupe by domain (keep first = inactive first)
     seen = set()
     unique_probe = []
-    for d, o in to_probe_fixed:
+    for d, o in to_probe:
         if d not in seen:
             seen.add(d)
             unique_probe.append((d, o))
@@ -295,43 +294,24 @@ def main() -> int:
             st = r.status if isinstance(r.status, str) else str(r.status)
             if st not in ("403", "404", "dns_error"):
                 continue
+            prev = inactive_by_domain.get(r.domain, {})
             new_inactive.append({
                 "domain": r.domain,
                 "origin": r.origin,
                 "last_status": st,
                 "last_checked_at": today,
-                "notes": r.message,
+                "notes": prev.get("notes") or r.message,
             })
         elif r.classification == "review":
             review_issues.append(r)
             if r.domain in inactive_by_domain:
                 remove_from_inactive_review.append((r.domain, r.origin))
 
-    # Inactive re-probe: keep only still 403/404/dns_error; drop those we restore or move to review
-    still_inactive_domains = {e["domain"] for e in new_inactive}
-    for e in inactive_list:
-        d, o = e["domain"], e["origin"]
-        if (d, o) in restore_to_active:
-            continue
-        if (d, o) in remove_from_inactive_review:
-            continue
-        if d in still_inactive_domains:
-            continue
-        if (d, o) not in active_200_domains:
-            res = next((r for r in results if r.domain == d and r.origin == o), None)
-            if res and res.classification == "inactive":
-                new_inactive.append({
-                    "domain": d,
-                    "origin": o,
-                    "last_status": str(res.status) if isinstance(res.status, int) else res.status,
-                    "last_checked_at": today,
-                    "notes": e.get("notes"),
-                })
-
     # Active datasets: remove any that are now in new_inactive; add restored entries
     inactive_domains_set = {e["domain"] for e in new_inactive}
+    file_to_origin = {"shorteners.json": "shortener", "redirectors.json": "redirector", "tracking.json": "tracking"}
     for name in ACTIVE_FILES:
-        origin_key = name.replace(".json", "").replace("shorteners", "shortener").replace("redirectors", "redirector")
+        origin_key = file_to_origin.get(name, name.replace(".json", ""))
         kept = [e for e in active[name] if e["domain"] not in inactive_domains_set]
         for (d, o) in restore_to_active:
             if o != origin_key:

@@ -78,6 +78,12 @@ Common reasons for rejection:
 - Evidence link is broken
 - Not actually a shortener/redirector
 
+## Monthly releases and domain-review issues
+
+The repo runs an automated **monthly release** (see [README#Monthly releases](https://github.com/DontPokeMe/known-link-shorteners#monthly-releases)). It probes all domains and may open issues with the label **domain-review** when a domain returns a redirect (301/302/307/308), 5xx, 429, or connection/TLS errors. You can help by triaging those issues and updating the dataset or [inactive list](data/inactive.json) as needed.
+
+Release artifacts (JSON, CSV, XML, and a zip archive) are attached to each month’s release for easy consumption.
+
 ## Questions?
 
 - Check existing [issues](https://github.com/DontPokeMe/known-link-shorteners/issues)
