@@ -15,7 +15,7 @@
         "enum": ["shortener", "redirector", "tracking"]
       },
       "last_status": {
-        "type": "string",
+        "type": ["string", "integer"],
         "description": "403, 404, or dns_error for inactive list"
       },
       "last_checked_at": {
@@ -24,7 +24,7 @@
         "description": "ISO date YYYY-MM-DD"
       },
       "notes": {
-        "type": "string"
+        "type": ["string", "null"]
       }
     },
     "additionalProperties": false

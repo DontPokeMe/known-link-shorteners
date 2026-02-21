@@ -295,13 +295,16 @@ def main() -> int:
             if st not in ("403", "404", "dns_error"):
                 continue
             prev = inactive_by_domain.get(r.domain, {})
-            new_inactive.append({
+            entry = {
                 "domain": r.domain,
                 "origin": r.origin,
                 "last_status": st,
                 "last_checked_at": today,
-                "notes": prev.get("notes") or r.message,
-            })
+            }
+            notes = prev.get("notes") or r.message
+            if notes is not None and notes != "":
+                entry["notes"] = notes
+            new_inactive.append(entry)
         elif r.classification == "review":
             review_issues.append(r)
             if r.domain in inactive_by_domain:
