@@ -1,0 +1,4 @@
+# Monthly release workflow: probe + export
+jsonschema>=4.0,<5
+requests>=2.28,<3
+httpx>=0.24,<0.28
