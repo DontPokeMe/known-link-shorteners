@@ -5,7 +5,9 @@
     "status": "active",
     "added_at": "2026-02-20",
     "source": "internal",
-    "evidence": ["https://developers.facebook.com/docs/sharing/webmasters"],
+    "evidence": [
+      "https://developers.facebook.com/docs/sharing/webmasters"
+    ],
     "notes": "Facebook link redirect / outbound click tracking"
   },
   {
@@ -14,26 +16,10 @@
     "status": "active",
     "added_at": "2026-02-20",
     "source": "internal",
-    "evidence": ["https://www.instagram.com/"],
+    "evidence": [
+      "https://www.instagram.com/"
+    ],
     "notes": "Instagram outbound link redirect"
-  },
-  {
-    "domain": "l.linkedin.com",
-    "type": "redirector",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": ["https://www.linkedin.com/help/linkedin/answer/46788"],
-    "notes": "LinkedIn outbound link redirect"
-  },
-  {
-    "domain": "t.umblr.com",
-    "type": "redirector",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": ["https://www.tumblr.com/"],
-    "notes": "Tumblr link redirect"
   },
   {
     "domain": "url.google.com",
@@ -41,7 +27,9 @@
     "status": "active",
     "added_at": "2026-02-20",
     "source": "internal",
-    "evidence": ["https://support.google.com/"],
+    "evidence": [
+      "https://support.google.com/"
+    ],
     "notes": "Google redirect / URL wrapper"
   }
 ]

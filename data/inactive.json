@@ -1,1 +1,730 @@
-[]
+[
+  {
+    "domain": "1drv.ms",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "1shop.io",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "2u.pw",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "5w.fit",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "98pro.cc",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "agrd.io",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "app.philz.us",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "b2n.ir",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "bc.vc",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "bzh.me",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "c11.kr",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "clicky.me",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "clr.tax",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ctbc.tw",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "cvent.me",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "cyb.ec",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "dl.gl",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "dopice.sk",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "e.vg",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "etp.tw",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "firsturl.de",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "flomuz.io",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "fox.ly",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='fox.ly', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='fox.ly', port=443): failed to resolve 'fox.ly' ([errno -2] name or "
+  },
+  {
+    "domain": "go.jc.fm",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "go.osu.edu",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "go.redirectingat.com",
+    "origin": "tracking",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "goo-gl.me",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "goo.by",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "gtly.ink",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "gtly.to",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ibit.ly",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ic9.in",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "iln.io",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "is.gd",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "j.mp",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "jpeg.ly",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "kko.to",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "klck.me",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "kortlink.dk",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "kuku.lu",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "kurl.ru",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='kurl.ru', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='kurl.ru', port=443): failed to resolve 'kurl.ru' ([errno -2] name "
+  },
+  {
+    "domain": "l.linkedin.com",
+    "origin": "redirector",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='l.linkedin.com', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='l.linkedin.com', port=443): failed to resolve 'l.linkedin.c"
+  },
+  {
+    "domain": "lam.bo",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "lihi.cc",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "lin.ee",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "link.host",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='link.host', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='link.host', port=443): failed to resolve 'link.host' ([errno -2]"
+  },
+  {
+    "domain": "linkd.in",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "linkhuddle.com",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "linkjust.com",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "linksplit.io",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "lt27.de",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "lurl.cc",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "me2.do",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "mork.ro",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "mrx.cl",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "mub.me",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "myglamm.in",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "myppt.cc",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "n9.cl",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "nav.cx",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "naver.me",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "neti.cc",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "netm.ag",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='netm.ag', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='netm.ag', port=443): failed to resolve 'netm.ag' ([errno -2] name "
+  },
+  {
+    "domain": "obank.tw",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "orlo.uk",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ouo.io",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ouo.press",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ovh.to",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ow.ly",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "pag.la",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "pj.pizza",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "pl.kotl.in",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "rb.gy",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "rebrand.ly",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "reduced.to",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='reduced.to', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='reduced.to', port=443): failed to resolve 'reduced.to' ([errno "
+  },
+  {
+    "domain": "relink.asia",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "risu.io",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ro.blox.com",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "s.wikicharlie.cl",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "sched.co",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "sgq.io",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='sgq.io', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='sgq.io', port=443): failed to resolve 'sgq.io' ([errno -2] name or "
+  },
+  {
+    "domain": "share.as",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='share.as', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='share.as', port=443): failed to resolve 'share.as' ([errno -2] na"
+  },
+  {
+    "domain": "shope.ee",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shorten.asia",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shorter.me",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shorturl.ae",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shorturl.asia",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shorturl.at",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "shp.ee",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "simpleurl.co",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='simpleurl.co', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='simpleurl.co', port=443): failed to resolve 'simpleurl.co' (["
+  },
+  {
+    "domain": "sina.lt",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "sinyi.biz",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "smlk.es",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "sn.rs",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "sndn.link",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "t.iotex.me",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "t.ly",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "t.umblr.com",
+    "origin": "redirector",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "t2m.io",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "temu.to",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "thght.works",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "tim.com.vc",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "tiny.pl",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "tinyurl.mobi",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='tinyurl.mobi', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='tinyurl.mobi', port=443): failed to resolve 'tinyurl.mobi' (["
+  },
+  {
+    "domain": "topt.al",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "tracking.truthfinder.com",
+    "origin": "tracking",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "twm5g.co",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "ucbexed.org",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='ucbexed.org', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='ucbexed.org', port=443): failed to resolve 'ucbexed.org' ([err"
+  },
+  {
+    "domain": "ufcqc.link",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "urluno.com",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "v.ht",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='v.ht', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='v.ht', port=443): failed to resolve 'v.ht' ([errno -2] name or servic"
+  },
+  {
+    "domain": "v.redd.it",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "wee.so",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "wn.nr",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "wndrfl.co",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='wndrfl.co', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='wndrfl.co', port=443): failed to resolve 'wndrfl.co' ([errno -2]"
+  },
+  {
+    "domain": "wooo.tw",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "y.ahoo.it",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "yubi.co",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-02-21"
+  },
+  {
+    "domain": "zxc.li",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-02-21",
+    "notes": "httpsconnectionpool(host='zxc.li', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='zxc.li', port=443): failed to resolve 'zxc.li' ([errno -2] name or "
+  }
+]
