@@ -138,7 +138,7 @@ jobs:
       - name: Job summary
         run: |
           if [ -f dist/report.json ]; then
-            python3 - << 'PY'
+            python3 - << 'PY' >> $GITHUB_STEP_SUMMARY
           import json
           r = json.load(open("dist/report.json"))
           print("## Monthly release summary")
@@ -149,4 +149,3 @@ jobs:
           print(f"- **Inactive list size**: {r.get('inactive_list_count', 0)}")
           PY
           fi
-        >> $GITHUB_STEP_SUMMARY
