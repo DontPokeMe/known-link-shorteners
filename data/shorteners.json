@@ -4783,17 +4783,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "geti.in",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "gfuel.ly",
     "type": "shortener",
     "status": "active",
@@ -5286,6 +5275,17 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "goo-gl.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-03-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed 200)"
   },
   {
     "domain": "goo.gl",
@@ -6827,28 +6827,6 @@
     "notes": "Link shortener based in Germany"
   },
   {
-    "domain": "kutt.it",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://kutt.it/"
-    ],
-    "notes": "Open-source URL shortener"
-  },
-  {
-    "domain": "ky77.link",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "l.linklyhq.com",
     "type": "shortener",
     "status": "active",
@@ -7421,17 +7399,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "ln.run",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "lnk.bz",
     "type": "shortener",
     "status": "active",
@@ -7763,17 +7730,6 @@
   },
   {
     "domain": "many.at",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "maper.info",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
