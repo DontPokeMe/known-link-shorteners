@@ -17,7 +17,7 @@ This repository powers the [dontpoke.me Link Expander](https://dontpoke.me/tools
 
 ### Statistics
 
-- Total shorteners: 1,394
+- Total shorteners: 1,393
 - Total redirectors: 3
 - Total tracking domains: 4
 - Last updated: 2026-07-05

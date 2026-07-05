@@ -259,6 +259,18 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "goo.su",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-07-05",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "HTTP 403"
+  },
+  {
     "domain": "gtly.ink",
     "origin": "shortener",
     "last_status": "404",

@@ -1,1 +1,442 @@
-[]
+[
+  {
+    "domain": "1un.fr",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "500",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "301.link",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "7oi.de",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "bit.do",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "bitly.lc",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "brief.ly",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "chts.tw",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "clk.ink",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "cutit.org",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "dld.bz",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "envs.sh",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "faturl.com",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "fetnet.tw",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "firsturl.net",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "526",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "forms.gle",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "400",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "geti.in",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "go.btwrdn.co",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "526",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "go.qb.by",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "521",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "goo.gl",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "400",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "gowat.ch",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "503",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "hoy.kr",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "htn.to",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "204",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "ity.im",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "link.ac",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "521",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "links2.me",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "livestre.am",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "lnk.direct",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "521",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "lnkiy.com",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "lnkiy.in",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "mcaf.ee",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "merky.de",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "minify.link",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "526",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "on.ft.com",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "400",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "onepl.us",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "oow.pw",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "400",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "po.st",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "redir.ec",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "500",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "rip.to",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "409",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "s.coop",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "526",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "shiny.link",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "short.link",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "526",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "small.cat",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "thatis.me",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "thrill.to",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "tl.gd",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "tnw.to",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "ul.to",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "ul3.ir",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "url.google.com",
+    "origin": "redirector",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "wi.se",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "ynews.page.link",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "400",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "yun.ir",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "z23.ru",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "timeout",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "zez.kr",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "connect_error",
+    "last_checked_at": "2026-07-05"
+  },
+  {
+    "domain": "zurl.ir",
+    "origin": "shortener",
+    "consecutive_review_count": 1,
+    "first_flagged_at": "2026-07-05",
+    "last_status": "503",
+    "last_checked_at": "2026-07-05"
+  }
+]
