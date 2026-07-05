@@ -8,7 +8,9 @@ from __future__ import annotations
 
 import json
 import os
+import socket
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
@@ -34,9 +36,32 @@ REDIRECT_STATUSES = (301, 302, 303, 307, 308)
 ACTIVE_FILES = ["shorteners.json", "redirectors.json", "tracking.json"]
 ORIGIN_TO_FILE = {"shortener": "shorteners.json", "redirector": "redirectors.json", "tracking": "tracking.json"}
 INACTIVE_FILE = "inactive.json"
+REVIEW_HISTORY_FILE = "review_history.json"
+REPEAT_OFFENDER_THRESHOLD = 3
 
 REVIEW_LABEL = "domain-review"
 MAX_NOTES_LENGTH = 500
+
+# Many shortener/redirector domains are CNAME'd onto a shared backend (e.g. Bitly's branded
+# short-domains product), so probing them at full concurrency can be self-inflicted rate
+# limiting. Cap concurrent probes per resolved IP independent of MAX_CONCURRENT.
+PER_HOST_CONCURRENCY = 3
+_host_semaphores: dict[str, threading.Semaphore] = {}
+_host_semaphores_lock = threading.Lock()
+
+
+def _get_host_semaphore(domain: str) -> threading.Semaphore:
+    """One semaphore per resolved IP (or per domain if resolution fails), created lazily."""
+    try:
+        key = socket.gethostbyname(domain)
+    except OSError:
+        key = domain
+    with _host_semaphores_lock:
+        sem = _host_semaphores.get(key)
+        if sem is None:
+            sem = threading.Semaphore(PER_HOST_CONCURRENCY)
+            _host_semaphores[key] = sem
+        return sem
 
 
 @dataclass
@@ -72,7 +97,17 @@ def truncate_notes(notes: Any) -> str | None:
 
 
 def probe_one(domain: str, origin: str) -> ProbeResult:
-    """Probe https then http, no redirects. Return classification."""
+    """Probe https then http, no redirects. Return classification.
+
+    Holds a per-resolved-IP semaphore for the whole probe (both schemes, all retries) so
+    domains sharing a backend get serialized down to PER_HOST_CONCURRENCY instead of all
+    hitting it at MAX_CONCURRENT simultaneously.
+    """
+    with _get_host_semaphore(domain):
+        return _probe_one(domain, origin)
+
+
+def _probe_one(domain: str, origin: str) -> ProbeResult:
     for scheme in ("https", "http"):
         for attempt in range(RETRIES_PER_SCHEME):
             try:
@@ -419,6 +454,45 @@ def sync_review_issue(
     return "created", None
 
 
+def update_review_history(
+    history_by_domain: dict[str, dict],
+    active_review: list[ProbeResult],
+    today: str,
+    threshold: int = REPEAT_OFFENDER_THRESHOLD,
+) -> tuple[list[dict], list[ProbeResult], list[ProbeResult]]:
+    """
+    Track consecutive review-anomaly months per active domain. A domain that recovered
+    (not in this run's active_review) is simply absent from the returned history -- its
+    streak resets. A domain that reaches `threshold` consecutive months is returned in
+    `demoted` (and dropped from history; the streak is resolved by demotion) instead of
+    `still_needs_review`.
+
+    Returns (new_history_list, still_needs_review, demoted).
+    """
+    still_needs_review: list[ProbeResult] = []
+    demoted: list[ProbeResult] = []
+    new_history: dict[str, dict] = {}
+
+    for r in active_review:
+        prev = history_by_domain.get(r.domain)
+        count = (prev["consecutive_review_count"] + 1) if prev else 1
+        if count >= threshold:
+            demoted.append(r)
+            continue  # streak resolved by demotion -- don't carry it forward
+        new_history[r.domain] = {
+            "domain": r.domain,
+            "origin": r.origin,
+            "consecutive_review_count": count,
+            "first_flagged_at": prev["first_flagged_at"] if prev else today,
+            "last_status": str(r.status),
+            "last_checked_at": today,
+        }
+        still_needs_review.append(r)
+
+    new_history_list = sorted(new_history.values(), key=lambda e: e["domain"])
+    return new_history_list, still_needs_review, demoted
+
+
 def main() -> int:
     today = date.today().isoformat()
     DATA.mkdir(parents=True, exist_ok=True)
@@ -525,6 +599,31 @@ def main() -> int:
             if r.domain in inactive_by_domain:
                 remove_from_inactive_review.append((r.domain, r.origin))
 
+    # Repeat-offender tracking: a domain stuck in review for REPEAT_OFFENDER_THRESHOLD
+    # consecutive months gets demoted to inactive instead of flagged forever.
+    unhandled = [r for r in review_issues if r.status == "error"]
+    active_review_this_run = [r for r in review_issues if r.domain in active_probe_domains and r.status != "error"]
+
+    review_history_path = DATA / REVIEW_HISTORY_FILE
+    review_history_list: list[dict] = load_json(review_history_path) if review_history_path.exists() else []
+    history_by_domain = {e["domain"]: e for e in review_history_list}
+    new_history_list, active_review, demoted = update_review_history(history_by_domain, active_review_this_run, today)
+
+    for r in demoted:
+        original_entry = original_active_by_domain.get(r.domain, {})
+        entry = {
+            "domain": r.domain,
+            "origin": r.origin,
+            "last_status": "persistent_error",
+            "last_checked_at": today,
+            "notes": f"Auto-demoted after {REPEAT_OFFENDER_THRESHOLD} consecutive months of review ({r.status})"[:MAX_NOTES_LENGTH],
+        }
+        for key in ("added_at", "source", "evidence"):
+            value = original_entry.get(key)
+            if value:
+                entry[key] = value
+        new_inactive.append(entry)
+
     # Active datasets: remove any that are now in new_inactive; add restored entries
     inactive_domains_set = {e["domain"] for e in new_inactive}
     file_to_origin = {"shorteners.json": "shortener", "redirectors.json": "redirector", "tracking.json": "tracking"}
@@ -561,8 +660,6 @@ def main() -> int:
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY", "DontPokeMe/known-link-shorteners")
     failed_issues: list[str] = []
-    unhandled = [r for r in review_issues if r.status == "error"]
-    active_review = [r for r in review_issues if r.domain in active_probe_domains and r.status != "error"]
     issues_created = 0
     issues_closed = 0
     if token:
@@ -586,6 +683,7 @@ def main() -> int:
     save_json(inactive_path, new_inactive)
     for name in ACTIVE_FILES:
         save_json(DATA / name, active[name])
+    save_json(review_history_path, new_history_list)
 
     # Report
     retry_later = [r for r in results if r.classification == "retry_later"]
@@ -600,6 +698,8 @@ def main() -> int:
         "active_review": len(active_review),
         "unhandled_errors": len(unhandled),
         "rate_limited_retry_later": len(retry_later),
+        "repeat_offender_demotions": len(demoted),
+        "review_history_size": len(new_history_list),
         "inactive_list_count": len(new_inactive),
         "issues_created": issues_created,
         "issues_closed": issues_closed,
@@ -625,7 +725,7 @@ def main() -> int:
                 f.write(line + "\n")
 
     print(f"Probed: {len(results)} | active(200): {report['active_200']} | active(redirect): {report['active_redirect']} | inactive: {report['inactive']} | review: {report['review']} | retry_later(429): {report['rate_limited_retry_later']}")
-    print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Issues created: {report['issues_created']} | Closed: {report['issues_closed']} | Failed: {report['issues_failed']}")
+    print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Repeat-offender demotions: {report['repeat_offender_demotions']} | Issues created: {report['issues_created']} | Closed: {report['issues_closed']} | Failed: {report['issues_failed']}")
     return 0
 
 
