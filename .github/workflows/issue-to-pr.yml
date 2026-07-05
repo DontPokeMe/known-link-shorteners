@@ -2,15 +2,15 @@ name: Auto-create PR from Issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 jobs:
   create-pr:
-    if: contains(github.event.issue.labels.*.name, 'shortener-submission')
+    if: github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'shortener-submission') || github.event.action == 'labeled' && github.event.label.name == 'shortener-submission'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Extract submission data
         id: extract
@@ -34,7 +34,7 @@ jobs:
 
       - name: Create Pull Request
         id: create-pr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@4e1beaa7521e8b457b572c090b25bd3db56bf1c5 # v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add ${{ steps.extract.outputs.domain }} (${{ steps.extract.outputs.type }})"
@@ -52,7 +52,7 @@ jobs:
 
       - name: Comment on issue
         if: steps.create-pr.outputs.pull-request-number != ''
-        uses: actions/github-script@v6
+        uses: actions/github-script@00f12e3e20659f42342b1c0226afda7f7c042325 # v6
         with:
           script: |
             const prNum = '${{ steps.create-pr.outputs.pull-request-number }}';
@@ -64,7 +64,7 @@ jobs:
             });
       - name: Comment on issue (no PR)
         if: steps.create-pr.outputs.pull-request-number == ''
-        uses: actions/github-script@v6
+        uses: actions/github-script@00f12e3e20659f42342b1c0226afda7f7c042325 # v6
         with:
           script: |
             github.rest.issues.createComment({

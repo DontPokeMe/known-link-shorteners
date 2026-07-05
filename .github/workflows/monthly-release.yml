@@ -15,6 +15,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
       release_tag: ${{ steps.meta.outputs.release_tag }}
       release_title: ${{ steps.meta.outputs.release_title }}
@@ -22,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -40,7 +42,7 @@ jobs:
           echo "release_title=${TITLE}" >> $GITHUB_OUTPUT
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
 
@@ -51,6 +53,10 @@ jobs:
 
       - name: Validate data (pre-probe)
         run: python scripts/validate_data.py
+
+      - name: Ensure domain-review label exists
+        run: |
+          gh label create "domain-review" --description "Domain probe needs review (redirect/5xx/429/connection)" --color "FBCA04" 2>/dev/null || true
 
       - name: Probe domains
         id: probe
@@ -68,31 +74,30 @@ jobs:
           mkdir -p dist
           python scripts/export_lists.py "${{ steps.meta.outputs.dist_date }}"
 
+      - name: Update README stats
+        run: node scripts/update-readme-stats.js "${{ steps.meta.outputs.dist_date }}"
+
       - name: Create archive
         run: |
           cd dist
           zip -r "known-link-shorteners-release-${{ steps.meta.outputs.release_tag }}.zip" "${{ steps.meta.outputs.dist_date }}"
           cd ..
 
-      - name: Commit updated data (inactive + active if restored)
+      - name: Commit updated data and README stats
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/inactive.json data/shorteners.json data/redirectors.json data/tracking.json
+          git add data/inactive.json data/shorteners.json data/redirectors.json data/tracking.json README.md
           if git diff --staged --quiet; then
-            echo "No changes to data files"
+            echo "No changes to data files or README stats"
           else
             git commit -m "Update inactive list (monthly release ${{ steps.meta.outputs.release_title }})"
             git push origin HEAD:main
           fi
 
-      - name: Ensure domain-review label exists
-        run: |
-          gh label create "domain-review" --description "Domain probe needs review (redirect/5xx/429/connection)" --color "FBCA04" 2>/dev/null || true
-
       - name: Create GitHub Release
         id: create_release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
           tag_name: ${{ steps.meta.outputs.release_tag }}
           name: ${{ steps.meta.outputs.release_title }}
@@ -126,7 +131,7 @@ jobs:
           [ -f "$ARCHIVE" ] && gh release upload "${{ steps.meta.outputs.release_tag }}" "$ARCHIVE" --clobber
 
       - name: Upload run artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: monthly-release-${{ steps.meta.outputs.dist_date }}
           path: |
@@ -145,7 +150,7 @@ jobs:
           print(f"- **Total probed**: {r.get('total_probed', 0)}")
           print(f"- **Active (200)**: {r.get('active_200', 0)}")
           print(f"- **Inactive (403/404/dns_error)**: {r.get('inactive', 0)}")
-          print(f"- **Review (issues created)**: {r.get('review', 0)} (created: {r.get('issues_created', 0)}, failed: {r.get('issues_failed', 0)})")
+          print(f"- **Review**: {r.get('review', 0)} (active: {r.get('active_review', 0)}, unhandled: {r.get('unhandled_errors', 0)}, issues created: {r.get('issues_created', 0)}, failed: {r.get('issues_failed', 0)})")
           print(f"- **Inactive list size**: {r.get('inactive_list_count', 0)}")
           PY
           fi
