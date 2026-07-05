@@ -71,7 +71,7 @@ CSV/XML), use the monthly [Release artifacts](#release-artifacts) below, or the 
 On the **1st of every month (00:00 UTC)** an automated workflow:
 
 1. **Probes** every domain in the active and inactive datasets (HTTPS then HTTP, no redirect follow).
-2. **Updates** [data/inactive.json](data/inactive.json): keeps 403/404/dns_error, restores domains that return 200, and syncs two persistent **domain-review** issues (active-domain redirects/5xx/429/connection/TLS errors, and unhandled probe errors) — each run comments on the existing issue instead of opening a new one, and auto-closes it once clear.
+2. **Updates** [data/inactive.json](data/inactive.json): keeps 403/404/dns_error, restores domains that return 200 or an expected redirect, retries 429s with backoff (left untouched to re-check next run if still rate-limited after retries), and syncs two persistent **domain-review** issues (genuine anomalies — 5xx/unexpected 4xx/connection/TLS errors — on active domains, and unhandled probe errors) — each run comments on the existing issue instead of opening a new one, and auto-closes it once clear.
 3. **Exports** and publishes a [GitHub Release](https://github.com/DontPokeMe/known-link-shorteners/releases) with tag `release-YYYY-MM-DD` and title "Month Day".
 
 ### Release artifacts

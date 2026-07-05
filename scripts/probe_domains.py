@@ -25,6 +25,11 @@ TIMEOUT = 10
 MAX_CONCURRENT = 20
 RETRIES_PER_SCHEME = 2
 BACKOFF_BASE = 1.0
+MAX_RATE_LIMIT_WAIT = 30.0
+
+# A shortener/redirector/tracking domain returning a redirect on its bare root path is
+# expected behavior, not an anomaly -- these services exist to redirect.
+REDIRECT_STATUSES = (301, 302, 303, 307, 308)
 
 ACTIVE_FILES = ["shorteners.json", "redirectors.json", "tracking.json"]
 ORIGIN_TO_FILE = {"shortener": "shorteners.json", "redirector": "redirectors.json", "tracking": "tracking.json"}
@@ -38,7 +43,7 @@ MAX_NOTES_LENGTH = 500
 class ProbeResult:
     domain: str
     origin: str
-    classification: str  # "active" | "inactive" | "review"
+    classification: str  # "active" | "inactive" | "review" | "retry_later"
     status: int | str
     scheme: str
     location: str | None
@@ -98,7 +103,37 @@ def probe_one(domain: str, origin: str) -> ProbeResult:
                         scheme=scheme,
                         location=location,
                     )
-                if status in (301, 302, 307, 308) or 500 <= status <= 599 or status == 429:
+                if status in REDIRECT_STATUSES:
+                    # Expected behavior for a shortener/redirector/tracking domain -- not a problem.
+                    return ProbeResult(
+                        domain=domain,
+                        origin=origin,
+                        classification="active",
+                        status=status,
+                        scheme=scheme,
+                        location=location,
+                    )
+                if status == 429:
+                    if attempt < RETRIES_PER_SCHEME - 1:
+                        retry_after = r.headers.get("Retry-After")
+                        try:
+                            wait = float(retry_after) if retry_after else BACKOFF_BASE * (2**attempt)
+                        except ValueError:
+                            wait = BACKOFF_BASE * (2**attempt)
+                        time.sleep(min(wait, MAX_RATE_LIMIT_WAIT))
+                        continue
+                    if scheme == "http":
+                        return ProbeResult(
+                            domain=domain,
+                            origin=origin,
+                            classification="retry_later",
+                            status=429,
+                            scheme=scheme,
+                            location=location,
+                            message="Rate-limited after retries; left unchanged, will re-check next run",
+                        )
+                    continue  # https exhausted; let the scheme loop move on to http
+                if 500 <= status <= 599:
                     return ProbeResult(
                         domain=domain,
                         origin=origin,
@@ -205,7 +240,7 @@ def make_active_entry(
         "evidence": original_entry.get("evidence") or ["https://github.com/DontPokeMe/known-link-shorteners"],
     }
     if restored:
-        entry["notes"] = "Restored from inactive list (re-probed 200)"
+        entry["notes"] = "Restored from inactive list (re-probed active)"
     elif original_entry.get("notes"):
         notes = truncate_notes(original_entry.get("notes"))
         if notes:
@@ -553,15 +588,18 @@ def main() -> int:
         save_json(DATA / name, active[name])
 
     # Report
+    retry_later = [r for r in results if r.classification == "retry_later"]
     report = {
         "run_at": datetime.now(timezone.utc).isoformat(),
         "date": today,
         "total_probed": len(results),
-        "active_200": sum(1 for r in results if r.classification == "active"),
+        "active_200": sum(1 for r in results if r.classification == "active" and r.status == 200),
+        "active_redirect": sum(1 for r in results if r.classification == "active" and r.status != 200),
         "inactive": sum(1 for r in results if r.classification == "inactive"),
         "review": len(review_issues),
         "active_review": len(active_review),
         "unhandled_errors": len(unhandled),
+        "rate_limited_retry_later": len(retry_later),
         "inactive_list_count": len(new_inactive),
         "issues_created": issues_created,
         "issues_closed": issues_closed,
@@ -586,7 +624,7 @@ def main() -> int:
             for line in failed_issues:
                 f.write(line + "\n")
 
-    print(f"Probed: {len(results)} | active(200): {report['active_200']} | inactive: {report['inactive']} | review: {report['review']}")
+    print(f"Probed: {len(results)} | active(200): {report['active_200']} | active(redirect): {report['active_redirect']} | inactive: {report['inactive']} | review: {report['review']} | retry_later(429): {report['rate_limited_retry_later']}")
     print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Issues created: {report['issues_created']} | Closed: {report['issues_closed']} | Failed: {report['issues_failed']}")
     return 0
 
