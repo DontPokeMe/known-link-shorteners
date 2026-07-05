@@ -22,14 +22,19 @@ const stats = [
 ].join('\n');
 
 const readme = fs.readFileSync(readmePath, 'utf8');
-const next = readme.replace(
+const match = readme.match(
   /- Total shorteners: .*\r?\n- Total redirectors: .*\r?\n- Total tracking domains: .*\r?\n- Last updated: .*/,
-  stats,
 );
 
-if (next === readme) {
+if (!match) {
   throw new Error('Could not find README statistics block to update');
 }
 
-fs.writeFileSync(readmePath, next);
-console.log('README statistics updated');
+const next = readme.slice(0, match.index) + stats + readme.slice(match.index + match[0].length);
+
+if (next === readme) {
+  console.log('README statistics already up to date');
+} else {
+  fs.writeFileSync(readmePath, next);
+  console.log('README statistics updated');
+}
