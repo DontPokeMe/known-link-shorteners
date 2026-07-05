@@ -221,13 +221,6 @@
     "notes": "DNS resolution failed"
   },
   {
-    "domain": "go.osu.edu",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-07-05",
-    "notes": "HTTP 403"
-  },
-  {
     "domain": "go.redirectingat.com",
     "origin": "tracking",
     "last_status": "404",

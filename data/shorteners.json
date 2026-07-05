@@ -5112,6 +5112,17 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "go.osu.edu",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-07-05",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed 200)"
+  },
+  {
     "domain": "go.qb.by",
     "type": "shortener",
     "status": "active",
