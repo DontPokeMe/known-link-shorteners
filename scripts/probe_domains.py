@@ -31,6 +31,7 @@ ORIGIN_TO_FILE = {"shortener": "shorteners.json", "redirector": "redirectors.jso
 INACTIVE_FILE = "inactive.json"
 
 REVIEW_LABEL = "domain-review"
+MAX_NOTES_LENGTH = 500
 
 
 @dataclass
@@ -56,9 +57,17 @@ def save_json(path: Path, data: list | dict) -> None:
         f.write("\n")
 
 
+def truncate_notes(notes: Any) -> str | None:
+    if notes is None:
+        return None
+    text = str(notes).strip()
+    if not text:
+        return None
+    return text[:MAX_NOTES_LENGTH]
+
+
 def probe_one(domain: str, origin: str) -> ProbeResult:
     """Probe https then http, no redirects. Return classification."""
-    today = date.today().isoformat()
     for scheme in ("https", "http"):
         for attempt in range(RETRIES_PER_SCHEME):
             try:
@@ -179,43 +188,92 @@ def probe_one(domain: str, origin: str) -> ProbeResult:
     )
 
 
-def make_active_entry(domain: str, origin: str, restored: bool = False) -> dict[str, Any]:
+def make_active_entry(
+    domain: str,
+    origin: str,
+    restored: bool = False,
+    original_entry: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     today = date.today().isoformat()
-    return {
+    original_entry = original_entry or {}
+    entry = {
         "domain": domain,
         "type": origin,
         "status": "active",
-        "added_at": today,
-        "source": "internal",
-        "evidence": ["https://github.com/DontPokeMe/known-link-shorteners"],
-        "notes": "Restored from inactive list (re-probed 200)" if restored else None,
+        "added_at": original_entry.get("added_at") or today,
+        "source": original_entry.get("source") or "internal",
+        "evidence": original_entry.get("evidence") or ["https://github.com/DontPokeMe/known-link-shorteners"],
     }
+    if restored:
+        entry["notes"] = "Restored from inactive list (re-probed 200)"
+    elif original_entry.get("notes"):
+        notes = truncate_notes(original_entry.get("notes"))
+        if notes:
+            entry["notes"] = notes
+    return entry
 
 
-def create_issue(domain: str, origin: str, result: ProbeResult, repo: str, token: str) -> str | None:
-    """Create GitHub issue. Return None on success, error string on failure."""
-    url = f"https://api.github.com/repos/{repo}/issues"
-    title = f"[domain-review] {domain} ({origin})"
-    body = f"""## Domain review
-
-- **Domain**: `{domain}`
-- **Dataset origin**: {origin}
-- **Observed status**: {result.status}
-- **Scheme used**: {result.scheme}
-- **Timestamp**: {datetime.now(timezone.utc).isoformat()}
-- **Location header**: {result.location or '(none)'}
-- **Message**: {result.message or '(none)'}
-
-This issue was auto-created by the monthly release workflow.
-"""
-    headers = {
+def issue_headers(token: str) -> dict[str, str]:
+    return {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
     }
+
+
+def create_unhandled_errors_issue(
+    results: list[ProbeResult], run_date: str, repo: str, token: str
+) -> str | None:
+    """Create a single GitHub issue for unhandled probe errors. Return None on success, error string on failure."""
+    url = f"https://api.github.com/repos/{repo}/issues"
+    title = f"[monthly probe] Unhandled errors during domain probe ({run_date})"
+    lines = [
+        "## Unhandled errors",
+        "",
+        "The following domains triggered unexpected exceptions during probing. Please investigate.",
+        "",
+        "| Domain | Origin | Message |",
+        "|--------|--------|---------|",
+    ]
+    for r in results:
+        msg = (r.message or str(r.status))[:200].replace("|", "\\|").replace("\n", " ")
+        lines.append(f"| `{r.domain}` | {r.origin} | {msg} |")
+    lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
+    body = "\n".join(lines)
     payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
     try:
-        r = requests.post(url, json=payload, headers=headers, timeout=30)
+        r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
+        if r.status_code in (200, 201):
+            return None
+        return f"HTTP {r.status_code}: {r.text[:300]}"
+    except Exception as e:
+        return str(e)[:300]
+
+
+def create_active_review_issue(
+    results: list[ProbeResult], run_date: str, repo: str, token: str
+) -> str | None:
+    """Create a single GitHub issue for active dataset domains that need manual probe review."""
+    url = f"https://api.github.com/repos/{repo}/issues"
+    title = f"[monthly probe] Active domains needing review ({run_date})"
+    lines = [
+        "## Active domains needing review",
+        "",
+        "The following active dataset domains returned review-worthy probe results during the monthly run.",
+        "",
+        "| Domain | Origin | Status | Scheme | Location | Message |",
+        "|--------|--------|--------|--------|----------|---------|",
+    ]
+    for r in sorted(results, key=lambda item: (item.origin, item.domain)):
+        status = str(r.status)
+        location = (r.location or "").replace("|", "\\|").replace("\n", " ")
+        message = (r.message or "").replace("|", "\\|").replace("\n", " ")
+        lines.append(f"| `{r.domain}` | {r.origin} | {status} | {r.scheme} | {location or '(none)'} | {message or '(none)'} |")
+    lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
+    body = "\n".join(lines)
+    payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
+    try:
+        r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
         if r.status_code in (200, 201):
             return None
         return f"HTTP {r.status_code}: {r.text[:300]}"
@@ -233,6 +291,12 @@ def main() -> int:
     for name in ACTIVE_FILES:
         path = DATA / name
         active[name] = load_json(path) if path.exists() else []
+    original_active_by_domain = {
+        entry["domain"]: entry
+        for entries in active.values()
+        for entry in entries
+        if entry.get("domain")
+    }
 
     # Load inactive
     inactive_path = DATA / INACTIVE_FILE
@@ -284,6 +348,7 @@ def main() -> int:
     remove_from_inactive_review: list[tuple[str, str]] = []  # (domain, origin) -> open issue and restore
     review_issues: list[ProbeResult] = []
     active_200_domains: set[tuple[str, str]] = set()
+    active_probe_domains = set(seen_active)
 
     for r in results:
         if r.classification == "active":
@@ -295,15 +360,27 @@ def main() -> int:
             if st not in ("403", "404", "dns_error"):
                 continue
             prev = inactive_by_domain.get(r.domain, {})
+            original_entry = original_active_by_domain.get(r.domain, prev)
             entry = {
                 "domain": r.domain,
                 "origin": r.origin,
                 "last_status": st,
                 "last_checked_at": today,
             }
-            notes = prev.get("notes") or r.message
-            if notes is not None and notes != "":
-                entry["notes"] = notes
+            for key in ("added_at", "source", "evidence"):
+                value = original_entry.get(key)
+                if value:
+                    entry[key] = value
+            # Prefer existing notes, capped to the active schema limit.
+            prev_notes = prev.get("notes")
+            if prev_notes:
+                notes = truncate_notes(prev_notes)
+                if notes:
+                    entry["notes"] = notes
+            elif st == "dns_error":
+                entry["notes"] = "DNS resolution failed"
+            elif st in ("403", "404"):
+                entry["notes"] = f"HTTP {st}"
             new_inactive.append(entry)
         elif r.classification == "review":
             review_issues.append(r)
@@ -320,27 +397,46 @@ def main() -> int:
             if o != origin_key:
                 continue
             if not any(e["domain"] == d for e in kept):
-                kept.append(make_active_entry(d, o, restored=True))
+                kept.append(make_active_entry(
+                    d,
+                    o,
+                    restored=True,
+                    original_entry=inactive_by_domain.get(d) or original_active_by_domain.get(d),
+                ))
         for (d, o) in remove_from_inactive_review:
             if o != origin_key:
                 continue
             if not any(e["domain"] == d for e in kept):
-                kept.append(make_active_entry(d, o, restored=False))
+                kept.append(make_active_entry(
+                    d,
+                    o,
+                    restored=False,
+                    original_entry=inactive_by_domain.get(d) or original_active_by_domain.get(d),
+                ))
         kept.sort(key=lambda x: x["domain"])
         active[name] = kept
 
     new_inactive.sort(key=lambda x: x["domain"])
 
-    # Create REVIEW issues
+    # Create an issue only for unhandled errors (unexpected exceptions), not for expected outcomes (redirects, 5xx, etc.)
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY", "DontPokeMe/known-link-shorteners")
     failed_issues: list[str] = []
-    if token and review_issues:
-        for r in review_issues:
-            err = create_issue(r.domain, r.origin, r, repo, token)
-            if err:
-                failed_issues.append(f"{r.domain} ({r.origin}): {err}")
-            time.sleep(0.3)
+    unhandled = [r for r in review_issues if r.status == "error"]
+    active_review = [r for r in review_issues if r.domain in active_probe_domains and r.status != "error"]
+    issues_created = 0
+    if token and unhandled:
+        err = create_unhandled_errors_issue(unhandled, today, repo, token)
+        if err:
+            failed_issues.append(f"unhandled errors issue: {err}")
+        else:
+            issues_created += 1
+    if token and active_review:
+        err = create_active_review_issue(active_review, today, repo, token)
+        if err:
+            failed_issues.append(f"active review issue: {err}")
+        else:
+            issues_created += 1
 
     # Write data files
     save_json(inactive_path, new_inactive)
@@ -355,8 +451,10 @@ def main() -> int:
         "active_200": sum(1 for r in results if r.classification == "active"),
         "inactive": sum(1 for r in results if r.classification == "inactive"),
         "review": len(review_issues),
+        "active_review": len(active_review),
+        "unhandled_errors": len(unhandled),
         "inactive_list_count": len(new_inactive),
-        "issues_created": len(review_issues) - len(failed_issues),
+        "issues_created": issues_created,
         "issues_failed": len(failed_issues),
         "failed_issue_details": failed_issues,
         "details": [
@@ -379,7 +477,7 @@ def main() -> int:
                 f.write(line + "\n")
 
     print(f"Probed: {len(results)} | active(200): {report['active_200']} | inactive: {report['inactive']} | review: {report['review']}")
-    print(f"Inactive list size: {len(new_inactive)} | Issues created: {report['issues_created']} | Failed: {report['issues_failed']}")
+    print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Issues created: {report['issues_created']} | Failed: {report['issues_failed']}")
     return 0
 
 
