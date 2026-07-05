@@ -263,20 +263,48 @@ def close_issue(number: int, repo: str, token: str) -> str | None:
         return str(e)[:300]
 
 
-def create_issue(title: str, body: str, repo: str, token: str) -> str | None:
+GITHUB_BODY_LIMIT = 60_000  # GitHub caps issue/comment bodies at 65536 chars; leave headroom
+
+
+def create_issue(title: str, body: str, repo: str, token: str) -> tuple[int | None, str | None]:
     url = f"https://api.github.com/repos/{repo}/issues"
     payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
     try:
         r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
         if r.status_code in (200, 201):
-            return None
-        return f"HTTP {r.status_code}: {r.text[:300]}"
+            return r.json().get("number"), None
+        return None, f"HTTP {r.status_code}: {r.text[:300]}"
     except Exception as e:
-        return str(e)[:300]
+        return None, str(e)[:300]
 
 
-def unhandled_errors_body(results: list[ProbeResult]) -> str:
-    lines = [
+def chunk_table(preamble: list[str], rows: list[str], footer: list[str], limit: int = GITHUB_BODY_LIMIT) -> list[str]:
+    """
+    Split a preamble+table+footer into one or more self-contained chunks (each repeating the
+    preamble/footer so every chunk renders as a valid standalone markdown table), so a single
+    run's findings can't exceed GitHub's per-issue/comment body size limit.
+    """
+    overhead = sum(len(l) + 1 for l in preamble) + sum(len(l) + 1 for l in footer)
+    chunks: list[str] = []
+    current_rows: list[str] = []
+    current_len = 0
+    for row in rows:
+        added = len(row) + 1
+        if current_rows and overhead + current_len + added > limit:
+            chunks.append("\n".join(preamble + current_rows + footer))
+            current_rows = []
+            current_len = 0
+        current_rows.append(row)
+        current_len += added
+    chunks.append("\n".join(preamble + current_rows + footer))
+
+    if len(chunks) > 1:
+        chunks = [f"_(part {i + 1} of {len(chunks)} — split due to size)_\n\n{c}" for i, c in enumerate(chunks)]
+    return chunks
+
+
+def unhandled_errors_body(results: list[ProbeResult]) -> list[str]:
+    preamble = [
         "## Unhandled errors",
         "",
         "The following domains triggered unexpected exceptions during probing. Please investigate.",
@@ -284,15 +312,16 @@ def unhandled_errors_body(results: list[ProbeResult]) -> str:
         "| Domain | Origin | Message |",
         "|--------|--------|---------|",
     ]
+    rows = []
     for r in results:
         msg = (r.message or str(r.status))[:200].replace("|", "\\|").replace("\n", " ")
-        lines.append(f"| `{r.domain}` | {r.origin} | {msg} |")
-    lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
-    return "\n".join(lines)
+        rows.append(f"| `{r.domain}` | {r.origin} | {msg} |")
+    footer = ["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"]
+    return chunk_table(preamble, rows, footer)
 
 
-def active_review_body(results: list[ProbeResult]) -> str:
-    lines = [
+def active_review_body(results: list[ProbeResult]) -> list[str]:
+    preamble = [
         "## Active domains needing review",
         "",
         "The following active dataset domains returned review-worthy probe results during the monthly run.",
@@ -300,13 +329,14 @@ def active_review_body(results: list[ProbeResult]) -> str:
         "| Domain | Origin | Status | Scheme | Location | Message |",
         "|--------|--------|--------|--------|----------|---------|",
     ]
+    rows = []
     for r in sorted(results, key=lambda item: (item.origin, item.domain)):
         status = str(r.status)
         location = (r.location or "").replace("|", "\\|").replace("\n", " ")
         message = (r.message or "").replace("|", "\\|").replace("\n", " ")
-        lines.append(f"| `{r.domain}` | {r.origin} | {status} | {r.scheme} | {location or '(none)'} | {message or '(none)'} |")
-    lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
-    return "\n".join(lines)
+        rows.append(f"| `{r.domain}` | {r.origin} | {status} | {r.scheme} | {location or '(none)'} | {message or '(none)'} |")
+    footer = ["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"]
+    return chunk_table(preamble, rows, footer)
 
 
 def sync_review_issue(
@@ -336,10 +366,22 @@ def sync_review_issue(
             return "closed", close_issue(existing["number"], repo, token)
         return "noop", None
 
-    body = body_fn(results)
+    chunks = body_fn(results)  # one or more bodies, each under GitHub's size limit
     if existing:
-        return "commented", comment_on_issue(existing["number"], body, repo, token)
-    return "created", create_issue(title, body, repo, token)
+        for chunk in chunks:
+            err = comment_on_issue(existing["number"], chunk, repo, token)
+            if err:
+                return "commented", err
+        return "commented", None
+
+    number, err = create_issue(title, chunks[0], repo, token)
+    if err or number is None:
+        return "created", err or "issue created but no number returned"
+    for chunk in chunks[1:]:
+        err = comment_on_issue(number, chunk, repo, token)
+        if err:
+            return "created", err
+    return "created", None
 
 
 def main() -> int:
