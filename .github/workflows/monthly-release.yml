@@ -87,7 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/inactive.json data/shorteners.json data/redirectors.json data/tracking.json README.md
+          git add data/inactive.json data/shorteners.json data/redirectors.json data/tracking.json data/review_history.json README.md
           if git diff --staged --quiet; then
             echo "No changes to data files or README stats"
           else
@@ -153,6 +153,7 @@ jobs:
           print(f"- **Inactive (403/404/dns_error)**: {r.get('inactive', 0)}")
           print(f"- **Rate-limited, retry next run (429)**: {r.get('rate_limited_retry_later', 0)}")
           print(f"- **Review**: {r.get('review', 0)} (active: {r.get('active_review', 0)}, unhandled: {r.get('unhandled_errors', 0)}, issues created: {r.get('issues_created', 0)}, closed: {r.get('issues_closed', 0)}, failed: {r.get('issues_failed', 0)})")
+          print(f"- **Repeat-offender demotions**: {r.get('repeat_offender_demotions', 0)} (review history size: {r.get('review_history_size', 0)})")
           print(f"- **Inactive list size**: {r.get('inactive_list_count', 0)}")
           PY
           fi

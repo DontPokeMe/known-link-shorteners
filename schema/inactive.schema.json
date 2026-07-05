@@ -16,7 +16,7 @@
       },
       "last_status": {
         "type": ["string", "integer"],
-        "description": "403, 404, or dns_error for inactive list"
+        "description": "403, 404, or dns_error for inactive list; persistent_error for domains auto-demoted after repeated review anomalies"
       },
       "last_checked_at": {
         "type": "string",

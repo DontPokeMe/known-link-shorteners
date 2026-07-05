@@ -23,7 +23,8 @@ DATA = ROOT / "data"
 SCHEMA_DIR = ROOT / "schema"
 ACTIVE_FILES = ["shorteners.json", "redirectors.json", "tracking.json"]
 INACTIVE_FILE = "inactive.json"
-ALLOWED_INACTIVE_STATUSES = {"403", "404", "dns_error"}
+REVIEW_HISTORY_FILE = "review_history.json"
+ALLOWED_INACTIVE_STATUSES = {"403", "404", "dns_error", "persistent_error"}
 
 
 def load_json(path: Path) -> list | dict:
@@ -51,6 +52,22 @@ def validate_active_schema(entries: list, path: Path) -> list[str]:
 def validate_inactive_schema(entries: list, path: Path) -> list[str]:
     errors = []
     schema_path = SCHEMA_DIR / "inactive.schema.json"
+    if not schema_path.exists():
+        return errors
+    if jsonschema is None:
+        return errors
+    schema = load_json(schema_path)
+    item_schema = schema.get("items", schema)
+    validator = jsonschema.Draft7Validator(item_schema)
+    for i, item in enumerate(entries):
+        for err in validator.iter_errors(item):
+            errors.append(f"{path}: entry[{i}] {err.message}")
+    return errors
+
+
+def validate_review_history_schema(entries: list, path: Path) -> list[str]:
+    errors = []
+    schema_path = SCHEMA_DIR / "review-history.schema.json"
     if not schema_path.exists():
         return errors
     if jsonschema is None:
@@ -132,6 +149,17 @@ def main() -> int:
             all_errors.append(
                 f"Domain {d!r} exists in both active ({all_active_domains[d]}) and {INACTIVE_FILE}"
             )
+
+    # Review history: schema + sort only (its domains are expected to overlap with active --
+    # it tracks active domains mid-streak before they're demoted or recover).
+    review_history_path = DATA / REVIEW_HISTORY_FILE
+    if review_history_path.exists():
+        review_history = load_json(review_history_path)
+        if not isinstance(review_history, list):
+            all_errors.append(f"{review_history_path}: expected array")
+        else:
+            all_errors.extend(validate_review_history_schema(review_history, review_history_path))
+            all_errors.extend(check_sorted(review_history, review_history_path))
 
     if all_errors:
         for e in all_errors:
