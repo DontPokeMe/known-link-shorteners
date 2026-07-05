@@ -213,6 +213,10 @@ def make_active_entry(
     return entry
 
 
+UNHANDLED_ERRORS_TITLE = "[monthly probe] Unhandled errors during domain probe"
+ACTIVE_REVIEW_TITLE = "[monthly probe] Active domains needing review"
+
+
 def issue_headers(token: str) -> dict[str, str]:
     return {
         "Authorization": f"Bearer {token}",
@@ -221,12 +225,57 @@ def issue_headers(token: str) -> dict[str, str]:
     }
 
 
-def create_unhandled_errors_issue(
-    results: list[ProbeResult], run_date: str, repo: str, token: str
-) -> str | None:
-    """Create a single GitHub issue for unhandled probe errors. Return None on success, error string on failure."""
+def find_open_issue_by_title(title: str, repo: str, token: str) -> dict[str, Any] | None:
+    """Find an open domain-review issue with an exact matching title, if any."""
     url = f"https://api.github.com/repos/{repo}/issues"
-    title = f"[monthly probe] Unhandled errors during domain probe ({run_date})"
+    params = {"labels": REVIEW_LABEL, "state": "open", "per_page": 100}
+    try:
+        r = requests.get(url, headers=issue_headers(token), params=params, timeout=30)
+        if r.status_code != 200:
+            return None
+        for issue in r.json():
+            if "pull_request" not in issue and issue.get("title") == title:
+                return issue
+    except Exception:
+        return None
+    return None
+
+
+def comment_on_issue(number: int, body: str, repo: str, token: str) -> str | None:
+    url = f"https://api.github.com/repos/{repo}/issues/{number}/comments"
+    try:
+        r = requests.post(url, json={"body": body}, headers=issue_headers(token), timeout=30)
+        if r.status_code in (200, 201):
+            return None
+        return f"HTTP {r.status_code}: {r.text[:300]}"
+    except Exception as e:
+        return str(e)[:300]
+
+
+def close_issue(number: int, repo: str, token: str) -> str | None:
+    url = f"https://api.github.com/repos/{repo}/issues/{number}"
+    try:
+        r = requests.patch(url, json={"state": "closed"}, headers=issue_headers(token), timeout=30)
+        if r.status_code == 200:
+            return None
+        return f"HTTP {r.status_code}: {r.text[:300]}"
+    except Exception as e:
+        return str(e)[:300]
+
+
+def create_issue(title: str, body: str, repo: str, token: str) -> str | None:
+    url = f"https://api.github.com/repos/{repo}/issues"
+    payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
+    try:
+        r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
+        if r.status_code in (200, 201):
+            return None
+        return f"HTTP {r.status_code}: {r.text[:300]}"
+    except Exception as e:
+        return str(e)[:300]
+
+
+def unhandled_errors_body(results: list[ProbeResult]) -> str:
     lines = [
         "## Unhandled errors",
         "",
@@ -239,23 +288,10 @@ def create_unhandled_errors_issue(
         msg = (r.message or str(r.status))[:200].replace("|", "\\|").replace("\n", " ")
         lines.append(f"| `{r.domain}` | {r.origin} | {msg} |")
     lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
-    body = "\n".join(lines)
-    payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
-    try:
-        r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
-        if r.status_code in (200, 201):
-            return None
-        return f"HTTP {r.status_code}: {r.text[:300]}"
-    except Exception as e:
-        return str(e)[:300]
+    return "\n".join(lines)
 
 
-def create_active_review_issue(
-    results: list[ProbeResult], run_date: str, repo: str, token: str
-) -> str | None:
-    """Create a single GitHub issue for active dataset domains that need manual probe review."""
-    url = f"https://api.github.com/repos/{repo}/issues"
-    title = f"[monthly probe] Active domains needing review ({run_date})"
+def active_review_body(results: list[ProbeResult]) -> str:
     lines = [
         "## Active domains needing review",
         "",
@@ -270,15 +306,40 @@ def create_active_review_issue(
         message = (r.message or "").replace("|", "\\|").replace("\n", " ")
         lines.append(f"| `{r.domain}` | {r.origin} | {status} | {r.scheme} | {location or '(none)'} | {message or '(none)'} |")
     lines.extend(["", "---", f"*Run: {datetime.now(timezone.utc).isoformat()}*"])
-    body = "\n".join(lines)
-    payload = {"title": title, "body": body, "labels": [REVIEW_LABEL]}
-    try:
-        r = requests.post(url, json=payload, headers=issue_headers(token), timeout=30)
-        if r.status_code in (200, 201):
-            return None
-        return f"HTTP {r.status_code}: {r.text[:300]}"
-    except Exception as e:
-        return str(e)[:300]
+    return "\n".join(lines)
+
+
+def sync_review_issue(
+    title: str,
+    results: list[ProbeResult],
+    body_fn: Any,
+    run_date: str,
+    repo: str,
+    token: str,
+) -> tuple[str, str | None]:
+    """
+    Keep one persistent issue per category instead of creating a new one every run.
+    Returns (action, error) where action is one of:
+    "created", "commented", "closed", "noop".
+    """
+    existing = find_open_issue_by_title(title, repo, token)
+    if not results:
+        if existing:
+            err = comment_on_issue(
+                existing["number"],
+                f"✅ Clear on {run_date} — nothing in this category needs review anymore. Closing.",
+                repo,
+                token,
+            )
+            if err:
+                return "noop", err
+            return "closed", close_issue(existing["number"], repo, token)
+        return "noop", None
+
+    body = body_fn(results)
+    if existing:
+        return "commented", comment_on_issue(existing["number"], body, repo, token)
+    return "created", create_issue(title, body, repo, token)
 
 
 def main() -> int:
@@ -418,25 +479,31 @@ def main() -> int:
 
     new_inactive.sort(key=lambda x: x["domain"])
 
-    # Create an issue only for unhandled errors (unexpected exceptions), not for expected outcomes (redirects, 5xx, etc.)
+    # Sync (create/comment/close) one persistent issue per category, instead of one
+    # new issue per run, so recurring flaky domains don't pile up new issues monthly.
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY", "DontPokeMe/known-link-shorteners")
     failed_issues: list[str] = []
     unhandled = [r for r in review_issues if r.status == "error"]
     active_review = [r for r in review_issues if r.domain in active_probe_domains and r.status != "error"]
     issues_created = 0
-    if token and unhandled:
-        err = create_unhandled_errors_issue(unhandled, today, repo, token)
+    issues_closed = 0
+    if token:
+        action, err = sync_review_issue(UNHANDLED_ERRORS_TITLE, unhandled, unhandled_errors_body, today, repo, token)
         if err:
             failed_issues.append(f"unhandled errors issue: {err}")
-        else:
+        elif action == "created":
             issues_created += 1
-    if token and active_review:
-        err = create_active_review_issue(active_review, today, repo, token)
+        elif action == "closed":
+            issues_closed += 1
+
+        action, err = sync_review_issue(ACTIVE_REVIEW_TITLE, active_review, active_review_body, today, repo, token)
         if err:
             failed_issues.append(f"active review issue: {err}")
-        else:
+        elif action == "created":
             issues_created += 1
+        elif action == "closed":
+            issues_closed += 1
 
     # Write data files
     save_json(inactive_path, new_inactive)
@@ -455,6 +522,7 @@ def main() -> int:
         "unhandled_errors": len(unhandled),
         "inactive_list_count": len(new_inactive),
         "issues_created": issues_created,
+        "issues_closed": issues_closed,
         "issues_failed": len(failed_issues),
         "failed_issue_details": failed_issues,
         "details": [
@@ -477,7 +545,7 @@ def main() -> int:
                 f.write(line + "\n")
 
     print(f"Probed: {len(results)} | active(200): {report['active_200']} | inactive: {report['inactive']} | review: {report['review']}")
-    print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Issues created: {report['issues_created']} | Failed: {report['issues_failed']}")
+    print(f"Inactive list size: {len(new_inactive)} | Active review: {len(active_review)} | Unhandled errors: {len(unhandled)} | Issues created: {report['issues_created']} | Closed: {report['issues_closed']} | Failed: {report['issues_failed']}")
     return 0
 
 

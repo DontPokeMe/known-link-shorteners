@@ -80,7 +80,7 @@ Common reasons for rejection:
 
 ## Monthly releases and domain-review issues
 
-The repo runs an automated **monthly release** (see [README#Monthly releases](https://github.com/DontPokeMe/known-link-shorteners#monthly-releases)). It probes all domains and may open issues with the label **domain-review** when a domain returns a redirect (301/302/307/308), 5xx, 429, or connection/TLS errors. You can help by triaging those issues and updating the dataset or [inactive list](data/inactive.json) as needed.
+The repo runs an automated **monthly release** (see [README#Monthly releases](https://github.com/DontPokeMe/known-link-shorteners#monthly-releases)). It probes all domains and keeps at most two persistent issues labeled **domain-review** — one for active-dataset domains that returned a redirect (301/302/307/308), 5xx, 429, or connection/TLS error, and one for unhandled probe exceptions. Each monthly run adds a comment to the existing issue instead of opening a new one, and auto-closes it once a run comes back clear. You can help by triaging those issues and updating the dataset or [inactive list](data/inactive.json) as needed.
 
 Release artifacts (JSON, CSV, XML, and a zip archive) are attached to each month’s release for easy consumption.
 

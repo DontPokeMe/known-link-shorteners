@@ -1,5 +1,7 @@
 # Dependencies (install with npm install)
 node_modules/
+__pycache__/
+*.pyc
 
 # API / backend (lives in dontpoke.me or separate backend repo)
 api/

@@ -150,7 +150,7 @@ jobs:
           print(f"- **Total probed**: {r.get('total_probed', 0)}")
           print(f"- **Active (200)**: {r.get('active_200', 0)}")
           print(f"- **Inactive (403/404/dns_error)**: {r.get('inactive', 0)}")
-          print(f"- **Review**: {r.get('review', 0)} (active: {r.get('active_review', 0)}, unhandled: {r.get('unhandled_errors', 0)}, issues created: {r.get('issues_created', 0)}, failed: {r.get('issues_failed', 0)})")
+          print(f"- **Review**: {r.get('review', 0)} (active: {r.get('active_review', 0)}, unhandled: {r.get('unhandled_errors', 0)}, issues created: {r.get('issues_created', 0)}, closed: {r.get('issues_closed', 0)}, failed: {r.get('issues_failed', 0)})")
           print(f"- **Inactive list size**: {r.get('inactive_list_count', 0)}")
           PY
           fi
