@@ -65,7 +65,7 @@ if (evidence.length === 0) {
 
 // Duplicate check
 const dataDir = path.join(workspace, 'data');
-const files = ['shorteners.json', 'redirectors.json', 'tracking.json'];
+const files = ['shorteners.json', 'redirectors.json', 'tracking.json', 'inactive.json'];
 const domain = (submission.domain || '').trim().toLowerCase();
 
 for (const file of files) {
