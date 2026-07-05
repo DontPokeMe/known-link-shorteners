@@ -82,6 +82,14 @@ Common reasons for rejection:
 
 The repo runs an automated **monthly release** (see [README#Monthly releases](https://github.com/DontPokeMe/known-link-shorteners#monthly-releases)). It probes all domains and keeps at most two persistent issues labeled **domain-review**: one for active-dataset domains that returned a genuine anomaly (5xx, unexpected 4xx, connection error, or TLS error), and one for unhandled probe exceptions. A redirect (301/302/303/307/308) on an active domain is treated as normal — that's the expected behavior for a shortener/redirector/tracking link — so it's counted as active, not flagged. A 429 (rate limited) is retried with backoff during the same run; if it's still rate-limited afterward, the domain is left untouched and simply re-checked on the next run rather than being flagged. Each monthly run adds a comment to the existing review issue instead of opening a new one, and auto-closes it once a run comes back clear. You can help by triaging those issues and updating the dataset or [inactive list](data/inactive.json) as needed.
 
+An active domain that keeps returning a genuine anomaly for **3 consecutive monthly runs** is
+auto-demoted to `inactive.json` (`last_status: "persistent_error"`) instead of being flagged
+forever — this is tracked in `data/review_history.json` (internal maintainer state, reset
+whenever a domain recovers). Probes to domains that share a resolved IP (e.g. branded
+short-domains riding on a shared backend like Bitly's) are throttled to 3 concurrent requests
+per IP, independent of the overall probe concurrency, to avoid the probe itself triggering
+rate limiting.
+
 Release artifacts (JSON, CSV, XML, and a zip archive) are attached to each month’s release for easy consumption.
 
 ## Questions?

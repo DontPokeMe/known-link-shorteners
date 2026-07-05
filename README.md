@@ -13,7 +13,7 @@ This repository powers the [dontpoke.me Link Expander](https://dontpoke.me/tools
 - **shorteners.json**: URL shortening services (bit.ly, tinyurl.com, etc.)
 - **redirectors.json**: Redirect services and link processors
 - **tracking.json**: Known tracking and analytics links
-- **inactive.json**: Domains that returned 403, 404, or DNS error at last probe (carry-forward list; see [Monthly releases](#monthly-releases)).
+- **inactive.json**: Domains that returned 403, 404, DNS error, or a persistent review anomaly (3+ consecutive months) at last probe (carry-forward list; see [Monthly releases](#monthly-releases)).
 
 ### Statistics
 
@@ -71,7 +71,7 @@ CSV/XML), use the monthly [Release artifacts](#release-artifacts) below, or the 
 On the **1st of every month (00:00 UTC)** an automated workflow:
 
 1. **Probes** every domain in the active and inactive datasets (HTTPS then HTTP, no redirect follow).
-2. **Updates** [data/inactive.json](data/inactive.json): keeps 403/404/dns_error, restores domains that return 200 or an expected redirect, retries 429s with backoff (left untouched to re-check next run if still rate-limited after retries), and syncs two persistent **domain-review** issues (genuine anomalies — 5xx/unexpected 4xx/connection/TLS errors — on active domains, and unhandled probe errors) — each run comments on the existing issue instead of opening a new one, and auto-closes it once clear.
+2. **Updates** [data/inactive.json](data/inactive.json): keeps 403/404/dns_error, restores domains that return 200 or an expected redirect, retries 429s with backoff (left untouched to re-check next run if still rate-limited after retries), and syncs two persistent **domain-review** issues (genuine anomalies — 5xx/unexpected 4xx/connection/TLS errors — on active domains, and unhandled probe errors) — each run comments on the existing issue instead of opening a new one, and auto-closes it once clear. An active domain that shows a genuine anomaly for **3 consecutive monthly runs** is auto-demoted to `inactive.json` (`last_status: "persistent_error"`) instead of being flagged forever; probes to domains sharing a resolved IP (e.g. branded short-domains on a shared backend) are throttled to 3 concurrent to avoid self-inflicted rate limiting. Streak progress is tracked in [data/review_history.json](data/review_history.json) (internal state, not part of the public data contract).
 3. **Exports** and publishes a [GitHub Release](https://github.com/DontPokeMe/known-link-shorteners/releases) with tag `release-YYYY-MM-DD` and title "Month Day".
 
 ### Release artifacts
