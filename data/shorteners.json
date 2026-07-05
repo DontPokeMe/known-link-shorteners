@@ -3617,17 +3617,6 @@
     ]
   },
   {
-    "domain": "dub.sh",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "dv.gd",
     "type": "shortener",
     "status": "active",
