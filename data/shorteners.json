@@ -99,17 +99,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "1un.fr",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "1url.cz",
     "type": "shortener",
     "status": "active",
@@ -384,17 +373,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "69run.fun",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "6g6.eu",
     "type": "shortener",
     "status": "active",
@@ -462,17 +440,6 @@
   },
   {
     "domain": "7ny.tv",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "7oi.de",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -1011,6 +978,17 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "alpha.camp",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
+  },
+  {
     "domain": "alphab.gr",
     "type": "shortener",
     "status": "active",
@@ -1119,6 +1097,17 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "amzn.pw",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "HTTP 403"
   },
   {
     "domain": "amzn.to",
@@ -1231,6 +1220,17 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "app.philz.us",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-09-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
+  },
+  {
     "domain": "apple.co",
     "type": "shortener",
     "status": "active",
@@ -1276,17 +1276,6 @@
   },
   {
     "domain": "arc.ht",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "arkinv.st",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -1748,17 +1737,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "bit.do",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://bit.do/"
-    ],
-    "notes": "Free URL shortener with custom slugs"
-  },
-  {
     "domain": "bit.ly",
     "type": "shortener",
     "status": "active",
@@ -1782,17 +1760,6 @@
   },
   {
     "domain": "bitly.is",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "bitly.lc",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -2068,17 +2035,6 @@
   },
   {
     "domain": "bridge.dev",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "brief.ly",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -2529,17 +2485,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "chts.tw",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "chzb.gr",
     "type": "shortener",
     "status": "active",
@@ -2725,17 +2670,6 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "clk.ink",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://clk.ink/"
-    ],
-    "notes": "Short link service"
   },
   {
     "domain": "clvr.rocks",
@@ -3112,17 +3046,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "cutit.org",
-    "type": "shortener",
-    "status": "defunct",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://cutit.org/"
-    ],
-    "notes": "Website suspended"
-  },
-  {
     "domain": "cutt.ly",
     "type": "shortener",
     "status": "active",
@@ -3465,17 +3388,6 @@
   },
   {
     "domain": "dky.bz",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "dld.bz",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -4145,17 +4057,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "faturl.com",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "fav.me",
     "type": "shortener",
     "status": "active",
@@ -4222,17 +4123,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "fetnet.tw",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "fevo.me",
     "type": "shortener",
     "status": "active",
@@ -4256,17 +4146,6 @@
   },
   {
     "domain": "fifa.fans",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "firsturl.net",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -4388,17 +4267,6 @@
   },
   {
     "domain": "ford.to",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "forms.gle",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -4717,17 +4585,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "geti.in",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-07-05",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/DontPokeMe/known-link-shorteners"
-    ],
-    "notes": "httpsconnectionpool(host='geti.in', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='geti.in', port=443): failed to resolve 'geti.in' ([errno -2] name"
-  },
-  {
     "domain": "gfuel.ly",
     "type": "shortener",
     "status": "active",
@@ -4925,17 +4782,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "go.btwrdn.co",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "go.cwtv.com",
     "type": "shortener",
     "status": "active",
@@ -5079,17 +4925,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "go.qb.by",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "go.rebel.pl",
     "type": "shortener",
     "status": "active",
@@ -5209,17 +5044,6 @@
       "https://github.com/DontPokeMe/known-link-shorteners"
     ],
     "notes": "Restored from inactive list (re-probed 200)"
-  },
-  {
-    "domain": "goo.gl",
-    "type": "shortener",
-    "status": "defunct",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://support.google.com/websearch/answer/9012508"
-    ],
-    "notes": "Google URL Shortener, discontinued 2018-03-30"
   },
   {
     "domain": "goo.gle",
@@ -5629,16 +5453,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "hoy.kr",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://hoy.kr/"
-    ]
-  },
-  {
     "domain": "hp.care",
     "type": "shortener",
     "status": "active",
@@ -5695,17 +5509,6 @@
   },
   {
     "domain": "htl.li",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "htn.to",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -6332,17 +6135,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "ity.im",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "ix.sk",
     "type": "shortener",
     "status": "active",
@@ -6715,6 +6507,17 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "kurl.ru",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-09-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
   },
   {
     "domain": "kurzelinks.de",
@@ -7112,17 +6915,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "link.ac",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "link.infini.fr",
     "type": "shortener",
     "status": "active",
@@ -7189,17 +6981,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "links2.me",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "linkshare.pro",
     "type": "shortener",
     "status": "active",
@@ -7234,17 +7015,6 @@
   },
   {
     "domain": "livemu.sc",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "livestre.am",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -7310,18 +7080,18 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "lnk.bz",
+    "domain": "ln.run",
     "type": "shortener",
     "status": "active",
-    "added_at": "2026-02-20",
+    "added_at": "2026-09-01",
     "source": "internal",
     "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
+      "https://github.com/DontPokeMe/known-link-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Restored from inactive list (re-probed active)"
   },
   {
-    "domain": "lnk.direct",
+    "domain": "lnk.bz",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -7363,28 +7133,6 @@
       "https://www.linkedin.com/help/linkedin/answer/46788"
     ],
     "notes": "LinkedIn short links"
-  },
-  {
-    "domain": "lnkiy.com",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "lnkiy.in",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "lnky.jp",
@@ -7716,17 +7464,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "mcaf.ee",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://www.mcafee.com/"
-    ],
-    "notes": "McAfee link scanner shortener"
-  },
-  {
     "domain": "mcafee.ly",
     "type": "shortener",
     "status": "active",
@@ -7826,17 +7563,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "merky.de",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "metamark.net",
     "type": "shortener",
     "status": "active",
@@ -7882,17 +7608,6 @@
   },
   {
     "domain": "migre.me",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "minify.link",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -8882,17 +8597,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "on.ft.com",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "on.louisvuitton.com",
     "type": "shortener",
     "status": "active",
@@ -9014,17 +8718,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "onepl.us",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "onforb.es",
     "type": "shortener",
     "status": "active",
@@ -9048,17 +8741,6 @@
   },
   {
     "domain": "onx.la",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "oow.pw",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -9179,6 +8861,17 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "ovh.to",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-09-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
+  },
+  {
     "domain": "owl.li",
     "type": "shortener",
     "status": "active",
@@ -9235,17 +8928,6 @@
   },
   {
     "domain": "p.asia",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "p.dw.com",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -9540,17 +9222,6 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "po.st",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://www.radiumone.com/"
-    ],
-    "notes": "RadiumOne short links"
   },
   {
     "domain": "pod.fo",
@@ -10167,17 +9838,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "redir.ec",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "redir.is",
     "type": "shortener",
     "status": "active",
@@ -10376,16 +10036,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "rip.to",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://rip.to/"
-    ]
-  },
-  {
     "domain": "ritea.id",
     "type": "shortener",
     "status": "active",
@@ -10439,6 +10089,17 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "ro.blox.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-09-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
   },
   {
     "domain": "rog.gg",
@@ -10629,17 +10290,6 @@
   },
   {
     "domain": "s.accupass.com",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "s.coop",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -11089,17 +10739,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "shiny.link",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "shln.me",
     "type": "shortener",
     "status": "active",
@@ -11166,17 +10805,6 @@
     "notes": "Custom domain short links"
   },
   {
-    "domain": "short.link",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://short.link/"
-    ],
-    "notes": "Short link service"
-  },
-  {
     "domain": "shorten-url.com",
     "type": "shortener",
     "status": "active",
@@ -11240,6 +10868,17 @@
     "evidence": [
       "https://github.com/DontPokeMe/known-link-shorteners"
     ]
+  },
+  {
+    "domain": "shorturl.asia",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-09-01",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
   },
   {
     "domain": "shorturl.at",
@@ -11462,17 +11101,6 @@
   },
   {
     "domain": "slidesha.re",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "small.cat",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -11800,6 +11428,17 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "spoo.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://spoo.me/"
+    ],
+    "notes": "Restored from inactive list (re-probed active)"
   },
   {
     "domain": "spoti.fi",
@@ -12439,17 +12078,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "thatis.me",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "thd.co",
     "type": "shortener",
     "status": "active",
@@ -12550,17 +12178,6 @@
   },
   {
     "domain": "thr.cm",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "thrill.to",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -12735,17 +12352,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "tl.gd",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "tlil.nl",
     "type": "shortener",
     "status": "active",
@@ -12824,17 +12430,6 @@
   },
   {
     "domain": "tnvge.co",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "tnw.to",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -13362,28 +12957,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "ul.to",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "ul3.ir",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "ulvis.net",
     "type": "shortener",
     "status": "active",
@@ -13627,17 +13200,6 @@
   },
   {
     "domain": "urls.fr",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "urls.kr",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -14176,17 +13738,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "walkjc.org",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "wapo.st",
     "type": "shortener",
     "status": "active",
@@ -14361,17 +13912,6 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "wf0.xin",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "HTTP 404"
   },
   {
     "domain": "whatel.se",
@@ -14879,17 +14419,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "ynews.page.link",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "yoox.ly",
     "type": "shortener",
     "status": "active",
@@ -14953,17 +14482,6 @@
     "evidence": [
       "https://github.com/DontPokeMe/known-link-shorteners"
     ]
-  },
-  {
-    "domain": "yun.ir",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "z23.ru",
@@ -15055,17 +14573,6 @@
   },
   {
     "domain": "zeep.ly",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "zez.kr",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -15253,17 +14760,6 @@
   },
   {
     "domain": "zurl.co",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "zurl.ir",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",

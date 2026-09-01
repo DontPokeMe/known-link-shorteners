@@ -3,73 +3,90 @@
     "domain": "1drv.ms",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "1shop.io",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "1un.fr",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (500)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "2u.pw",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "5w.fit",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "69run.fun",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "HTTP 404"
+  },
+  {
+    "domain": "7oi.de",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "agrd.io",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
-    "domain": "alpha.camp",
+    "domain": "arkinv.st",
     "origin": "shortener",
-    "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_status": "403",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "DNS resolution failed"
-  },
-  {
-    "domain": "amzn.pw",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "HTTP 403"
-  },
-  {
-    "domain": "app.philz.us",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "b23.tv",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -81,21 +98,33 @@
     "domain": "b2n.ir",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "bc.vc",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "bit.do",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://bit.do/"
+    ]
   },
   {
     "domain": "bitly.kr",
     "origin": "shortener",
-    "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_status": "403",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -104,38 +133,86 @@
     "notes": "HTTP 404"
   },
   {
+    "domain": "bitly.lc",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "DNS resolution failed"
+  },
+  {
+    "domain": "brief.ly",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
     "domain": "bzh.me",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "c11.kr",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "chts.tw",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "clicky.me",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "clk.ink",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://clk.ink/"
+    ]
   },
   {
     "domain": "clr.tax",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "cplink.co",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -147,42 +224,66 @@
     "domain": "ctbc.tw",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "cutit.org",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://cutit.org/"
+    ]
   },
   {
     "domain": "cvent.me",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "cyb.ec",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "dl.gl",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "dld.bz",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "dopice.sk",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "dub.sh",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -194,14 +295,14 @@
     "domain": "e.vg",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "envs.sh",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -213,35 +314,95 @@
     "domain": "etp.tw",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "faturl.com",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "fetnet.tw",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "firsturl.de",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "firsturl.net",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (526)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "flomuz.io",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "forms.gle",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (400)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "fox.ly",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='fox.ly', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='fox.ly', port=443): failed to resolve 'fox.ly' ([errno -2] name or"
+  },
+  {
+    "domain": "geti.in",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-07-05",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ]
   },
   {
     "domain": "gizmo.do",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -250,17 +411,29 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "go.btwrdn.co",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (526)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
     "domain": "go.jc.fm",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "DNS resolution failed"
   },
   {
     "domain": "go.osu.edu",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-07-05",
     "source": "internal",
     "evidence": [
@@ -269,17 +442,29 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "go.qb.by",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (521)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
     "domain": "go.redirectingat.com",
     "origin": "tracking",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "go.usa.gov",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -291,28 +476,52 @@
     "domain": "goo.by",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "goo.gl",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (400)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://support.google.com/websearch/answer/9012508"
+    ]
   },
   {
     "domain": "gtly.ink",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "gtly.to",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "hoy.kr",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://hoy.kr/"
+    ]
   },
   {
     "domain": "ht.ly",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -321,31 +530,43 @@
     "notes": "DNS resolution failed"
   },
   {
+    "domain": "htn.to",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (204)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
     "domain": "ibit.ly",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "ic9.in",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "iln.io",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "iplogger.com",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -357,63 +578,68 @@
     "domain": "is.gd",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "ity.im",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "j.mp",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "jpeg.ly",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "kko.to",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "klck.me",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "kortlink.dk",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "kuku.lu",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
-  },
-  {
-    "domain": "kurl.ru",
-    "origin": "shortener",
-    "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
-    "notes": "httpsconnectionpool(host='kurl.ru', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='kurl.ru', port=443): failed to resolve 'kurl.ru' ([errno -2] name"
   },
   {
     "domain": "kutt.it",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-07-05",
     "source": "internal",
     "evidence": [
@@ -425,91 +651,192 @@
     "domain": "ky77.link",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='ky77.link', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='ky77.link', port=443): failed to resolve 'ky77.link' ([errno -2]"
   },
   {
     "domain": "l.linkedin.com",
     "origin": "redirector",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='l.linkedin.com', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='l.linkedin.com', port=443): failed to resolve 'l.linkedin.c"
   },
   {
     "domain": "lam.bo",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "lin.ee",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "link.ac",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "link.host",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='link.host', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='link.host', port=443): failed to resolve 'link.host' ([errno -2]"
   },
   {
     "domain": "linkd.in",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "linkhuddle.com",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "linkjust.com",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "links2.me",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "linksplit.io",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
-    "domain": "ln.run",
+    "domain": "livestre.am",
     "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "notes": "HTTP 403"
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "lnk.direct",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (521)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "lnkiy.com",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "lnkiy.in",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "lt27.de",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "mcaf.ee",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://www.mcafee.com/"
+    ]
   },
   {
     "domain": "me2.do",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "merky.de",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "minify.link",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (526)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "moo.im",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -521,119 +848,172 @@
     "domain": "mrx.cl",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "myglamm.in",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "n9.cl",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "nav.cx",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "naver.me",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "neti.cc",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "netm.ag",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='netm.ag', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='netm.ag', port=443): failed to resolve 'netm.ag' ([errno -2] name"
   },
   {
     "domain": "obank.tw",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "on.ft.com",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (400)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "onepl.us",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "oow.pw",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (400)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "orlo.uk",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "ouo.io",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "ouo.press",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "notes": "HTTP 403"
-  },
-  {
-    "domain": "ovh.to",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "ow.ly",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
+    "notes": "HTTP 404"
+  },
+  {
+    "domain": "p.dw.com",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
     "notes": "HTTP 404"
   },
   {
     "domain": "pag.la",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "pj.pizza",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "pl.kotl.in",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "po.st",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://www.radiumone.com/"
+    ]
   },
   {
     "domain": "poie.ma",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -645,7 +1025,7 @@
     "domain": "qptr.ru",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -654,38 +1034,67 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "redir.ec",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (500)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
     "domain": "reduced.to",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='reduced.to', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='reduced.to', port=443): failed to resolve 'reduced.to' ([errno"
   },
   {
     "domain": "relink.asia",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "rip.to",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (409)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://rip.to/"
+    ]
   },
   {
     "domain": "risu.io",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
-    "domain": "ro.blox.com",
+    "domain": "s.coop",
     "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "notes": "HTTP 403"
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (526)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "s.mj.run",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -697,14 +1106,14 @@
     "domain": "s.wikicharlie.cl",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "s2r.co",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -716,7 +1125,7 @@
     "domain": "sealed.in",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -728,28 +1137,52 @@
     "domain": "share.as",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='share.as', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='share.as', port=443): failed to resolve 'share.as' ([errno -2] na"
+  },
+  {
+    "domain": "shiny.link",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "shope.ee",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "short.link",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (526)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://short.link/"
+    ]
   },
   {
     "domain": "shorten.asia",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "shorten.is",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -761,7 +1194,7 @@
     "domain": "shorten.tv",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -770,24 +1203,17 @@
     "notes": "HTTP 403"
   },
   {
-    "domain": "shorturl.asia",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "notes": "HTTP 403"
-  },
-  {
     "domain": "shp.ee",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "sie.ag",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -799,28 +1225,40 @@
     "domain": "sina.lt",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "sinyi.biz",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "small.cat",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "smlk.es",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "smsb.co",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -832,21 +1270,21 @@
     "domain": "sn.rs",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "sndn.link",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "snip.link",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -855,29 +1293,17 @@
     "notes": "DNS resolution failed"
   },
   {
-    "domain": "spoo.me",
-    "origin": "shortener",
-    "last_status": "403",
-    "last_checked_at": "2026-08-01",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://spoo.me/"
-    ],
-    "notes": "HTTP 403"
-  },
-  {
     "domain": "t.iotex.me",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "t.libren.ms",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -889,77 +1315,161 @@
     "domain": "t.ly",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "t.umblr.com",
     "origin": "redirector",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "t2m.io",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "temu.to",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "thatis.me",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "thght.works",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "thrill.to",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "tim.com.vc",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "tl.gd",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "tnw.to",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "topt.al",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "twm5g.co",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "ucbexed.org",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='ucbexed.org', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='ucbexed.org', port=443): failed to resolve 'ucbexed.org' ([err"
   },
   {
     "domain": "ufcqc.link",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "ul.to",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (timeout)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "ul3.ir",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "url.google.com",
+    "origin": "redirector",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://support.google.com/"
+    ]
   },
   {
     "domain": "url2.fr",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -968,31 +1478,43 @@
     "notes": "HTTP 404"
   },
   {
+    "domain": "urls.kr",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "HTTP 403"
+  },
+  {
     "domain": "urluno.com",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "v.ht",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='v.ht', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='v.ht', port=443): failed to resolve 'v.ht' ([errno -2] name or servic"
   },
   {
     "domain": "v.redd.it",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 403"
   },
   {
     "domain": "vbly.us",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -1004,7 +1526,7 @@
     "domain": "viaalto.me",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -1013,31 +1535,55 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "walkjc.org",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "DNS resolution failed"
+  },
+  {
     "domain": "wee.so",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
+    "notes": "HTTP 404"
+  },
+  {
+    "domain": "wf0.xin",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-09-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
     "notes": "HTTP 404"
   },
   {
     "domain": "wn.nr",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
   },
   {
     "domain": "wndrfl.co",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='wndrfl.co', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='wndrfl.co', port=443): failed to resolve 'wndrfl.co' ([errno -2]"
   },
   {
     "domain": "xurl.es",
     "origin": "shortener",
     "last_status": "403",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "added_at": "2026-02-20",
     "source": "internal",
     "evidence": [
@@ -1049,14 +1595,62 @@
     "domain": "y.ahoo.it",
     "origin": "shortener",
     "last_status": "404",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "ynews.page.link",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (400)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "yun.ir",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "zez.kr",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (connect_error)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
+  },
+  {
+    "domain": "zurl.ir",
+    "origin": "shortener",
+    "last_status": "persistent_error",
+    "last_checked_at": "2026-09-01",
+    "notes": "Auto-demoted after 3 consecutive months of review (503)",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ]
   },
   {
     "domain": "zxc.li",
     "origin": "shortener",
     "last_status": "dns_error",
-    "last_checked_at": "2026-08-01",
+    "last_checked_at": "2026-09-01",
     "notes": "httpsconnectionpool(host='zxc.li', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='zxc.li', port=443): failed to resolve 'zxc.li' ([errno -2] name or"
   }
 ]

@@ -20,16 +20,5 @@
       "https://www.instagram.com/"
     ],
     "notes": "Instagram outbound link redirect"
-  },
-  {
-    "domain": "url.google.com",
-    "type": "redirector",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://support.google.com/"
-    ],
-    "notes": "Google redirect / URL wrapper"
   }
 ]
