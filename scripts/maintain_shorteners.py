@@ -591,7 +591,7 @@ def run_triage(domains: list[str], host: str, models: list[str], workers: int,
 # --------------------------------------------------------------------- entries
 
 def decide(domain: str, votes: list[dict], sources: list[str], min_confidence: float,
-           min_sources: int) -> dict[str, Any]:
+           min_sources: int, required_models: int = 1) -> dict[str, Any]:
     """Turn per-model votes plus corroboration into accept / reject / review.
 
     A vote counts for a type only when the model is confident enough. Every
@@ -620,6 +620,14 @@ def decide(domain: str, votes: list[dict], sources: list[str], min_confidence: f
         disagreement = ", ".join(f"{v['model']}={v['category']}" for v in answered)
         return {**base, "outcome": "review", "type": None,
                 "reason": f"models disagree ({disagreement})"}
+    # A quorum that never formed is not a consensus. If fewer models answered
+    # than --consensus demands, the gate has not actually been applied, so the
+    # candidate goes to a human rather than being accepted on thinner evidence
+    # than configured. (CI installing only one model used to slip through here.)
+    if bucket is not None and len(answered) < required_models:
+        return {**base, "outcome": "review", "type": bucket,
+                "reason": f"classified {bucket} but only {len(answered)} of "
+                          f"{required_models} required models voted"}
     if bucket is None:
         return {**base, "outcome": "reject", "type": None,
                 "reason": "all models say this is not a shortener/redirector/tracker"}
@@ -957,8 +965,11 @@ def main() -> int:
         if models:
             print(f"  voting models ({len(models)}): {', '.join(models)}")
             if len(models) < args.consensus:
-                print(f"  only {len(models)} usable model(s) installed; "
-                      f"consensus of {args.consensus} requested.")
+                print(f"  !! only {len(models)} usable model(s) installed but --consensus "
+                      f"{args.consensus} is required: NOTHING will be auto-accepted this "
+                      f"run; every classified candidate goes to the review queue. "
+                      f"Install another model (e.g. ollama pull llama3.1:8b) to restore "
+                      f"auto-accept.", file=sys.stderr)
             votes = run_triage(pending_domains, host, models, args.ollama_workers, args.ollama_timeout)
 
             # A candidate that does not resolve is not worth adding, whatever
@@ -975,7 +986,8 @@ def main() -> int:
             for domain in pending_domains:
                 sources = pending[domain]
                 decision = decide(domain, votes[domain], sources,
-                                  args.min_confidence, args.min_sources)
+                                  args.min_confidence, args.min_sources,
+                                  required_models=args.consensus)
                 probe = liveness.get(domain)
                 if decision["outcome"] == "accept" and probe is not None:
                     if probe.verdict == "dead":

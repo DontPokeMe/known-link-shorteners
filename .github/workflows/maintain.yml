@@ -79,6 +79,18 @@ concurrency:
 # swapping it for anything smaller.
 env:
   CI_OLLAMA_MODEL: "qwen2.5:7b"
+  # The auto-accept gate needs --consensus models to actually vote. With one
+  # model installed the gate fails safe and accepts nothing, so CI pulls a
+  # second one from a DIFFERENT family (measured 9/10 on this task; a 3B model
+  # scored 6/10 and called zapier.com a shortener).
+  # llama3.1:8b, not mistral: it is the cross-family model actually measured on
+  # this task (9/10). Cost: the two model blobs total ~9.6GB of Actions cache.
+  # To trade auto-accept for a much smaller cache, blank this -- the gate then
+  # fails safe and every positive candidate goes to the review PR instead.
+  CI_OLLAMA_MODEL_2: "llama3.1:8b"
+  # Triage costs ~12.6s per candidate per model on a hosted runner's CPU
+  # (measured). Two models x this many candidates must fit in timeout-minutes.
+  CI_MAX_NEW_CANDIDATES: "120"
 
 jobs:
   maintain:
@@ -140,7 +152,7 @@ jobs:
         uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
         with:
           path: ~/.ollama/models
-          key: ollama-models-${{ runner.os }}-${{ inputs.model || env.CI_OLLAMA_MODEL }}
+          key: ollama-models-${{ runner.os }}-${{ inputs.model || env.CI_OLLAMA_MODEL }}-${{ env.CI_OLLAMA_MODEL_2 }}
 
       # BEST EFFORT. Every failure path here warns and exits 0 with ready=false;
       # the job then runs with --no-ollama rather than losing the week's
@@ -153,6 +165,7 @@ jobs:
           # about to bind, and a stale/remote value would make `serve` fail.
           OLLAMA_HOST: "http://127.0.0.1:11434"
           CI_MODEL: ${{ inputs.model || env.CI_OLLAMA_MODEL }}
+          CI_MODEL_2: ${{ env.CI_OLLAMA_MODEL_2 }}
         run: |
           set +e
           SERVE_LOG="${RUNNER_TEMP:-/tmp}/ollama-serve.log"
@@ -198,6 +211,17 @@ jobs:
           echo "Pulling $CI_MODEL (a warm cache makes this a no-op)..."
           ollama pull "$CI_MODEL"
           [ $? -eq 0 ] || bail "'ollama pull $CI_MODEL' failed."
+
+          # Second voter. Its absence is not fatal: the consensus gate fails
+          # safe and routes everything to the review PR instead of accepting
+          # on one opinion, which is a degraded run, not a broken one.
+          if [ -n "$CI_MODEL_2" ] && [ "$CI_MODEL_2" != "$CI_MODEL" ]; then
+            echo "Pulling second voter $CI_MODEL_2..."
+            if ! ollama pull "$CI_MODEL_2"; then
+              echo "::warning::Could not pull $CI_MODEL_2 -- the consensus gate will "\
+                   "fail safe and auto-accept nothing this run."
+            fi
+          fi
 
           ollama list
           {
@@ -251,12 +275,16 @@ jobs:
       # Non-fatal by design: an upstream list being down for a day must not cost
       # us the week's liveness refresh.
       - name: Discover new candidates
+        env:
+          CI_MAX_NEW: ${{ env.CI_MAX_NEW_CANDIDATES }}
         id: discover
         if: ${{ inputs.skip_discovery != true }}
         continue-on-error: true
         run: |
           mkdir -p dist
-          python3 scripts/discover_candidates.py --report dist/discovery-report.json
+          python3 scripts/discover_candidates.py \
+            --max-new "${CI_MAX_NEW:-120}" \
+            --report dist/discovery-report.json
 
       - name: Run maintenance
         id: maintain

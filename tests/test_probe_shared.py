@@ -141,3 +141,41 @@ class TestHostSemaphore:
              patch.object(ms, "_request", return_value=_resp(200)):
             r = ms.check_domain("nope.example", "shortener", 1.0)
         assert r.verdict == "alive"
+
+
+class TestConsensusFailsSafe:
+    """A quorum that never formed must not count as agreement.
+
+    Regression: CI installed a single model, so the 2-model gate degraded to
+    one model and auto-accepted 94 domains on single-model judgement.
+    """
+
+    @staticmethod
+    def _vote(model, category="shortener", confidence=0.9):
+        return {"domain": "d.example", "model": model, "category": category,
+                "confidence": confidence, "reason": ""}
+
+    def test_single_vote_cannot_satisfy_a_two_model_consensus(self):
+        d = ms.decide("d.example", [self._vote("only:7b")], ["https://a/list"],
+                      min_confidence=0.6, min_sources=1, required_models=2)
+        assert d["outcome"] == "review"
+        assert "1 of 2 required models" in d["reason"]
+
+    def test_two_agreeing_votes_do_satisfy_it(self):
+        d = ms.decide("d.example", [self._vote("a:7b"), self._vote("b:8b")],
+                      ["https://a/list"], min_confidence=0.6, min_sources=1,
+                      required_models=2)
+        assert d["outcome"] == "accept" and d["type"] == "shortener"
+
+    def test_single_vote_still_rejects_a_non_shortener(self):
+        """Failing safe must not turn confident rejections into review noise."""
+        d = ms.decide("d.example", [self._vote("only:7b", category="other")],
+                      ["https://a/list"], min_confidence=0.6, min_sources=1,
+                      required_models=2)
+        assert d["outcome"] == "reject"
+
+    def test_disagreement_still_beats_the_quorum_check(self):
+        votes = [self._vote("a:7b"), self._vote("b:8b", category="other")]
+        d = ms.decide("d.example", votes, ["https://a/list"],
+                      min_confidence=0.6, min_sources=1, required_models=2)
+        assert d["outcome"] == "review" and "disagree" in d["reason"]

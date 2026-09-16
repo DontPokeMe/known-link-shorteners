@@ -125,7 +125,7 @@ That provenance matters twice over: the number of independent lists naming a dom
 
 A single 7B model scores about 9/10 on this classification task — good, but not good enough to write to a public dataset unsupervised. So a candidate is only auto-accepted when **every** condition holds:
 
-- **Consensus**: `--consensus` distinct models (default 2, preferring different model families) independently agree on the same category, each at or above `--min-confidence`.
+- **Consensus**: `--consensus` distinct models (default 2, preferring different model families) independently agree on the same category, each at or above `--min-confidence`. If fewer models than that actually vote, the gate **fails safe**: the candidate goes to the review queue rather than being accepted on thinner evidence than configured.
 - **Corroboration**: at least `--min-sources` upstream lists named it (default 1).
 - **Liveness**: the domain actually resolves and responds.
 
@@ -240,7 +240,11 @@ root path serves no page answers `404` (`1drv.ms` and `b23.tv` both do). The
 
 [.github/workflows/maintain.yml](.github/workflows/maintain.yml) runs every **Sunday at 00:00 UTC** (`0 0 * * 0`) and on `workflow_dispatch` (inputs: `runs_on`, `ollama_host`, `model`, `dry_run`, `skip_check`, `skip_llm`, `skip_discovery`, `limit`). It:
 
-1. Installs and starts **Ollama on the runner** and pulls `CI_OLLAMA_MODEL` (default `qwen2.5:7b`), caching the model blobs between runs — so LLM triage runs unattended on a stock `ubuntu-latest`. A self-hosted runner that already has Ollama short-circuits this. The whole block is best-effort: if it fails, the job warns and continues with `--no-ollama` rather than losing the liveness work.
+1. Installs and starts **Ollama on the runner** and pulls two voting models, `CI_OLLAMA_MODEL` (`qwen2.5:7b`) and `CI_OLLAMA_MODEL_2` (`llama3.1:8b`), caching the blobs between runs — so LLM triage runs unattended on a stock `ubuntu-latest`. A self-hosted runner that already has Ollama short-circuits this. The whole block is best-effort: if it fails, the job warns and continues with `--no-ollama` rather than losing the liveness work.
+
+   Two models are pulled because the auto-accept gate needs a real quorum; with one installed it fails safe and accepts nothing. The cost is ~9.6GB of Actions cache. Blanking `CI_OLLAMA_MODEL_2` trades auto-accept for a much smaller cache — every positive candidate then goes to the review PR for a human instead.
+
+   Measured on a hosted runner: triage costs **~12.6s per candidate per model** on CPU, which is why `CI_MAX_NEW_CANDIDATES` (default 120) bounds how many discovery queues per run. 120 candidates × 2 models ≈ 50 minutes, inside the 120-minute job timeout.
 2. Runs discovery, then maintenance, validating the data before and after with both `validate_data.py` and `npm run ci`.
 3. Commits `data/*.json`, `shorteners.txt`, `candidates.txt` and `candidates.rejected.txt` straight to `main`.
 4. Opens (or updates) a pull request on branch `automation/review-queue` for anything in `candidates.review.txt`, so ambiguous domains get a human decision without blocking the rest of the run.
