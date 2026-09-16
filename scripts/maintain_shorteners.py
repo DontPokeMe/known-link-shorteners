@@ -49,6 +49,17 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from probe_shared import (  # noqa: E402
+    BROWSER_UA,
+    DEFAULT_HEADERS,
+    RATE_LIMITED,
+    _get_host_semaphore,
+    is_dns_error,
+    probe_headers,
+    retry_after_seconds,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DIST = ROOT / "dist"
@@ -90,20 +101,13 @@ DOMAIN_RE = re.compile(
     r"^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$"
 )
 
-# Measured on the full 1,533-domain list: a self-identifying agent string is
-# answered with HTTP 429 by the CDNs most shorteners sit behind, turning ~22%
-# of the list into unusable "review" results. A standard browser agent returns
-# the real 301/302 for those same domains, so liveness data is only meaningful
-# with one. Override with --user-agent.
-USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-)
-DEFAULT_HEADERS = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-}
+# User-Agent, per-host throttling and Retry-After policy live in probe_shared,
+# shared with scripts/probe_domains.py so the weekly and monthly runs cannot
+# reach different conclusions about the same rate-limited domain.
+USER_AGENT = BROWSER_UA
 
+# Attempts per scheme, matching scripts/probe_domains.py.
+RETRIES_PER_SCHEME = 2
 DEFAULT_TIMEOUT = 6.0
 DEFAULT_WORKERS = 24
 # Ambiguous results are re-checked slowly: 32 parallel requests trip per-IP
@@ -136,14 +140,6 @@ DEFAULT_MAX_QUARANTINE_PCT = 5.0
 QUARANTINE_FLOOR = 10
 # Distinct from argparse's exit 2, so CI can tell a tripped cap from a usage error.
 EXIT_QUARANTINE_CAP = 3
-
-DNS_MARKERS = (
-    "nodename nor servname provided",
-    "name or service not known",
-    "nxdomain",
-    "getaddrinfo failed",
-    "temporary failure in name resolution",
-)
 
 CATEGORY_TO_TYPE = {
     "shortener": "shortener",
@@ -288,7 +284,7 @@ def get_session() -> requests.Session:
     session = getattr(_local, "session", None)
     if session is None:
         session = requests.Session()
-        session.headers.update({**DEFAULT_HEADERS, "User-Agent": _user_agent})
+        session.headers.update(probe_headers(_user_agent))
         # Our own scheme/method fallback is the retry strategy; only let
         # urllib3 retry the cheap connect-level failures.
         adapter = HTTPAdapter(
@@ -309,56 +305,84 @@ def _request(method: str, url: str, timeout: float) -> requests.Response:
 
 
 def check_domain(domain: str, origin: str, timeout: float) -> CheckResult:
+    """Probe one domain, holding this backend's slot for the whole attempt.
+
+    Many of these domains share a CDN backend, so the semaphore (shared with
+    scripts/probe_domains.py) is what stops a wide sweep rate-limiting itself.
+    """
+    with _get_host_semaphore(domain):
+        return _check_domain(domain, origin, timeout)
+
+
+def _check_domain(domain: str, origin: str, timeout: float) -> CheckResult:
     """HEAD first (cheap), GET as fallback and as confirmation of a 403/404."""
     last: CheckResult | None = None
     for scheme in ("https", "http"):
         url = f"{scheme}://{domain}/"
-        try:
-            resp = _request("HEAD", url, timeout)
-            status, method = resp.status_code, "HEAD"
+        for attempt in range(RETRIES_PER_SCHEME):
+            try:
+                resp = _request("HEAD", url, timeout)
+                status, method = resp.status_code, "HEAD"
 
-            # Plenty of hosts mishandle HEAD -- confirm anything that looks
-            # negative with a real GET before acting on it.
-            if status in (400, 403, 404, 405, 501) or status >= 500:
-                confirmed = False
-                try:
-                    resp = _request("GET", url, timeout)
-                    resp.close()
-                    status, method = resp.status_code, "GET"
-                    confirmed = True
-                except requests.RequestException:
-                    pass
-                if status in (403, 404) and not confirmed:
-                    # HEAD said 403/404 but the confirming GET never landed --
-                    # that is single-method evidence, not proof the host is dead.
-                    last = CheckResult(domain, origin, "review", status, scheme, "HEAD",
-                                       "403/404 on HEAD, confirming GET failed")
-                    continue
+                # A 429 is the server asking us to come back later, so come back
+                # when it asks. Never a verdict -- see probe_shared.
+                if status == RATE_LIMITED:
+                    if attempt < RETRIES_PER_SCHEME - 1:
+                        time.sleep(retry_after_seconds(resp, attempt))
+                        continue
+                    last = CheckResult(domain, origin, "review", RATE_LIMITED, scheme, method,
+                                       "rate-limited after retries; left unchanged, re-checked next run")
+                    break
 
-            if status in (403, 404):
-                # Confirmed by GET (or HEAD-only if GET failed): quarantine.
-                return CheckResult(domain, origin, "dead", str(status), scheme, method)
-            if 200 <= status < 400:
-                return CheckResult(domain, origin, "alive", status, scheme, method)
-            last = CheckResult(
-                domain, origin, "review", status, scheme, method, "unexpected status"
-            )
-        except requests.exceptions.SSLError as e:
-            last = CheckResult(domain, origin, "review", "tls_error", scheme, "HEAD", str(e)[:200])
-            continue  # retry over http://
-        except requests.exceptions.Timeout:
-            last = CheckResult(domain, origin, "review", "timeout", scheme, "HEAD", "timed out")
-            continue
-        except requests.exceptions.ConnectionError as e:
-            err = str(e).lower()
-            if any(marker in err for marker in DNS_MARKERS):
-                # DNS is scheme independent -- no point trying http://.
-                return CheckResult(domain, origin, "dead", "dns_error", scheme, "HEAD", err[:200])
-            last = CheckResult(domain, origin, "review", "connect_error", scheme, "HEAD", str(e)[:200])
-            continue
-        except Exception as e:  # noqa: BLE001 - never let one domain kill the run
-            last = CheckResult(domain, origin, "review", "error", scheme, "HEAD", str(e)[:200])
-            continue
+                # Plenty of hosts mishandle HEAD -- confirm anything that looks
+                # negative with a real GET before acting on it.
+                if status in (400, 403, 404, 405, 501) or status >= 500:
+                    confirmed = False
+                    try:
+                        resp = _request("GET", url, timeout)
+                        resp.close()
+                        status, method = resp.status_code, "GET"
+                        confirmed = True
+                    except requests.RequestException:
+                        pass
+                    if status == RATE_LIMITED:
+                        if attempt < RETRIES_PER_SCHEME - 1:
+                            time.sleep(retry_after_seconds(resp, attempt))
+                            continue
+                        last = CheckResult(domain, origin, "review", RATE_LIMITED, scheme, method,
+                                           "rate-limited after retries; left unchanged, re-checked next run")
+                        break
+                    if status in (403, 404) and not confirmed:
+                        # HEAD said 403/404 but the confirming GET never landed
+                        # -- single-method evidence, not proof the host is dead.
+                        last = CheckResult(domain, origin, "review", status, scheme, "HEAD",
+                                           "403/404 on HEAD, confirming GET failed")
+                        break
+
+                if status in (403, 404):
+                    # Confirmed by GET (or HEAD-only if GET failed): quarantine.
+                    return CheckResult(domain, origin, "dead", str(status), scheme, method)
+                if 200 <= status < 400:
+                    return CheckResult(domain, origin, "alive", status, scheme, method)
+                last = CheckResult(
+                    domain, origin, "review", status, scheme, method, "unexpected status"
+                )
+                break
+            except requests.exceptions.SSLError as e:
+                last = CheckResult(domain, origin, "review", "tls_error", scheme, "HEAD", str(e)[:200])
+                break  # retry over http://
+            except requests.exceptions.Timeout:
+                last = CheckResult(domain, origin, "review", "timeout", scheme, "HEAD", "timed out")
+                break
+            except requests.exceptions.ConnectionError as e:
+                if is_dns_error(e):
+                    # DNS is scheme independent -- no point trying http://.
+                    return CheckResult(domain, origin, "dead", "dns_error", scheme, "HEAD", str(e)[:200])
+                last = CheckResult(domain, origin, "review", "connect_error", scheme, "HEAD", str(e)[:200])
+                break
+            except Exception as e:  # noqa: BLE001 - never let one domain kill the run
+                last = CheckResult(domain, origin, "review", "error", scheme, "HEAD", str(e)[:200])
+                break
     return last or CheckResult(domain, origin, "review", "error", "https", "HEAD", "no result")
 
 

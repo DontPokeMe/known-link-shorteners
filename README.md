@@ -202,19 +202,38 @@ A run finishes by leaving `data/*.json` valid against `python scripts/validate_d
 
 ### Probe accuracy
 
-Two behaviours exist because a measured run over the full list showed the naive
-approach produces mostly noise:
+Both jobs that probe this dataset — the weekly maintenance run and the
+[monthly release probe](#monthly-releases) — share one transport policy, in
+[scripts/probe_shared.py](scripts/probe_shared.py). They were written separately and had
+independently grown two different answers to the same problem, which meant the two runs
+could reach different conclusions about the same rate-limited domain in the same week.
 
-- **User-Agent**: a self-identifying agent string is answered with HTTP 429 by the CDNs
-  most shorteners sit behind, which turned roughly a fifth of the list into unusable
-  results. The probe therefore sends a standard browser User-Agent.
-- **Second-chance pass**: ambiguous results (429, timeouts, 5xx) are re-checked at low
-  concurrency, after a short delay, before being reported. In the measured run, 71% of
-  rate-limited domains resolved to a normal `301`/`302` on the slow re-check.
+A large share of these domains answer HTTP 429 when swept, which is not information about
+whether the domain is alive. Three things cause or cure that, and all three are now shared:
+
+- **User-Agent**: measured over the full list, a self-identifying agent string drew 429 on
+  roughly a fifth of it. Re-probed with a browser agent, 30 of 30 sampled domains returned
+  their real `301`/`302`. This is the dominant factor — with a browser agent, a 200-domain
+  sample at 32 workers returns **zero** 429s.
+- **Per-host concurrency**: many of these domains are CNAME'd onto a shared CDN backend, so
+  sweeping at full concurrency is self-inflicted rate limiting. Concurrency is capped per
+  *resolved IP* (default 3), independent of the worker count.
+- **Retry-After**: a 429 is the server asking us to come back later, so the probe comes back
+  when it asks, capped so one hostile host cannot stall a run.
+
+And one shared verdict: **a 429 that survives the retries is never a verdict.** It cannot
+quarantine, demote or remove a domain — it means "unknown, re-check next run". The monthly
+probe calls that `retry_later`, the weekly run reports it as review; neither touches the
+dataset. `tests/test_probe_shared.py` pins this, including a regression test that both
+probes still send the same agent and share one semaphore table.
+
+The weekly run adds a **second-chance pass** on top: ambiguous results are re-checked at low
+concurrency after a short delay. In an earlier measurement 71% of rate-limited domains
+resolved to a normal `301`/`302` on that slow re-check.
 
 One caveat worth knowing before widening `--quarantine-on`: a working shortener whose
 root path serves no page answers `404` (`1drv.ms` and `b23.tv` both do). The
-`403`/`404` quarantine rule is inherited from the [monthly probe](#monthly-releases) and
+`403`/`404` quarantine rule is inherited from the monthly probe and
 `schema/inactive.schema.json`; `--quarantine-on dns` is the conservative alternative.
 
 ### Weekly workflow

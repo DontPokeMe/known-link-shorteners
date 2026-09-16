@@ -8,9 +8,11 @@ from __future__ import annotations
 
 import json
 import os
-import socket
+# socket is no longer called here (per-host throttling moved to probe_shared) but
+# tests/test_probe_domains.py patches probe_domains.socket.gethostbyname, which
+# reaches the shared module through the real socket module. Keep the import.
+import socket  # noqa: F401
 import sys
-import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
@@ -20,18 +22,27 @@ from typing import Any
 
 import requests
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from probe_shared import (  # noqa: E402
+    BACKOFF_BASE,
+    MAX_RATE_LIMIT_WAIT,
+    PER_HOST_CONCURRENCY,
+    REDIRECT_STATUSES,
+    _get_host_semaphore,
+    _host_semaphores,
+    is_dns_error,
+    probe_headers,
+    retry_after_seconds,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DIST = ROOT / "dist"
 TIMEOUT = 10
 MAX_CONCURRENT = 20
 RETRIES_PER_SCHEME = 2
-BACKOFF_BASE = 1.0
-MAX_RATE_LIMIT_WAIT = 30.0
-
-# A shortener/redirector/tracking domain returning a redirect on its bare root path is
-# expected behavior, not an anomaly -- these services exist to redirect.
-REDIRECT_STATUSES = (301, 302, 303, 307, 308)
+# BACKOFF_BASE, MAX_RATE_LIMIT_WAIT, REDIRECT_STATUSES and the per-host throttle
+# now live in probe_shared, so the weekly maintenance run applies the same rules.
 
 ACTIVE_FILES = ["shorteners.json", "redirectors.json", "tracking.json"]
 ORIGIN_TO_FILE = {"shortener": "shorteners.json", "redirector": "redirectors.json", "tracking": "tracking.json"}
@@ -41,27 +52,6 @@ REPEAT_OFFENDER_THRESHOLD = 3
 
 REVIEW_LABEL = "domain-review"
 MAX_NOTES_LENGTH = 500
-
-# Many shortener/redirector domains are CNAME'd onto a shared backend (e.g. Bitly's branded
-# short-domains product), so probing them at full concurrency can be self-inflicted rate
-# limiting. Cap concurrent probes per resolved IP independent of MAX_CONCURRENT.
-PER_HOST_CONCURRENCY = 3
-_host_semaphores: dict[str, threading.Semaphore] = {}
-_host_semaphores_lock = threading.Lock()
-
-
-def _get_host_semaphore(domain: str) -> threading.Semaphore:
-    """One semaphore per resolved IP (or per domain if resolution fails), created lazily."""
-    try:
-        key = socket.gethostbyname(domain)
-    except OSError:
-        key = domain
-    with _host_semaphores_lock:
-        sem = _host_semaphores.get(key)
-        if sem is None:
-            sem = threading.Semaphore(PER_HOST_CONCURRENCY)
-            _host_semaphores[key] = sem
-        return sem
 
 
 @dataclass
@@ -116,7 +106,7 @@ def _probe_one(domain: str, origin: str) -> ProbeResult:
                     url,
                     timeout=TIMEOUT,
                     allow_redirects=False,
-                    headers={"User-Agent": "DontPokeMe-known-link-shorteners-monthly-probe/1.0"},
+                    headers=probe_headers(),
                 )
                 status = r.status_code
                 location = r.headers.get("Location")
@@ -150,12 +140,7 @@ def _probe_one(domain: str, origin: str) -> ProbeResult:
                     )
                 if status == 429:
                     if attempt < RETRIES_PER_SCHEME - 1:
-                        retry_after = r.headers.get("Retry-After")
-                        try:
-                            wait = float(retry_after) if retry_after else BACKOFF_BASE * (2**attempt)
-                        except ValueError:
-                            wait = BACKOFF_BASE * (2**attempt)
-                        time.sleep(min(wait, MAX_RATE_LIMIT_WAIT))
+                        time.sleep(retry_after_seconds(r, attempt))
                         continue
                     if scheme == "http":
                         return ProbeResult(
@@ -214,7 +199,7 @@ def _probe_one(domain: str, origin: str) -> ProbeResult:
                         )
             except requests.exceptions.ConnectionError as e:
                 err_str = str(e).lower()
-                if "nodename nor servname provided" in err_str or "name or service not known" in err_str or "nxdomain" in err_str or "getaddrinfo failed" in err_str:
+                if is_dns_error(err_str):
                     return ProbeResult(
                         domain=domain,
                         origin=origin,
