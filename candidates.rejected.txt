@@ -1,0 +1,2 @@
+# Domains Ollama judged not to be shorteners/redirectors/trackers.
+# Kept so they are not re-evaluated every week. Delete a line to retry it.

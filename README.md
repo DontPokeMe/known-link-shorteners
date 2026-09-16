@@ -89,6 +89,150 @@ Each release includes:
 
 Use the [Releases](https://github.com/DontPokeMe/known-link-shorteners/releases) page to download the latest or a specific month.
 
+## Automation & Obsidian Workflow
+
+A weekly pipeline keeps the dataset healthy and growing between the [monthly releases](#monthly-releases). It **discovers** new domains from public lists, **triages** them with a local LLM, **ingests** the ones that clear the bar, and **re-checks** everything already in the dataset. It is designed to run unattended and to hand a human only the cases it genuinely cannot decide.
+
+```
+public lists ─┐
+              ├─→ candidates.txt ─→ consensus triage ─→ data/*.json ─→ weekly workflow ─→ monthly release
+Obsidian  ────┘                            └─→ candidates.review.txt ─→ pull request
+```
+
+### Discovery
+
+[scripts/discover_candidates.py](scripts/discover_candidates.py) fetches the public shortener lists configured in [data/discovery-sources.json](data/discovery-sources.json), normalises every entry to a bare domain, drops anything already in the dataset or the inboxes, and appends the rest to `candidates.txt` with inline provenance:
+
+```
+0rz.tw  # src=https://raw.githubusercontent.com/PeterDaveHello/url-shorteners/master/list,https://...
+```
+
+That provenance matters twice over: the number of independent lists naming a domain is the corroboration signal used to rank the queue, and the source URLs become the `evidence` array on the resulting entry.
+
+- A source that is down, moved, or returns junk is recorded in the report and skipped — never fatal.
+- `--max-new` (default 250) caps how many domains one run may queue, highest-corroboration first, so a newly added source cannot flood the queue.
+- Sources are data, not code: flip `"enabled": false` in the JSON to drop one.
+
+### Maintenance script
+
+[scripts/maintain_shorteners.py](scripts/maintain_shorteners.py) is a multithreaded script (`requests` + `concurrent.futures`) that runs in three phases:
+
+1. **Clean**: concurrent HTTP `HEAD` requests (falling back to `GET`) against every active domain, with short timeouts. A confirmed 403/404 or a DNS failure quarantines the domain into [data/inactive.json](data/inactive.json); every other outcome (timeouts, TLS errors, 5xx, 429, redirects) is reported but never auto-removed. A safety cap refuses to quarantine more than 5% of the list in a single run (exit code `3`), so a network blip on the runner cannot gut the dataset.
+2. **Ingest**: reads `candidates.txt`, asks a panel of local Ollama models to classify each domain, probes it for liveness, and routes the result (below). `candidates.txt` is drained like an inbox; comments and unparseable lines are preserved.
+3. **Normalise**: merges and deduplicates across all four data files, sorts by domain, and rewrites everything in the repo's canonical JSON format plus the flat mirror `shorteners.txt`.
+
+### Consensus triage
+
+A single 7B model scores about 9/10 on this classification task — good, but not good enough to write to a public dataset unsupervised. So a candidate is only auto-accepted when **every** condition holds:
+
+- **Consensus**: `--consensus` distinct models (default 2, preferring different model families) independently agree on the same category, each at or above `--min-confidence`.
+- **Corroboration**: at least `--min-sources` upstream lists named it (default 1).
+- **Liveness**: the domain actually resolves and responds.
+
+Everything else is routed, never guessed:
+
+| Outcome | Where it goes |
+|---------|---------------|
+| All models agree it is a shortener / link-in-bio / redirector / tracker, and it is live | added to the matching `data/*.json`, marked *pending human review* in `notes` |
+| All models agree it is an ordinary site | `candidates.rejected.txt`, so it is never re-evaluated |
+| Models disagree, corroboration is thin, or liveness is inconclusive | `candidates.review.txt` — a human decides |
+| Classified as a shortener but the domain is dead | rejected |
+| A model errored | left in `candidates.txt`, retried next run |
+
+To accept something from the review queue, move its line into `candidates.txt` and delete it from the review file. In a measured run this gate caught exactly the false positives a single model produced (`notion.so`, `pixelfy.me`) while still auto-accepting corroborated shorteners.
+
+### Local model discovery
+
+The script queries `http://localhost:11434/api/tags` at run time to see which models are actually installed, then picks by preference order `qwen2.5` → `llama3.2` → `mistral`, subject to a parameter-count floor. Nothing is hardcoded, so the pipeline never breaks because a specific model tag is missing. The full order is: an explicit `--model`, then a preferred family at or above `--min-params` (default 7B), then the largest general-purpose model installed, then a preferred family at any size, then the largest model installed. Code, embedding and vision models are ranked last or skipped, and `qwen2.5-coder` deliberately does **not** satisfy a preference for `qwen2.5`.
+
+The size floor exists because small models are measurably unsafe for this job. Scored against a 10-domain set:
+
+| Model | Correct | Notable errors |
+|-------|---------|----------------|
+| `llama3.2:3b` | 6/10 | called `zapier.com`, `notion.so` and `vercel.app` shorteners |
+| `llama3.1:8b` | 9/10 | missed `spoo.me` |
+| `phi4` (14.7B) | 9/10 | called `notion.so` a link-in-bio service |
+
+- **Model**: override with `--model <name>` or the `OLLAMA_MODEL` environment variable.
+- **Host**: point at a different host with `--ollama-host` or the `OLLAMA_HOST` environment variable.
+- **Size floor**: `--min-params` (default `7`); set `0` to allow any installed model.
+
+### Pipeline files
+
+- **[data/discovery-sources.json](data/discovery-sources.json)**: the upstream lists discovery pulls from.
+- **`candidates.txt`**: inbox of domains awaiting triage, appended to by discovery and by the Obsidian template.
+- **`candidates.review.txt`**: candidates the automation refused to decide; the weekly workflow raises a PR for these.
+- **`candidates.rejected.txt`**: candidates the models rejected, kept to avoid rework.
+- **`shorteners.txt`**: flat sorted mirror of all active domains, regenerated each run. Hand-added lines are adopted into the dataset on the next run; `data/*.json` remains the source of truth.
+- **`dist/maintenance-report.json`**, **`dist/discovery-report.json`**: per-run JSON reports, including every model vote.
+- **[requirements.txt](requirements.txt)**: Python dependencies (`requests`, `urllib3`).
+
+### Running it locally
+
+```bash
+pip install -r requirements.txt
+
+python3 scripts/discover_candidates.py --dry-run           # see what discovery would queue
+python3 scripts/discover_candidates.py                     # queue new candidates
+
+python3 scripts/maintain_shorteners.py --dry-run           # report only, writes nothing
+python3 scripts/maintain_shorteners.py --no-ollama         # liveness check only
+python3 scripts/maintain_shorteners.py --no-check          # candidate triage only
+python3 scripts/maintain_shorteners.py --limit 50          # probe a 50-domain sample
+python3 scripts/maintain_shorteners.py                     # full run
+```
+
+Other useful flags:
+
+- `--workers`: probe threads (default 24).
+- `--timeout`: per-request timeout in seconds (default 6).
+- `--retry-workers` / `--retry-delay` / `--retry-timeout` / `--no-retry`: control the second-chance pass (below).
+- `--quarantine-on`: which outcomes quarantine a domain (default `dns,403,404`).
+- `--user-agent`: override the probe User-Agent.
+- `--consensus`: how many models must agree before auto-accepting (default 2).
+- `--min-sources`: corroborating upstream lists required for auto-accept (default 1).
+- `--min-confidence`: per-model confidence threshold (default 0.6).
+- `--min-params`: minimum model size in billions of parameters (default 7).
+- `--no-candidate-probe`: skip the liveness check on new candidates.
+- `--max-quarantine-pct`: quarantine safety cap (default 5.0).
+- `--ollama-workers`: parallel classification requests.
+- `--review` / `--report`: paths for the review queue and the JSON run report.
+
+A run finishes by leaving `data/*.json` valid against `python scripts/validate_data.py` and `npm run ci`. Auto-ingested entries are marked *pending human review* in `notes` — review them before a release.
+
+### Probe accuracy
+
+Two behaviours exist because a measured run over the full list showed the naive
+approach produces mostly noise:
+
+- **User-Agent**: a self-identifying agent string is answered with HTTP 429 by the CDNs
+  most shorteners sit behind, which turned roughly a fifth of the list into unusable
+  results. The probe therefore sends a standard browser User-Agent.
+- **Second-chance pass**: ambiguous results (429, timeouts, 5xx) are re-checked at low
+  concurrency, after a short delay, before being reported. In the measured run, 71% of
+  rate-limited domains resolved to a normal `301`/`302` on the slow re-check.
+
+One caveat worth knowing before widening `--quarantine-on`: a working shortener whose
+root path serves no page answers `404` (`1drv.ms` and `b23.tv` both do). The
+`403`/`404` quarantine rule is inherited from the [monthly probe](#monthly-releases) and
+`schema/inactive.schema.json`; `--quarantine-on dns` is the conservative alternative.
+
+### Weekly workflow
+
+[.github/workflows/maintain.yml](.github/workflows/maintain.yml) runs every **Sunday at 00:00 UTC** (`0 0 * * 0`) and on `workflow_dispatch` (inputs: `runs_on`, `ollama_host`, `model`, `dry_run`, `skip_check`, `skip_llm`, `skip_discovery`, `limit`). It:
+
+1. Installs and starts **Ollama on the runner** and pulls `CI_OLLAMA_MODEL` (default `qwen2.5:7b`), caching the model blobs between runs — so LLM triage runs unattended on a stock `ubuntu-latest`. A self-hosted runner that already has Ollama short-circuits this. The whole block is best-effort: if it fails, the job warns and continues with `--no-ollama` rather than losing the liveness work.
+2. Runs discovery, then maintenance, validating the data before and after with both `validate_data.py` and `npm run ci`.
+3. Commits `data/*.json`, `shorteners.txt`, `candidates.txt` and `candidates.rejected.txt` straight to `main`.
+4. Opens (or updates) a pull request on branch `automation/review-queue` for anything in `candidates.review.txt`, so ambiguous domains get a human decision without blocking the rest of the run.
+
+It shares a `dataset-write` concurrency group with the monthly release workflow, so the two can never push conflicting dataset commits — the 1st of the month can land on a Sunday. The PR step needs **Allow GitHub Actions to create and approve pull requests** enabled in repository settings; without it the step warns and the run still succeeds.
+
+### Obsidian capture
+
+[obsidian/Extract-Domains-Template.md](obsidian/Extract-Domains-Template.md) is a Templater template for collecting candidates while reading. Highlight raw text in a vault note (article clippings, feeds, social posts) and run the template: it discovers local Ollama models via `/api/tags`, extracts unique shortener-like hostnames via `/api/generate`, and appends the new ones to `candidates.txt` ready for the next maintenance run. The template's `REPO_PATH` constant must be set to your local clone.
+
+
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details.

@@ -1,0 +1,4 @@
+# candidates.txt -- one domain or URL per line.
+# Appended to by the Obsidian template; drained by scripts/maintain_shorteners.py.
+# Lines starting with # are ignored.
+

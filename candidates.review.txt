@@ -1,0 +1,3 @@
+# Candidates needing a human decision: the models disagreed, the
+# corroboration was too thin, or liveness was inconclusive.
+# To accept one, move its line into candidates.txt and delete it here.

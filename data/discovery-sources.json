@@ -1,0 +1,42 @@
+[
+  {
+    "name": "PeterDaveHello/url-shorteners",
+    "url": "https://raw.githubusercontent.com/PeterDaveHello/url-shorteners/master/list",
+    "format": "lines",
+    "type": "shortener",
+    "enabled": true,
+    "notes": "The list this repo's original import came from; actively maintained, '#'-commented header. Verified 2026-09-15: HTTP 200, 1454 domains parsed, 0 unparseable lines. Branch is master; there is no main."
+  },
+  {
+    "name": "timleland/url-shorteners",
+    "url": "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt",
+    "format": "lines",
+    "type": "shortener",
+    "enabled": true,
+    "notes": "Plain one-per-line list, no header. Verified 2026-09-15: HTTP 200, 949 domains parsed, 2 unparseable lines. Branch is master; main 404s."
+  },
+  {
+    "name": "boutetnico/url-shorteners",
+    "url": "https://raw.githubusercontent.com/boutetnico/url-shorteners/master/list.txt",
+    "format": "lines",
+    "type": "shortener",
+    "enabled": true,
+    "notes": "Small, hand-curated list; useful mainly as corroboration for the bigger ones. Verified 2026-09-15: HTTP 200, 418 domains parsed, 1 unparseable line. Branch is master; main 404s."
+  },
+  {
+    "name": "sambokai/ShortURL-Services-List",
+    "url": "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+    "format": "csv",
+    "type": "shortener",
+    "enabled": true,
+    "notes": "Single-column CSV with a 'domain name' header row and a trailing empty column, so it needs the csv parser rather than lines. The .txt filename in older references does not exist. Verified 2026-09-15: HTTP 200, 645 domains parsed, 2 unparseable lines."
+  },
+  {
+    "name": "hagezi/dns-blocklists urlshortener",
+    "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+    "format": "lines",
+    "type": "shortener",
+    "enabled": true,
+    "notes": "By far the largest source and refreshed every few hours; the onlydomains variant is plain lines with a '#' header, unlike the Adblock-syntax adblock/urlshortener.txt. Heavy on per-site redirect subdomains (a.189.cn, go.9nl.com), so most of its entries are single-source and rank below the curated lists under --max-new. Verified 2026-09-15: HTTP 200, 9887 domains parsed, 0 unparseable lines. Branch is main."
+  }
+]

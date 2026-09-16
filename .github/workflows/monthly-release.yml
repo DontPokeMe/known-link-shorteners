@@ -12,6 +12,12 @@ permissions:
   issues: write
   actions: read
 
+# Shared with .github/workflows/maintain.yml: both rewrite data/*.json and push
+# to main, and the 1st of the month can land on the weekly Sunday cron.
+concurrency:
+  group: dataset-write
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest

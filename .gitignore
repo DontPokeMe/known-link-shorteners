@@ -27,5 +27,12 @@ Thumbs.db
 # Generated at runtime (e.g. by parse-issue.js)
 submission.json
 
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Generated exports and run reports (published to Releases, never committed)
+dist/
+
 # Local docs (audit notes, not part of public repo)
 docs/GIT_AUDIT.md
