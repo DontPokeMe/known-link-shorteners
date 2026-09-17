@@ -72,6 +72,16 @@ jobs:
         run: |
           python scripts/probe_domains.py 2>&1 | tee probe.log
 
+      # Record which open-source shortener each domain runs (software/hosting). --write first
+      # re-checks every fingerprint against its reference instances and skips (with a warning)
+      # any that no longer match; a miss never clears a value. Network trouble here must not
+      # block the release, so the step is best effort.
+      - name: Fingerprint self-hosted software
+        continue-on-error: true
+        run: |
+          mkdir -p dist
+          python scripts/fingerprint_software.py --from-data --write --report dist/fingerprints.json 2>&1 | tee fingerprint.log
+
       - name: Validate data (post-probe)
         run: python scripts/validate_data.py
 

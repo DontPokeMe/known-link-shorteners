@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Open-source shortener fingerprints",
+  "description": "HTTP and DNS signals used by scripts/fingerprint_software.py to recognise which shortener software a domain runs.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["software", "name", "homepage", "source_code", "min_score", "checks"],
+    "properties": {
+      "software": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "description": "Stable id, used as the `software` value in the datasets"
+      },
+      "name": { "type": "string", "minLength": 1 },
+      "homepage": { "type": "string", "format": "uri" },
+      "source_code": { "type": "string", "format": "uri" },
+      "managed_domains": {
+        "type": "array",
+        "description": "Domains that are the project's own hosted service (hosting = managed)",
+        "items": { "$ref": "#/definitions/domain" },
+        "uniqueItems": true
+      },
+      "branded_cname_suffixes": {
+        "type": "array",
+        "description": "CNAME targets customers point custom domains at (hosting = branded)",
+        "items": { "$ref": "#/definitions/domain" },
+        "uniqueItems": true
+      },
+      "reference_instances": {
+        "type": "array",
+        "description": "Known live instances the fingerprint must match (checked by --verify)",
+        "items": { "$ref": "#/definitions/domain" },
+        "uniqueItems": true
+      },
+      "min_score": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Sum of matched check weights needed to call a match"
+      },
+      "checks": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "$ref": "#/definitions/check" }
+      },
+      "notes": { "type": "string" }
+    },
+    "additionalProperties": false
+  },
+  "definitions": {
+    "domain": {
+      "type": "string",
+      "pattern": "^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$"
+    },
+    "check": {
+      "type": "object",
+      "required": ["id", "path"],
+      "anyOf": [
+        { "required": ["body"] },
+        { "required": ["header"] },
+        { "required": ["cookie"] },
+        { "required": ["json"] }
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "path": { "type": "string", "pattern": "^/" },
+        "stage": {
+          "type": "integer",
+          "enum": [1, 2],
+          "default": 1,
+          "description":"1: always requested. 2: only after a stage-1 hit for this software (or --deep)."
+        },
+        "status": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 100, "maximum": 599 },
+          "minItems": 1
+        },
+        "body": { "type": "string", "description": "Case-insensitive regex searched in the first 256 KB of the body" },
+        "header": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "pattern": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "cookie": { "type": "string", "description": "Case-insensitive regex matched against Set-Cookie names" },
+        "json": {
+          "type": "object",
+          "description": "Dotted key -> regex for the value, or null to require the key only",
+          "additionalProperties": { "type": ["string", "null"] }
+        },
+        "weight": { "type": "integer", "minimum": 1, "maximum": 5, "default": 1 },
+        "hosting": {
+          "type": "string",
+          "enum": ["branded"],
+          "description": "This signal only appears on a hosted service's customer domains, so a match found through it is recorded as branded instead of self-hosted."
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

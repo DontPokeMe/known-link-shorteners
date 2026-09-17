@@ -58,6 +58,30 @@ Each submission must include:
 
 5. **Notes** (optional): Additional context
 
+6. **Software and hosting** (optional, set together): if the domain runs a recognised open-source shortener, set `software` to its id in [data/fingerprints.json](data/fingerprints.json). Then set `hosting` to one of:
+   - `managed`: the project's own service
+   - `branded`: a custom domain on a hosted service
+   - `self-hosted`: an independent install
+
+   These are normally filled in by `scripts/fingerprint_software.py`.
+
+## Adding a software fingerprint
+
+To teach the detector a new open-source shortener, add an entry to [data/fingerprints.json](data/fingerprints.json) (schema: [schema/fingerprints.schema.json](schema/fingerprints.schema.json)).
+
+**What makes a good check:**
+- Prefer signals unique to the software: an API error message, an app-specific health endpoint, a "Powered by" footer, a distinctive cookie name.
+- Avoid generic framework traits such as `X-Powered-By: Express` or `Next.js`, or keep their weight low.
+- Each check needs at least one body, header, cookie or JSON condition; a status code alone is not accepted.
+- Keep checks to a handful of paths. They run against every domain in the dataset.
+
+**What the entry must include:**
+- A link to the source code, and a comment in `notes` saying where each signal comes from (file and line, or a release).
+- Official hosted domains under `managed_domains`.
+- CNAME targets for customer custom domains under `branded_cname_suffixes`.
+- `"hosting": "branded"` on any check that only a hosted service's customer domains show, such as a "this custom domain is powered by …" placeholder page.
+- At least one live instance under `reference_instances`, whenever one exists. Then run `python scripts/fingerprint_software.py --verify --software <id>` and include its output in the PR.
+
 ## Review Process
 
 1. Submission creates GitHub Issue
