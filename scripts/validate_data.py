@@ -6,10 +6,13 @@ Validate canonical datasets: schema, dedupe, sort, inactive rules.
 - Each file sorted by domain.
 - inactive.json: only last_status in (403, 404, "dns_error").
 - No domain in both active and inactive.
+- fingerprints.json matches fingerprints.schema.json, its regexes compile, and every
+  `software` value in the active files refers to one of its ids.
 """
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -24,6 +27,7 @@ SCHEMA_DIR = ROOT / "schema"
 ACTIVE_FILES = ["shorteners.json", "redirectors.json", "tracking.json"]
 INACTIVE_FILE = "inactive.json"
 REVIEW_HISTORY_FILE = "review_history.json"
+FINGERPRINTS_FILE = "fingerprints.json"
 ALLOWED_INACTIVE_STATUSES = {"403", "404", "dns_error", "persistent_error"}
 
 
@@ -32,53 +36,33 @@ def load_json(path: Path) -> list | dict:
         return json.load(f)
 
 
-def validate_active_schema(entries: list, path: Path) -> list[str]:
-    errors = []
-    if jsonschema is None:
-        return errors
-    schema_path = SCHEMA_DIR / "shortener.schema.json"
-    if not schema_path.exists():
-        return errors
+def schema_errors(entries: list, path: Path, schema_file: str) -> list[str]:
+    """Validate each entry against the array schema's `items`, reporting entry[i] locations."""
+    schema_path = SCHEMA_DIR / schema_file
+    if jsonschema is None or not schema_path.exists():
+        return []
     schema = load_json(schema_path)
-    # Validate each entry against the "items" subschema (object), not the root (array)
-    item_schema = schema.get("items", schema)
+    # Keep the root's definitions so "#/definitions/..." refs still resolve from the item schema.
+    item_schema = {**schema.get("items", schema), "definitions": schema.get("definitions", {})}
     validator = jsonschema.Draft7Validator(item_schema)
+    errors = []
     for i, item in enumerate(entries):
         for err in validator.iter_errors(item):
-            errors.append(f"{path}: entry[{i}] {err.message}")
+            where = "/".join(str(p) for p in err.absolute_path)
+            errors.append(f"{path}: entry[{i}]{'/' + where if where else ''} {err.message}")
     return errors
+
+
+def validate_active_schema(entries: list, path: Path) -> list[str]:
+    return schema_errors(entries, path, "shortener.schema.json")
 
 
 def validate_inactive_schema(entries: list, path: Path) -> list[str]:
-    errors = []
-    schema_path = SCHEMA_DIR / "inactive.schema.json"
-    if not schema_path.exists():
-        return errors
-    if jsonschema is None:
-        return errors
-    schema = load_json(schema_path)
-    item_schema = schema.get("items", schema)
-    validator = jsonschema.Draft7Validator(item_schema)
-    for i, item in enumerate(entries):
-        for err in validator.iter_errors(item):
-            errors.append(f"{path}: entry[{i}] {err.message}")
-    return errors
+    return schema_errors(entries, path, "inactive.schema.json")
 
 
 def validate_review_history_schema(entries: list, path: Path) -> list[str]:
-    errors = []
-    schema_path = SCHEMA_DIR / "review-history.schema.json"
-    if not schema_path.exists():
-        return errors
-    if jsonschema is None:
-        return errors
-    schema = load_json(schema_path)
-    item_schema = schema.get("items", schema)
-    validator = jsonschema.Draft7Validator(item_schema)
-    for i, item in enumerate(entries):
-        for err in validator.iter_errors(item):
-            errors.append(f"{path}: entry[{i}] {err.message}")
-    return errors
+    return schema_errors(entries, path, "review-history.schema.json")
 
 
 def check_inactive_statuses(entries: list, path: Path) -> list[str]:
@@ -96,6 +80,41 @@ def check_inactive_statuses(entries: list, path: Path) -> list[str]:
     return errors
 
 
+def duplicates(values: list) -> list:
+    seen: set = set()
+    return [v for v in values if v in seen or seen.add(v)]
+
+
+def validate_fingerprints(entries: list, path: Path) -> list[str]:
+    """Schema, plus what JSON Schema can't express: unique ids, compiling regexes, reachable min_score."""
+    errors = schema_errors(entries, path, "fingerprints.schema.json")
+    errors += [f"{path}: duplicate software id {sid!r}" for sid in duplicates([fp.get("software") for fp in entries])]
+    for fp in entries:
+        sid, checks = fp.get("software"), fp.get("checks", [])
+        errors += [f"{path}: {sid}: duplicate check id {cid!r}" for cid in duplicates([c.get("id") for c in checks])]
+        for check in checks:
+            patterns = [check.get("body"), check.get("cookie"), (check.get("header") or {}).get("pattern"),
+                        *(check.get("json") or {}).values()]
+            for pattern in filter(None, patterns):
+                try:
+                    re.compile(pattern)
+                except re.error as e:
+                    errors.append(f"{path}: {sid}/{check.get('id')}: invalid regex {pattern!r}: {e}")
+        reachable = sum(c.get("weight", 1) for c in checks)
+        if isinstance(fp.get("min_score"), int) and reachable < fp["min_score"]:
+            errors.append(f"{path}: {sid}: min_score {fp['min_score']} exceeds the total check weight {reachable}")
+    return errors
+
+
+def check_software_ids(entries: list, path: Path, known: set[str]) -> list[str]:
+    errors = []
+    for i, item in enumerate(entries):
+        sid = item.get("software")
+        if sid is not None and sid not in known:
+            errors.append(f"{path}: entry[{i}] domain={item.get('domain')} software={sid!r} is not in {FINGERPRINTS_FILE}")
+    return errors
+
+
 def check_sorted(entries: list, path: Path, key: str = "domain") -> list[str]:
     domains = [e.get(key) for e in entries if key in e]
     if domains != sorted(domains):
@@ -105,6 +124,17 @@ def check_sorted(entries: list, path: Path, key: str = "domain") -> list[str]:
 
 def main() -> int:
     all_errors: list[str] = []
+
+    # Fingerprints (software ids referenced by the active files)
+    known_software: set[str] = set()
+    fingerprints_path = DATA / FINGERPRINTS_FILE
+    if fingerprints_path.exists():
+        fingerprints = load_json(fingerprints_path)
+        if not isinstance(fingerprints, list):
+            all_errors.append(f"{fingerprints_path}: expected array")
+        else:
+            all_errors.extend(validate_fingerprints(fingerprints, fingerprints_path))
+            known_software = {fp.get("software") for fp in fingerprints}
 
     # Active files
     all_active_domains: dict[str, str] = {}
@@ -118,6 +148,7 @@ def main() -> int:
             all_errors.append(f"{path}: expected array")
             continue
         all_errors.extend(validate_active_schema(data, path))
+        all_errors.extend(check_software_ids(data, path, known_software))
         all_errors.extend(check_sorted(data, path))
         for entry in data:
             d = entry.get("domain")

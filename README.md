@@ -39,6 +39,7 @@ Each entry includes:
 - Date added
 - Evidence link(s)
 - Optional notes
+- Optional `software` and `hosting`, for domains running a recognised open-source shortener (see [Self-hosted software detection](#self-hosted-software-detection))
 
 See [schema/shortener.schema.json](schema/shortener.schema.json) for full specification.
 
@@ -250,6 +251,49 @@ root path serves no page answers `404` (`1drv.ms` and `b23.tv` both do). The
 4. Opens (or updates) a pull request on branch `automation/review-queue` for anything in `candidates.review.txt`, so ambiguous domains get a human decision without blocking the rest of the run.
 
 It shares a `dataset-write` concurrency group with the monthly release workflow, so the two can never push conflicting dataset commits — the 1st of the month can land on a Sunday. The PR step needs **Allow GitHub Actions to create and approve pull requests** enabled in repository settings; without it the step warns and the run still succeeds.
+
+### Self-hosted software detection
+
+[scripts/fingerprint_software.py](scripts/fingerprint_software.py) recognises which open-source shortener a domain runs (YOURLS, Shlink, Kutt, Lstu, Polr and others). It then records whether the domain is that project's own service or an independent install, in two optional fields:
+
+| `hosting` | Meaning | How it is decided |
+|---|---|---|
+| `managed` | The project's own hosted service (e.g. `lstu.fr`) | The domain is in the fingerprint's `managed_domains` |
+| `branded` | A customer's custom domain on a hosted service | The domain's CNAME ends in one of the fingerprint's `branded_cname_suffixes` (looked up over DNS-over-HTTPS), or a matched check is marked `"hosting": "branded"` because only customer domains show that signal |
+| `self-hosted` | An independent install of the software | The fingerprint's HTTP checks reach its `min_score` |
+
+The signatures live in [data/fingerprints.json](data/fingerprints.json) ([schema](schema/fingerprints.schema.json)), so adding software is a data change, not a code change.
+
+**How a fingerprint is scored:**
+- Each fingerprint is a list of weighted checks, each against a single path. A check can test the response status, a body regex, a header, a cookie name, or keys in a JSON body.
+- A check must include at least one content condition (body, header, cookie or JSON); a status code alone is not accepted.
+- Stage-1 checks run on every domain. Stage-2 checks run only after one of that software's stage-1 checks matches.
+- If two fingerprints tie for the top score, the domain is reported as ambiguous rather than guessed.
+
+**How it treats misses:**
+- "No match" means *unknown*. Operators hide admin pages, turn on private mode and change defaults, so a miss never clears an existing `software`/`hosting` value.
+- Requests use the weekly run's pooled session and the shared probe rules (`probe_shared.py`: browser User-Agent, per-IP concurrency cap, `Retry-After`). They never follow redirects and read at most 256 KB per response.
+- A domain that doesn't resolve costs no requests; an unreachable one costs one.
+- `--write` first re-checks every fingerprint against its `reference_instances` and skips any that no longer match.
+
+The first full run covered 1,356 domains in about 20 minutes with ~12,000 requests. It identified 33:
+- 13 YOURLS, 4 Polr, 3 Shlink and 1 Lstu self-hosted installs
+- 6 branded domains on Dub
+- 3 managed domains
+
+```bash
+python scripts/fingerprint_software.py --domains go.example.org https://s.example.net/x   # candidates (all checks)
+python scripts/fingerprint_software.py --from-data --report dist/fingerprints.json  # whole dataset, report only
+python scripts/fingerprint_software.py --from-data --write                        # record software/hosting
+python scripts/fingerprint_software.py --verify                                   # re-check signatures against reference_instances
+```
+
+`--verify` checks each fingerprint against its `reference_instances` and exits non-zero if one no longer matches, so signature drift is caught before it quietly stops matching anything. The monthly release runs the `--write` form as a best-effort step after the probe. `validate_data.py` also checks the fingerprints file:
+- it matches the schema
+- ids are unique
+- every regex compiles
+- each `min_score` is reachable
+- every `software` value in the datasets refers to an existing fingerprint
 
 ### Obsidian capture
 

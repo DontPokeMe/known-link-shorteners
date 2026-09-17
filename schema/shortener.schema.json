@@ -38,7 +38,21 @@
       "notes": {
         "type": "string",
         "description": "Optional notes"
+      },
+      "software": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "description": "Open-source software the domain runs; must be an id in data/fingerprints.json"
+      },
+      "hosting": {
+        "type": "string",
+        "enum": ["managed", "branded", "self-hosted"],
+        "description": "managed: the project's own service; branded: a customer domain on a hosted service; self-hosted: an independent install"
       }
+    },
+    "dependencies": {
+      "hosting": ["software"],
+      "software": ["hosting"]
     },
     "additionalProperties": false
   }

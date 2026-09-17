@@ -469,7 +469,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "92url.com",
@@ -777,7 +779,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "polr",
+    "hosting": "self-hosted"
   },
   {
     "domain": "act.gp",
@@ -1712,7 +1716,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "biibly.com",
@@ -2130,7 +2136,9 @@
     "evidence": [
       "https://buffer.com/"
     ],
-    "notes": "Buffer social media link shortener"
+    "notes": "Buffer social media link shortener",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "bung.ie",
@@ -3230,7 +3238,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "dell.to",
@@ -3526,7 +3536,9 @@
     "source": "internal",
     "evidence": [
       "https://dub.co/"
-    ]
+    ],
+    "software": "dub",
+    "hosting": "managed"
   },
   {
     "domain": "dv.gd",
@@ -3944,7 +3956,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "ezstat.ru",
@@ -4757,7 +4771,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "go-link.ru",
@@ -4889,7 +4905,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "polr",
+    "hosting": "self-hosted"
   },
   {
     "domain": "go.ly",
@@ -5010,7 +5028,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "gofund.me",
@@ -5670,7 +5690,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "ibm.biz",
@@ -5846,7 +5868,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "polr",
+    "hosting": "self-hosted"
   },
   {
     "domain": "imdb.to",
@@ -6901,7 +6925,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "shlink",
+    "hosting": "self-hosted"
   },
   {
     "domain": "lin0.de",
@@ -6923,7 +6949,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "lstu",
+    "hosting": "self-hosted"
   },
   {
     "domain": "link.to",
@@ -7055,7 +7083,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "shlink",
+    "hosting": "self-hosted"
   },
   {
     "domain": "lmt.co",
@@ -7253,7 +7283,9 @@
     "evidence": [
       "https://lstu.fr/"
     ],
-    "notes": "Let's shorten that url"
+    "notes": "Let's shorten that url",
+    "software": "lstu",
+    "hosting": "managed"
   },
   {
     "domain": "lttr.ai",
@@ -7791,7 +7823,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "ms.spr.ly",
@@ -7967,7 +8001,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "mz.cm",
@@ -9210,7 +9246,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "pnsne.ws",
@@ -9287,7 +9325,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "ppt.cc",
@@ -9693,7 +9733,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "rd.gt",
@@ -9802,7 +9844,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "red.ht",
@@ -10154,7 +10198,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "rpf.io",
@@ -10165,7 +10211,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "rptl.io",
@@ -10440,7 +10488,9 @@
     "evidence": [
       "https://san.aq/"
     ],
-    "notes": "Scott's URL shortener (usable with curl)"
+    "notes": "Scott's URL shortener (usable with curl)",
+    "software": "sanaq",
+    "hosting": "managed"
   },
   {
     "domain": "sbird.co",
@@ -11976,7 +12026,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "tcrn.ch",
@@ -12800,7 +12852,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "polr",
+    "hosting": "self-hosted"
   },
   {
     "domain": "u.to",
@@ -13053,7 +13107,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "up.to",
@@ -14438,7 +14494,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "yourls.org",
@@ -14449,7 +14507,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "yourwish.es",
@@ -14460,7 +14520,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "yourls",
+    "hosting": "self-hosted"
   },
   {
     "domain": "youtu.be",
@@ -14481,7 +14543,9 @@
     "source": "internal",
     "evidence": [
       "https://github.com/DontPokeMe/known-link-shorteners"
-    ]
+    ],
+    "software": "shlink",
+    "hosting": "self-hosted"
   },
   {
     "domain": "z23.ru",
@@ -14734,7 +14798,9 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)",
+    "software": "dub",
+    "hosting": "branded"
   },
   {
     "domain": "zurb.us",

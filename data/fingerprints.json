@@ -1,0 +1,475 @@
+[
+  {
+    "software": "dub",
+    "name": "Dub",
+    "homepage": "https://dub.co/",
+    "source_code": "https://github.com/dubinc/dub",
+    "managed_domains": [
+      "dub.co",
+      "dub.sh"
+    ],
+    "branded_cname_suffixes": [
+      "cname.dub.co"
+    ],
+    "min_score": 4,
+    "checks": [
+      {
+        "id": "powered-by-header",
+        "path": "/",
+        "header": {
+          "name": "X-Powered-By",
+          "pattern": "^Dub\\b"
+        },
+        "weight": 4,
+        "hosting": "branded",
+        "notes": "packages/utils/src/constants/middleware.ts; sent on link responses. Marked branded: apex customer domains on dub.co look identical to the rare self-hosted Dub, which also runs on Vercel."
+      },
+      {
+        "id": "custom-domain-placeholder",
+        "path": "/",
+        "body": "A Dub Custom Domain|This custom domain is powered by Dub",
+        "weight": 4,
+        "hosting": "branded",
+        "notes": "apps/web/app/[domain]/page.tsx; the placeholder dub.co shows on a customer domain with no root link"
+      }
+    ],
+    "notes": "Custom domains on dub.co use CNAME cname.dub.co; apex domains use A 76.76.21.21, which is generic Vercel and not used. dub.sh blocks automated requests (Vercel checkpoint), so there is no live reference. Unverified."
+  },
+  {
+    "software": "eastlake",
+    "name": "Eastlake",
+    "homepage": "https://github.com/Likenttt/eastlake-cloudflare-worker-short-url",
+    "source_code": "https://github.com/Likenttt/eastlake-cloudflare-worker-short-url",
+    "min_score": 4,
+    "checks": [
+      {
+        "id": "multilingual-404",
+        "path": "/kls-fingerprint-probe",
+        "status": [
+          404
+        ],
+        "body": "Not found! Please contact the URL provider",
+        "weight": 4,
+        "notes": "src/html.js: unknown-slug page, repeated in ~8 languages"
+      },
+      {
+        "id": "password-page",
+        "path": "/kls-fingerprint-probe",
+        "stage": 2,
+        "body": "Password Protected URL",
+        "weight": 1,
+        "notes": "src/html.js; only on protected links, so it rarely fires"
+      }
+    ],
+    "notes": "Cloudflare Worker; / redirects to the operator's DEFAULT_PAGE, so only the 404 page identifies it. The author's demo (u.li2niu.com) no longer resolves. Unverified."
+  },
+  {
+    "software": "kutt",
+    "name": "Kutt",
+    "homepage": "https://kutt.to/",
+    "source_code": "https://github.com/thedevs-network/kutt",
+    "managed_domains": [
+      "kutt.it",
+      "kutt.to"
+    ],
+    "reference_instances": [
+      "kutt.to"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "powered-by-footer",
+        "path": "/",
+        "body": "Powered by\\s*<a[^>]+github\\.com/thedevs-network/kutt",
+        "weight": 3,
+        "notes": "views/partials/footer.hbs; present when / serves the homepage"
+      },
+      {
+        "id": "health-ok",
+        "path": "/api/v2/health",
+        "status": [
+          200
+        ],
+        "body": "^OK$",
+        "weight": 1,
+        "notes": "server/routes/health.routes.js; weak on its own"
+      },
+      {
+        "id": "root-to-login",
+        "path": "/",
+        "status": [
+          302
+        ],
+        "header": {
+          "name": "Location",
+          "pattern": "^/(login|create-admin)$"
+        },
+        "weight": 1,
+        "notes": "server/handlers/renders.handler.js; default when anonymous links are disabled"
+      },
+      {
+        "id": "unknown-to-404",
+        "path": "/kls-fingerprint-probe",
+        "status": [
+          302
+        ],
+        "header": {
+          "name": "Location",
+          "pattern": "^/404$"
+        },
+        "weight": 1
+      },
+      {
+        "id": "login-footer",
+        "path": "/login",
+        "stage": 2,
+        "body": "Powered by\\s*<a[^>]+github\\.com/thedevs-network/kutt",
+        "weight": 3
+      },
+      {
+        "id": "htmx-config",
+        "path": "/login",
+        "stage": 2,
+        "body": "<meta name=\"htmx-config\"",
+        "weight": 1
+      },
+      {
+        "id": "api-not-authenticated",
+        "path": "/api/v2/links",
+        "stage": 2,
+        "body": "^NOT_AUTHENTICATED$",
+        "weight": 2,
+        "notes": "htmx auth failure (with an HX-Redirect header) when no API key is sent"
+      },
+      {
+        "id": "not-found-page",
+        "path": "/404",
+        "stage": 2,
+        "body": "Link could not be found",
+        "weight": 2,
+        "notes": "views/404.hbs"
+      }
+    ],
+    "notes": "Verified 2026-09-17 against kutt/kutt:latest (v3.2.6) in Docker and against kutt.to."
+  },
+  {
+    "software": "lstu",
+    "name": "Lstu",
+    "homepage": "https://lstu.fr/",
+    "source_code": "https://framagit.org/fiat-tux/hat-softwares/lstu",
+    "managed_domains": [
+      "lstu.fr"
+    ],
+    "reference_instances": [
+      "lstu.fr",
+      "link.infini.fr"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "fullstats-json",
+        "path": "/fullstats",
+        "status": [
+          200
+        ],
+        "json": {
+          "empty": null,
+          "urls": null,
+          "timestamp": null
+        },
+        "weight": 4,
+        "notes": "lib/Lstu/Controller/Stats.pm: unauthenticated counters"
+      },
+      {
+        "id": "homepage-branding",
+        "path": "/",
+        "body": "lstu-small\\.svg|Let's Shorten That URL|bootstrap-lstu",
+        "weight": 2,
+        "notes": "themes/default/templates/layouts/default.html.ep"
+      },
+      {
+        "id": "api-docs-page",
+        "path": "/api",
+        "stage": 2,
+        "body": "<title>Lstu API",
+        "weight": 3
+      },
+      {
+        "id": "stats-page",
+        "path": "/stats",
+        "stage": 2,
+        "body": "<title>Lstu stats",
+        "weight": 2
+      }
+    ],
+    "notes": "Verified 2026-09-17 against lstu.fr."
+  },
+  {
+    "software": "polr",
+    "name": "Polr",
+    "homepage": "https://polrproject.org/",
+    "source_code": "https://github.com/cydrobolt/polr",
+    "reference_instances": [
+      "acortar.link",
+      "ilnk.io"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "generator-meta",
+        "path": "/",
+        "body": "<meta name=\"generator\" content=\"Polr",
+        "weight": 3,
+        "notes": "resources/views/layouts/base.blade.php"
+      },
+      {
+        "id": "about-page",
+        "path": "/about-polr",
+        "body": "powered by Polr",
+        "weight": 3,
+        "notes": "resources/views/about.blade.php"
+      },
+      {
+        "id": "login-app",
+        "path": "/login",
+        "stage": 2,
+        "body": "ng-app=\"polr\"",
+        "weight": 3
+      },
+      {
+        "id": "api-token-required",
+        "path": "/api/v2/action/lookup",
+        "stage": 2,
+        "body": "Authentication token required",
+        "weight": 2,
+        "notes": "app/Http/Middleware/ApiMiddleware.php"
+      }
+    ],
+    "notes": "Signals read from source and verified 2026-09-17 against instances found by the first dataset scan. polrproject.org is the project site, not an instance."
+  },
+  {
+    "software": "pygmy",
+    "name": "pygmy",
+    "homepage": "https://pygy.co/",
+    "source_code": "https://github.com/amitt001/pygmy",
+    "managed_domains": [
+      "pygy.co",
+      "demo.pygy.co"
+    ],
+    "reference_instances": [
+      "demo.pygy.co"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "ui-title",
+        "path": "/",
+        "body": "<title>\\s*Pygmy \\| URL Shortener\\s*</title>",
+        "weight": 3,
+        "notes": "pygmyui/templates/base.html"
+      },
+      {
+        "id": "meta-description",
+        "path": "/",
+        "body": "Pygmy\\(pygy\\.co\\)",
+        "weight": 3
+      }
+    ],
+    "notes": "Verified 2026-09-17 against demo.pygy.co. The API (port 9119) is usually not exposed."
+  },
+  {
+    "software": "reduced-to",
+    "name": "Reduced.to",
+    "homepage": "https://reduced.to/",
+    "source_code": "https://github.com/origranot/reduced.to",
+    "managed_domains": [
+      "reduced.to"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "homepage-title",
+        "path": "/",
+        "body": "<title>Reduced\\.to - ",
+        "weight": 3,
+        "notes": "apps/frontend routes/index.tsx; easily rebranded"
+      },
+      {
+        "id": "shortener-api-error",
+        "path": "/api/v1/shortener/kls-fingerprint-probe",
+        "body": "Shortened url is wrong or expired",
+        "weight": 3,
+        "notes": "apps/backend shortener.controller.ts"
+      }
+    ],
+    "notes": "Signals read from source on 2026-09-17. reduced.to answered 404 to every path at that time, so this is unverified."
+  },
+  {
+    "software": "sanaq",
+    "name": "san.aq",
+    "homepage": "https://github.com/neutronscott/sanaq",
+    "source_code": "https://github.com/neutronscott/sanaq",
+    "managed_domains": [
+      "san.aq"
+    ],
+    "reference_instances": [
+      "san.aq"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "homepage-title",
+        "path": "/",
+        "body": "<title>scott's url thingie</title>",
+        "weight": 3
+      },
+      {
+        "id": "unknown-slug-page",
+        "path": "/kls-fingerprint-probe",
+        "body": "<title>No such file or directory</title>",
+        "weight": 2,
+        "notes": "error404.php mimics `cat: <slug>: No such file or directory`"
+      },
+      {
+        "id": "humans-txt",
+        "path": "/humans.txt",
+        "stage": 2,
+        "body": "Owner: neutronscott",
+        "weight": 3
+      }
+    ],
+    "notes": "Verified 2026-09-17 against san.aq. Deliberately never requests /list.php or /pics.php, which dump the link database without authentication."
+  },
+  {
+    "software": "shlink",
+    "name": "Shlink",
+    "homepage": "https://shlink.io/",
+    "source_code": "https://github.com/shlinkio/shlink",
+    "reference_instances": [
+      "liip.to",
+      "lmg.gg",
+      "yubi.co"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "health-json",
+        "path": "/rest/health",
+        "json": {
+          "status": null,
+          "links.project": "github\\.com/shlinkio/shlink"
+        },
+        "weight": 4,
+        "notes": "module/Rest/src/Action/HealthAction.php; 200 when healthy, 503 when the database is down"
+      },
+      {
+        "id": "not-found-title",
+        "path": "/",
+        "body": "<title>[^<]*\\| Shlink</title>",
+        "weight": 2,
+        "notes": "module/Core/templates/404.html; / is a 404 unless a not-found redirect is configured"
+      },
+      {
+        "id": "invalid-short-url-title",
+        "path": "/kls-fingerprint-probe",
+        "body": "<title>Invalid Short URL \\| Shlink</title>",
+        "weight": 2
+      },
+      {
+        "id": "missing-auth-problem",
+        "path": "/rest/v3/short-urls",
+        "stage": 2,
+        "body": "shlink\\.io/api/error/missing-authentication",
+        "weight": 3
+      }
+    ],
+    "notes": "Verified 2026-09-17 against shlinkio/shlink:stable (5.1.6) in Docker. Shlink has no hosted service; shlink.io is documentation. Live references found by the first dataset scan."
+  },
+  {
+    "software": "sink",
+    "name": "Sink",
+    "homepage": "https://sink.cool/",
+    "source_code": "https://github.com/ccbikai/sink",
+    "managed_domains": [
+      "sink.cool"
+    ],
+    "reference_instances": [
+      "sink.cool"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "openapi-title",
+        "path": "/_docs/openapi.json",
+        "json": {
+          "info.title": "^Sink API$"
+        },
+        "weight": 4,
+        "notes": "nuxt.config.ts OpenAPI metadata"
+      },
+      {
+        "id": "i18n-cookie",
+        "path": "/",
+        "cookie": "^sink_i18n_redirected$",
+        "weight": 3
+      },
+      {
+        "id": "landing-title",
+        "path": "/",
+        "body": "<title>Sink - Link Shortener with Analytics",
+        "weight": 3,
+        "notes": "app/app.config.ts; only when / isn't redirected to NUXT_HOME_URL"
+      }
+    ],
+    "notes": "Verified 2026-09-17 against sink.cool (the project's demo). Runs on Cloudflare, so there are no server headers to go on."
+  },
+  {
+    "software": "yourls",
+    "name": "YOURLS",
+    "homepage": "https://yourls.org/",
+    "source_code": "https://github.com/YOURLS/YOURLS",
+    "reference_instances": [
+      "deli.bz",
+      "myurls.ca"
+    ],
+    "min_score": 3,
+    "checks": [
+      {
+        "id": "api-error-json",
+        "path": "/yourls-api.php?format=json",
+        "status": [
+          400,
+          403
+        ],
+        "json": {
+          "errorCode": "^(400|403)$",
+          "message": null
+        },
+        "weight": 3,
+        "notes": "includes/functions-api.php and includes/auth.php: 'Please log in' (private) or 'Unknown or missing action' (public)"
+      },
+      {
+        "id": "generator-meta",
+        "path": "/",
+        "body": "<meta name=\"generator\" content=\"YOURLS",
+        "weight": 3,
+        "notes": "includes/functions-html.php; only if the operator serves a YOURLS-themed front page"
+      },
+      {
+        "id": "admin-generator-meta",
+        "path": "/admin/",
+        "stage": 2,
+        "body": "<meta name=\"generator\" content=\"YOURLS",
+        "weight": 3
+      },
+      {
+        "id": "admin-powered-by",
+        "path": "/admin/",
+        "stage": 2,
+        "body": "Powered by <a href=\"https?://yourls\\.org/?\"",
+        "weight": 2
+      }
+    ],
+    "notes": "Verified 2026-09-17 against the yourls:1.10 image (YOURLS 1.10.6) in Docker. There is no hosted service; yourls.org is the project site. Live references found by the first dataset scan."
+  }
+]
