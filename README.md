@@ -17,10 +17,10 @@ This repository powers the [dontpoke.me Link Expander](https://dontpoke.me/tools
 
 ### Statistics
 
-- Total shorteners: 1,350
+- Total shorteners: 1,386
 - Total redirectors: 2
 - Total tracking domains: 4
-- Last updated: 2026-09-01
+- Last updated: 2026-10-01
 
 ## Contributing
 
