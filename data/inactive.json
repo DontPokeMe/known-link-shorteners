@@ -133,6 +133,18 @@
     ]
   },
   {
+    "domain": "blur.by",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-10-04",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "bzh.me",
     "origin": "shortener",
     "last_status": "404",
@@ -336,6 +348,18 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "gowat.ch",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-10-04",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "gtly.ink",
     "origin": "shortener",
     "last_status": "404",
@@ -393,6 +417,18 @@
     "evidence": [
       "https://github.com/PeterDaveHello/url-shorteners"
     ]
+  },
+  {
+    "domain": "iplogger.org",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-04",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "is.gd",
@@ -517,6 +553,18 @@
     "last_status": "403",
     "last_checked_at": "2026-10-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "linkye.net",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-04",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "livestre.am",
@@ -1175,6 +1223,18 @@
     "last_status": "dns_error",
     "last_checked_at": "2026-10-01",
     "notes": "httpsconnectionpool(host='wndrfl.co', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='wndrfl.co', port=443): failed to resolve 'wndrfl.co' ([errno -2]"
+  },
+  {
+    "domain": "x.gd",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-10-04",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "xurl.es",

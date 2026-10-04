@@ -1,2 +1,25 @@
 # Domains Ollama judged not to be shorteners/redirectors/trackers.
 # Kept so they are not re-evaluated every week. Delete a line to retry it.
+
+1tk.us
+1url.com
+2u.xf.cz
+4i.ae
+5z8.info
+77.ai
+7fth.cc
+7vd.cn
+a0.fr
+ad-med.cz
+ad5.eu
+ad7.biz
+aka.gr
+aqva.pl
+asso.in
+ayt.fr
+azali.fr
+bee4.biz
+ble.pl
+blip.tv
+bul.lu
+cjb.net
