@@ -970,25 +970,34 @@ def main() -> int:
                       f"run; every classified candidate goes to the review queue. "
                       f"Install another model (e.g. ollama pull llama3.1:8b) to restore "
                       f"auto-accept.", file=sys.stderr)
-            votes = run_triage(pending_domains, host, models, args.ollama_workers, args.ollama_timeout)
-
             # A candidate that does not resolve is not worth adding, whatever
-            # the models think of the name.
+            # the models think of the name. Probe first: it takes seconds, and
+            # every dead domain skipped here saves a CPU inference per model.
             liveness: dict[str, CheckResult] = {}
             if not args.no_candidate_probe:
-                print(f"  probing {len(pending_domains)} candidate(s) for liveness")
+                print(f"  probing {len(pending_domains)} candidate(s) for liveness", flush=True)
                 liveness = {
                     r.domain: r
                     for r in run_liveness([(d, "shortener") for d in pending_domains],
                                           min(args.workers, 8), args.timeout)
                 }
+            dead_candidates = {d for d, r in liveness.items() if r.verdict == "dead"}
+            to_classify = [d for d in pending_domains if d not in dead_candidates]
+            if dead_candidates:
+                print(f"  skipping triage for {len(dead_candidates)} dead candidate(s)", flush=True)
+            votes = run_triage(to_classify, host, models, args.ollama_workers, args.ollama_timeout)
 
             for domain in pending_domains:
                 sources = pending[domain]
-                decision = decide(domain, votes[domain], sources,
-                                  args.min_confidence, args.min_sources,
-                                  required_models=args.consensus)
                 probe = liveness.get(domain)
+                if domain in dead_candidates:
+                    decision = {"domain": domain, "outcome": "reject", "type": None,
+                                "votes": [], "sources": sources,
+                                "reason": f"domain is dead ({probe.status}); not classified"}
+                else:
+                    decision = decide(domain, votes[domain], sources,
+                                      args.min_confidence, args.min_sources,
+                                      required_models=args.consensus)
                 if decision["outcome"] == "accept" and probe is not None:
                     if probe.verdict == "dead":
                         decision = {**decision, "outcome": "reject",

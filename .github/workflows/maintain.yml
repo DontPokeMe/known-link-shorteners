@@ -9,11 +9,13 @@
 #     http://localhost:11434, and if any answers we use it as-is. Set OLLAMA_HOST
 #     repo-wide as an Actions variable (Settings > Variables) or per-run below.
 #   * A GitHub-hosted ubuntu-latest runner has no Ollama, so the job installs it,
-#     starts it and pulls CI_OLLAMA_MODEL. The model blobs are cached between
-#     runs, but a cache miss just means a slower (multi-GB) download, not a
-#     failure. The whole install block is BEST EFFORT: if anything in it breaks
-#     we log a warning and continue with --no-ollama. Keeping the dataset
-#     liveness data fresh matters more than triaging new candidates.
+#     starts it and pulls CI_OLLAMA_MODEL. The blobs are deliberately NOT
+#     cached: a fresh pull of both models measured ~40s on a hosted runner,
+#     while caching them would take ~9.6GB of the repo's 10GB Actions cache
+#     quota and evict everything else. The whole install block is BEST
+#     EFFORT: if anything in it breaks we log a warning and continue with
+#     --no-ollama. Keeping the dataset liveness data fresh matters more than
+#     triaging new candidates.
 #
 # Model choice is deliberate: CI_OLLAMA_MODEL must stay at 7B parameters or
 # larger. A measured benchmark of this classification task scored 3B models at
@@ -74,29 +76,34 @@ concurrency:
   group: dataset-write
   cancel-in-progress: false
 
-# Change the triage model HERE and nowhere else: the cache key, the pull and the
-# run all read it. qwen2.5:7b is ~4.7GB. See the note in the header before
+# Change the triage model HERE and nowhere else: the pull and the run both
+# read it. qwen2.5:7b is ~4.7GB. See the note in the header before
 # swapping it for anything smaller.
 env:
+  # Unbuffered, so every log line carries the time it was actually printed.
+  # Buffered output made phase timestamps in the log land up to an hour late.
+  PYTHONUNBUFFERED: "1"
   CI_OLLAMA_MODEL: "qwen2.5:7b"
   # The auto-accept gate needs --consensus models to actually vote. With one
   # model installed the gate fails safe and accepts nothing, so CI pulls a
   # second one from a DIFFERENT family (measured 9/10 on this task; a 3B model
   # scored 6/10 and called zapier.com a shortener).
   # llama3.1:8b, not mistral: it is the cross-family model actually measured on
-  # this task (9/10). Cost: the two model blobs total ~9.6GB of Actions cache.
-  # To trade auto-accept for a much smaller cache, blank this -- the gate then
-  # fails safe and every positive candidate goes to the review PR instead.
+  # this task (9/10). Blanking this halves triage time, but the gate then fails
+  # safe and every positive candidate goes to the review PR instead.
   CI_OLLAMA_MODEL_2: "llama3.1:8b"
-  # Triage costs ~12.6s per candidate per model on a hosted runner's CPU
-  # (measured). Two models x this many candidates must fit in timeout-minutes.
-  CI_MAX_NEW_CANDIDATES: "120"
+  # Triage is nearly the whole run. Measured on hosted runners with both models
+  # voting, it cost 24-47s per candidate (it varies run to run), so 120 took
+  # 48-94 min and was closing in on timeout-minutes. 50 keeps the worst case
+  # observed to ~40 min of triage, plus ~5 min for liveness. Dead candidates
+  # are probed first and skip triage entirely.
+  CI_MAX_NEW_CANDIDATES: "50"
 
 jobs:
   maintain:
     runs-on: ${{ inputs.runs_on || 'ubuntu-latest' }}
-    # Generous: a cold model cache adds a multi-GB pull, and 7B triage runs on
-    # CPU on a hosted runner. The liveness probe itself is the fast part.
+    # Generous: 7B triage runs on CPU on a hosted runner and dominates the run.
+    # The liveness probe and the model pulls are the fast parts.
     timeout-minutes: 120
     env:
       OLLAMA_HOST: ${{ inputs.ollama_host || vars.OLLAMA_HOST || 'http://localhost:11434' }}
@@ -145,15 +152,6 @@ jobs:
           echo "available=false" >> $GITHUB_OUTPUT
           echo "host=" >> $GITHUB_OUTPUT
 
-      # Multi-GB blobs. A miss is slow, never fatal -- the pull below just
-      # re-downloads. Keyed on the model so a model swap invalidates cleanly.
-      - name: Restore Ollama model cache
-        if: ${{ steps.ollama.outputs.available != 'true' && inputs.skip_llm != true }}
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.ollama/models
-          key: ollama-models-${{ runner.os }}-${{ inputs.model || env.CI_OLLAMA_MODEL }}-${{ env.CI_OLLAMA_MODEL_2 }}
-
       # BEST EFFORT. Every failure path here warns and exits 0 with ready=false;
       # the job then runs with --no-ollama rather than losing the week's
       # liveness data. Nothing below this line may `exit 1`.
@@ -180,9 +178,8 @@ jobs:
             bail "No model name resolved (CI_OLLAMA_MODEL is empty)."
           fi
 
-          # Keep blobs where the cache step looks for them. The install script
-          # also registers a systemd unit running as the 'ollama' user, whose
-          # model dir is elsewhere -- stop it so our own server owns the port.
+          # Keep blobs in a known place. The install script also registers a
+          # systemd unit running as the 'ollama' user, whose model dir is elsewhere -- stop it so our own server owns the port.
           export OLLAMA_MODELS="$HOME/.ollama/models"
           mkdir -p "$OLLAMA_MODELS"
 
@@ -208,7 +205,7 @@ jobs:
           done
           echo "Ollama API is up after $SECONDS s."
 
-          echo "Pulling $CI_MODEL (a warm cache makes this a no-op)..."
+          echo "Pulling $CI_MODEL..."
           ollama pull "$CI_MODEL"
           [ $? -eq 0 ] || bail "'ollama pull $CI_MODEL' failed."
 
