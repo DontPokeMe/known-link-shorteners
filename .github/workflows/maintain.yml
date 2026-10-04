@@ -352,7 +352,9 @@ jobs:
             echo "No dataset changes this week."
           else
             git commit -m "Weekly maintenance: refresh domain liveness ($(date -u +%Y-%m-%d))"
-            git pull --rebase origin main
+            # --autostash: candidates.review.txt is deliberately left dirty for
+            # the PR step below, and a plain rebase pull refuses a dirty tree.
+            git pull --rebase --autostash origin main
             git push origin HEAD:main
           fi
 
