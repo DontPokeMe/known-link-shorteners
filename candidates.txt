@@ -2,4 +2,5 @@
 # Appended to by the Obsidian template; drained by scripts/maintain_shorteners.py.
 # Lines starting with # are ignored.
 # --- discovered 2026-10-04T05:51:23.639140+00:00 ---
+# --- discovered 2026-10-04T07:25:57.430334+00:00 ---
 
