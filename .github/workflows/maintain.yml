@@ -93,11 +93,12 @@ env:
   # safe and every positive candidate goes to the review PR instead.
   CI_OLLAMA_MODEL_2: "llama3.1:8b"
   # Triage is nearly the whole run. Measured on hosted runners with both models
-  # voting, it cost 24-47s per candidate (it varies run to run), so 120 took
-  # 48-94 min and was closing in on timeout-minutes. 50 keeps the worst case
-  # observed to ~40 min of triage, plus ~5 min for liveness. Dead candidates
-  # are probed first and skip triage entirely.
-  CI_MAX_NEW_CANDIDATES: "50"
+  # voting, it cost 24-47s per candidate (it varies run to run). At 100, even
+  # if every candidate is live and costs 47s that is ~78 min of triage, plus
+  # ~5 min for liveness and ~1 min of setup: ~85 min against timeout-minutes.
+  # In practice ~20% of candidates are dead and skip triage (probed first), so
+  # expect ~60-70 min. 120 took up to 94 min of triage before that skip existed.
+  CI_MAX_NEW_CANDIDATES: "100"
 
 jobs:
   maintain:
