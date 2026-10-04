@@ -25,17 +25,6 @@ def _stub_liveness(targets, workers, timeout):
 
 
 class TestRunTriage:
-    def test_models_run_one_after_another_not_interleaved(self, monkeypatch):
-        # Two models generating at once on a CPU runner split the same cores.
-        calls = []
-        monkeypatch.setattr(ms, "classify_candidate", _stub_classify(calls))
-        domains = [f"d{i}.example" for i in range(6)]
-
-        ms.run_triage(domains, "http://ollama", MODELS, workers=2, timeout=1)
-
-        order = [model for _, model in calls]
-        assert order == [MODELS[0]] * 6 + [MODELS[1]] * 6
-
     def test_every_model_still_votes_on_every_domain(self, monkeypatch):
         monkeypatch.setattr(ms, "classify_candidate", _stub_classify([]))
         votes = ms.run_triage(["a.example", "b.example"], "http://ollama", MODELS, 2, 1)

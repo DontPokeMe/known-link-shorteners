@@ -113,6 +113,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # The branch tip as of NOW, not github.sha. A queued run's sha is
+          # main as it was when the run was queued, so a run that waited out
+          # the dataset-write concurrency group (behind the monthly release, or
+          # another maintenance run) would otherwise rebuild the data from a
+          # stale base and conflict with the commit that run just pushed.
+          ref: ${{ github.ref }}
           # create-pull-request wants real history to diff the review branch
           # against; a depth-1 clone makes it re-create the branch every run.
           fetch-depth: 0
@@ -205,11 +211,6 @@ jobs:
           set +o pipefail
           export PATH="$OLLAMA_DIR/bin:$PATH"
           command -v ollama >/dev/null 2>&1 || bail "No 'ollama' binary in $OLLAMA_DIR/bin after extracting."
-          ollama --version 2>/dev/null | head -n 1
-
-          # One model resident at a time: triage runs the models in turn, so
-          # keeping the idle one loaded only takes RAM from the active one.
-          export OLLAMA_MAX_LOADED_MODELS=1
           ollama serve > "$SERVE_LOG" 2>&1 &
           echo "Started 'ollama serve' (pid $!); waiting for the API..."
 
@@ -223,7 +224,7 @@ jobs:
             fi
             sleep 2
           done
-          echo "Ollama API is up after $SECONDS s."
+          echo "Ollama API is up after $SECONDS s ($(ollama --version 2>&1 | tail -n 1))."
 
           echo "Pulling $CI_MODEL..."
           ollama pull "$CI_MODEL"
@@ -371,7 +372,12 @@ jobs:
             git commit -m "Weekly maintenance: refresh domain liveness ($(date -u +%Y-%m-%d))"
             # --autostash: candidates.review.txt is deliberately left dirty for
             # the PR step below, and a plain rebase pull refuses a dirty tree.
-            git pull --rebase --autostash origin main
+            if ! git pull --rebase --autostash origin main; then
+              CONFLICTED=$(git diff --name-only --diff-filter=U | paste -sd ' ' -)
+              git rebase --abort
+              echo "::error::main changed under this run and the rebase conflicted in: ${CONFLICTED:-unknown files}. Nothing was pushed. This run's results are in the maintenance-report artifact; re-run the workflow to rebuild them on the new main."
+              exit 1
+            fi
             git push origin HEAD:main
           fi
 
