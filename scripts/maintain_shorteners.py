@@ -567,22 +567,33 @@ def classify_candidate(domain: str, host: str, model: str, timeout: float) -> di
 
 def run_triage(domains: list[str], host: str, models: list[str], workers: int,
                timeout: float) -> dict[str, list[dict]]:
-    """Every model votes on every domain. Returns {domain: [vote, ...]}."""
-    jobs = [(d, m) for d in domains for m in models]
+    """Every model votes on every domain. Returns {domain: [vote, ...]}.
+
+    Models run one after another, not interleaved. On a CPU-only runner two
+    models generating at once split the same cores and each runs at well under
+    half speed, so interleaving them cost more wall time than running them in
+    turn. `workers` still overlaps requests to the one model that is active.
+    """
     votes: dict[str, list[dict]] = {d: [] for d in domains}
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {
-            pool.submit(classify_candidate, d, host, m, timeout): (d, m) for d, m in jobs
-        }
-        for fut in as_completed(futures):
-            domain, model = futures[fut]
-            try:
-                verdict = fut.result()
-            except Exception as e:  # noqa: BLE001
-                verdict = {"domain": domain, "category": "error", "confidence": 0.0,
-                           "reason": str(e)[:200]}
-            verdict["model"] = model
-            votes[domain].append(verdict)
+    for model in models:
+        started = time.monotonic()
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(classify_candidate, d, host, model, timeout): d for d in domains
+            }
+            for fut in as_completed(futures):
+                domain = futures[fut]
+                try:
+                    verdict = fut.result()
+                except Exception as e:  # noqa: BLE001
+                    verdict = {"domain": domain, "category": "error", "confidence": 0.0,
+                               "reason": str(e)[:200]}
+                verdict["model"] = model
+                votes[domain].append(verdict)
+        if domains:
+            elapsed = time.monotonic() - started
+            print(f"  {model}: {len(domains)} candidate(s) in {elapsed / 60:.1f} min "
+                  f"({elapsed / len(domains):.1f}s each)", flush=True)
     for vs in votes.values():
         vs.sort(key=lambda v: v["model"])
     return votes
