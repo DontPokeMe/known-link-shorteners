@@ -263,6 +263,18 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "enshom.link",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-11",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "etp.tw",
     "origin": "shortener",
     "last_status": "403",
@@ -884,6 +896,18 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "shorten.world",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-11",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "shp.ee",
     "origin": "shortener",
     "last_status": "404",
@@ -1045,6 +1069,18 @@
     "last_status": "404",
     "last_checked_at": "2026-10-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "tiny.ee",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-11",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "tnw.to",

@@ -366,7 +366,6 @@ ellemag.co
 embt.co
 emirat.es
 engt.co
-enshom.link
 entm.ag
 envs.sh
 epochtim.es
@@ -592,6 +591,7 @@ iplwin.us
 iqiyi.cn
 irng.ca
 isw.pub
+itm.im
 itsh.bo
 itvty.com
 ity.im
@@ -648,6 +648,7 @@ lego.build
 lemde.fr
 letsharu.cc
 lft.to
+lien.li
 lih.kg
 lihi.biz
 lihi.cc
@@ -667,6 +668,7 @@ lihi3.me
 lihipro.com
 lihivip.com
 liip.to
+lin.io
 lin0.de
 link.ac
 link.infini.fr
@@ -686,12 +688,15 @@ lmt.co
 lmy.de
 ln.run
 lnk.bz
+lnk.co
 lnk.direct
 lnk.do
 lnk.sk
 lnkd.in
 lnkiy.com
 lnkiy.in
+lnks.fr
+lnky.fr
 lnky.jp
 lnnk.in
 lnv.gy
@@ -750,6 +755,7 @@ mo.ma
 momo.dm
 monster.cat
 moovit.me
+more.sh
 mork.ro
 mou.sr
 mpl.pm
@@ -769,6 +775,7 @@ mypoya.com
 myppt.cc
 mysp.ac
 myumi.ch
+myurl.in
 myurls.ca
 mz.cm
 mzl.la
@@ -794,6 +801,7 @@ nnn.is
 nnna.ru
 nokia.ly
 notlong.com
+nov.io
 nr.tn
 nswroads.work
 ntap.com
@@ -849,6 +857,7 @@ optimize.ly
 oran.ge
 osdb.link
 oshko.sh
+ou.gd
 ourl.co
 ourl.in
 ourl.tw
@@ -879,6 +888,7 @@ pewrsr.ch
 pg3d.app
 pgat.us
 pgrs.in
+ph.ly
 philips.to
 piee.pw
 pin.it
@@ -946,6 +956,7 @@ redd.it
 redir.ec
 redir.is
 redsto.ne
+redu.it
 ref.trade.re
 refini.tv
 regmovi.es
@@ -1039,7 +1050,6 @@ short.link
 shorten-url.com
 shorten.ee
 shorten.so
-shorten.world
 shorter.me
 shorturl.ae
 shorturl.asia
@@ -1169,7 +1179,6 @@ tibco.co
 tidd.ly
 tinu.be
 tiny.cc
-tiny.ee
 tiny.one
 tiny.pl
 tinyarro.ws
