@@ -24,7 +24,7 @@
 2link.cc
 2nu.gs
 2pl.us
-2ty.in
+2tu.us
 2u.lc
 2wsb.tv
 3.cn
@@ -148,6 +148,7 @@ b-gat.es
 b.link
 b.mw
 b23.ru
+b54.in
 baid.us
 baratun.de
 bayareane.ws
@@ -297,7 +298,6 @@ ctfl.io
 cultm.ac
 cup.org
 cut.lu
-cut.pe
 cutit.org
 cutt.eu
 cutt.ly
@@ -722,7 +722,6 @@ maac.io
 maga.lu
 man.ac.uk
 many.at
-maper.info
 mapfan.to
 mayocl.in
 mbapp.io
@@ -738,7 +737,6 @@ meck.co
 meetu.ps
 merky.de
 metamark.net
-mgnet.me
 mgstn.ly
 michmed.org
 migre.me
@@ -892,6 +890,7 @@ ph.ly
 philips.to
 piee.pw
 pin.it
+pin.st
 pipr.es
 pldthome.info
 plu.sh
@@ -1084,6 +1083,7 @@ smsng.news
 smsng.us
 smtvj.com
 smu.gs
+sn.im
 snd.sc
 snip.ly
 snyk.co
@@ -1104,6 +1104,7 @@ spgrp.sg
 spigen.co
 split.to
 splk.it
+spn.sr
 spoo.me
 spoti.fi
 spotify.link
@@ -1124,6 +1125,7 @@ storycor.ps
 stspg.io
 stts.in
 stuf.in
+su.pr
 sumal.ly
 suo.fyi
 suo.im
@@ -1137,6 +1139,7 @@ switchy.io
 swiy.co
 swoo.sh
 swtt.cc
+sy.pe
 sy.to
 syb.la
 synd.co
@@ -1177,8 +1180,12 @@ ti.me
 tibco.cm
 tibco.co
 tidd.ly
+tin.li
+tini.cc
 tinu.be
 tiny.cc
+tiny.lt
+tiny.ms
 tiny.one
 tiny.pl
 tinyarro.ws
@@ -1188,6 +1195,7 @@ tinyurl.hu
 tinyurl.mobi
 tktwb.tw
 tl.gd
+tldr.sk
 tlil.nl
 tlrk.it
 tmblr.co
@@ -1201,6 +1209,7 @@ tny.im
 tny.so
 to.ly
 to.pbs.org
+to8.cc
 toi.in
 tokopedia.link
 tonyr.co
@@ -1209,14 +1218,18 @@ tpc.io
 tpmr.com
 tprk.us
 tr.ee
+tr5.in
 tracking.truthfinder.com
 trackurl.link
 trade.re
 travl.rs
+trck.me
 trib.al
 trib.in
+trick.ly
 troy.hn
 trt.sh
+trunc.it
 trymongodb.com
 tsbk.tw
 tsta.rs
@@ -1261,10 +1274,12 @@ urbn.is
 url.cn
 url.cy
 url.ie
+url5.org
 urla.ru
 urlgeni.us
 urli.ai
 urlify.cn
+urlin.it
 urlr.me
 urls.fr
 urly.co
@@ -1279,8 +1294,10 @@ utm.to
 utn.pl
 utraker.com
 v.gd
+valv.im
 vd55.com
 vercel.link
+verd.in
 vi.sa
 vi.tc
 viaja.am
@@ -1301,6 +1318,7 @@ vrnda.us
 vtns.io
 vur.me
 vurl.com
+vv.vg
 vvnt.co
 vxn.link
 vypij.bar

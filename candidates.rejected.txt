@@ -29,6 +29,7 @@ couic.fr
 curl.im
 cut.sk
 cybr.fr
+cyonix.to
 daa.pl
 ddp.net
 doiop.com
@@ -40,6 +41,7 @@ ezurl.cc
 filz.fr
 foe.hn
 freze.it
+goo.lu
 grem.io
 hide.my
 hjkl.fr
@@ -49,6 +51,7 @@ info.ms
 jdem.cz
 jp22.net
 kfd.pl
+krat.si
 kratsi.cz
 kuc.cz
 kxb.me
@@ -56,6 +59,7 @@ linkn.co
 llu.ch
 lvvk.com
 m3mi.com
+make.my
 mdl29.net
 mic.fr
 minu.me
@@ -73,6 +77,7 @@ plots.fr
 ppfr.it
 ptm.ro
 qbn.ru
+qqc.co
 qxp.sk
 ref.so
 ri.ms
@@ -87,3 +92,18 @@ short.ie
 short.pk
 shy.si
 sicax.net
+sk.gy
+surl.me
+tabzi.com
+thesa.us
+tllg.net
+tohle.de
+twi.im
+ug.cz
+upzat.com
+vov.li
+vt802.us
+w1p.fr
+wb1.eu
+web99.eu
+wideo.fr
