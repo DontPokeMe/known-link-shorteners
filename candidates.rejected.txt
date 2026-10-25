@@ -1,10 +1,14 @@
 # Domains Ollama judged not to be shorteners/redirectors/trackers.
 # Kept so they are not re-evaluated every week. Delete a line to retry it.
 
+1-url.net
 1tk.us
 1url.com
+1wb2.net
+2big.at
 2u.xf.cz
 4i.ae
+4view.me
 5z8.info
 77.ai
 7fth.cc
@@ -22,6 +26,7 @@ azali.fr
 bee4.biz
 ble.pl
 blip.tv
+boi.re
 bul.lu
 cjb.net
 clikk.in
@@ -55,6 +60,7 @@ krat.si
 kratsi.cz
 kuc.cz
 kxb.me
+lick.my
 linkn.co
 llu.ch
 lvvk.com
@@ -93,6 +99,7 @@ short.pk
 shy.si
 sicax.net
 sk.gy
+sq6.ru
 surl.me
 tabzi.com
 thesa.us
@@ -107,3 +114,23 @@ w1p.fr
 wb1.eu
 web99.eu
 wideo.fr
+wu.cz
+x2c.eu
+xl8.eu
+xoe.cz
+yagoa.fr
+yau.sh
+yeca.eu
+yect.com
+yon.ir
+youfap.me
+ysear.ch
+yyv.co
+z9.fr
+zeek.ir
+zkrat.me
+zkrt.cz
+zoodl.com
+zti.me
+zxq.net
+zyva.org

@@ -302,11 +302,35 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "entm.ag",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-25",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "etp.tw",
     "origin": "shortener",
     "last_status": "403",
     "last_checked_at": "2026-10-01",
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "fal.cn",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-10-25",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "firsturl.de",
@@ -1132,6 +1156,21 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "tiny.lt",
+    "origin": "shortener",
+    "last_status": "403",
+    "last_checked_at": "2026-10-25",
+    "added_at": "2026-10-18",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/boutetnico/url-shorteners/master/list.txt",
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.90, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "tnw.to",
