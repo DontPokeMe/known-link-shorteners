@@ -478,6 +478,19 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
+    "domain": "6url.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.80, models: llama3.1:8b, qwen2.5:7b). Pending human review."
+  },
+  {
     "domain": "7.ly",
     "type": "shortener",
     "status": "active",
@@ -668,6 +681,19 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "a2a.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "a360.co",
@@ -2319,6 +2345,19 @@
     "hosting": "branded"
   },
   {
+    "domain": "buk.me",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.80, models: llama3.1:8b, qwen2.5:7b). Pending human review."
+  },
+  {
     "domain": "bung.ie",
     "type": "shortener",
     "status": "active",
@@ -2328,6 +2367,19 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "burnurl.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "bwnews.pr",
@@ -2656,6 +2708,19 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "chilp.it",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.90, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "chip.tl",
@@ -3333,6 +3398,19 @@
       "https://cutt.ly/"
     ],
     "notes": "Custom short URLs with analytics"
+  },
+  {
+    "domain": "cuturl.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-01",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.90, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "cvs.co",
@@ -7808,17 +7886,6 @@
     "hosting": "managed"
   },
   {
-    "domain": "lttr.ai",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "ludia.gg",
     "type": "shortener",
     "status": "active",
@@ -7853,17 +7920,6 @@
   },
   {
     "domain": "lyksoomu.com",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "lzd.co",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",
@@ -10339,17 +10395,6 @@
     "evidence": [
       "https://github.com/DontPokeMe/known-link-shorteners"
     ]
-  },
-  {
-    "domain": "rbl.ms",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "rblx.co",
@@ -13333,17 +13378,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "tny.so",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
     "domain": "to.ly",
     "type": "shortener",
     "status": "active",
@@ -13381,17 +13415,6 @@
   },
   {
     "domain": "toi.in",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
-  },
-  {
-    "domain": "tokopedia.link",
     "type": "shortener",
     "status": "active",
     "added_at": "2026-02-20",

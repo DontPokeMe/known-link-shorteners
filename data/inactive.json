@@ -649,6 +649,30 @@
     "notes": "HTTP 403"
   },
   {
+    "domain": "lttr.ai",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "lzd.co",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "maper.info",
     "origin": "shortener",
     "last_status": "403",
@@ -855,6 +879,18 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "HTTP 403"
+  },
+  {
+    "domain": "rbl.ms",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "reduced.to",
@@ -1185,11 +1221,47 @@
     "notes": "Auto-demoted after 3 consecutive months of review (connect_error)"
   },
   {
+    "domain": "tny.so",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "tokopedia.link",
+    "origin": "shortener",
+    "last_status": "404",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "topt.al",
     "origin": "shortener",
     "last_status": "404",
     "last_checked_at": "2026-10-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "tracking.truthfinder.com",
+    "origin": "tracking",
+    "last_status": "403",
+    "last_checked_at": "2026-11-01",
+    "added_at": "2026-07-05",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/DontPokeMe/known-link-shorteners"
+    ],
+    "notes": "Restored from inactive list (re-probed 200)"
   },
   {
     "domain": "twm5g.co",

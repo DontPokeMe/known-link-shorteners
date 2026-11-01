@@ -44,6 +44,7 @@
 6.gp
 6.ly
 6g6.eu
+6url.com
 7.ly
 707.su
 71a.xyz
@@ -61,6 +62,7 @@
 9splay.store
 a.189.cn
 a.co
+a2a.me
 a360.co
 aarp.info
 ab.co
@@ -209,7 +211,9 @@ btm.li
 btwrdn.com
 budurl.com
 buff.ly
+buk.me
 bung.ie
+burnurl.com
 bwnews.pr
 bxl.me
 by2.io
@@ -239,6 +243,7 @@ cdl.booksy.com
 centi.ai
 cf2.me
 cfl.re
+chilp.it
 chip.tl
 chl.li
 chn.ge
@@ -302,6 +307,7 @@ cut.lu
 cutit.org
 cutt.eu
 cutt.ly
+cuturl.com
 cvs.co
 d-sh.io
 da.gd
@@ -707,12 +713,10 @@ lprk.co
 lru.jp
 lsdl.es
 lstu.fr
-lttr.ai
 ludia.gg
 luminary.link
 lurl.cc
 lyksoomu.com
-lzd.co
 m.me
 m.tb.cn
 m101.org
@@ -935,7 +939,6 @@ qvc.co
 r-7.co
 r.zecz.ec
 rb.gy
-rbl.ms
 rblx.co
 rch.lt
 rd.gt
@@ -1204,12 +1207,10 @@ tnsne.ws
 tnvge.co
 tny.cz
 tny.im
-tny.so
 to.ly
 to.pbs.org
 to8.cc
 toi.in
-tokopedia.link
 tonyr.co
 toyota.us
 tpc.io
@@ -1217,7 +1218,6 @@ tpmr.com
 tprk.us
 tr.ee
 tr5.in
-tracking.truthfinder.com
 trackurl.link
 trade.re
 travl.rs
