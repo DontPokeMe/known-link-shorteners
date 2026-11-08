@@ -7,6 +7,18 @@
     "notes": "HTTP 404"
   },
   {
+    "domain": "1ea.ir",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-08",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
     "domain": "1shop.io",
     "origin": "shortener",
     "last_status": "404",
@@ -331,6 +343,21 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "fff.to",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-08",
+    "added_at": "2026-10-04",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/boutetnico/url-shorteners/master/list.txt",
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.80, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "firsturl.de",
@@ -841,6 +868,18 @@
     "last_status": "404",
     "last_checked_at": "2026-10-01",
     "notes": "HTTP 404"
+  },
+  {
+    "domain": "pepsi.co",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-08",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "pj.pizza",

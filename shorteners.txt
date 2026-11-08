@@ -9,7 +9,6 @@
 126.am
 12ne.ws
 17mimei.club
-1ea.ir
 1kh.de
 1o2.ir
 1un.fr
@@ -354,12 +353,14 @@ dub.co
 dv.gd
 dvrv.ai
 dw.com
+dwarfurl.com
 dwz.tax
 dxc.to
 dy.fi
 dy.si
 dyo.gs
 e.lilly
+easyurl.net
 ebay.to
 econ.st
 ed.gr
@@ -408,17 +409,20 @@ fce.gg
 fetnet.tw
 fevo.me
 ff.im
-fff.to
+fhurl.com
 fifa.fans
+fire.to
 firsturl.net
 flic.kr
 flip.it
 flq.us
 fltr.ai
 flx.to
+fly2.ws
 fmurl.cc
 fn.gg
 fnb.lc
+fon.gs
 foodtv.com
 fooji.info
 ford.to
@@ -432,6 +436,7 @@ fstrk.cc
 ftnt.net
 fumacrom.com
 fvrr.co
+fwd4.me
 fwme.eu
 fxn.ws
 g-web.in
@@ -493,6 +498,7 @@ go.sony.tw
 go.tinder.com
 go.ustwo.games
 go.vic.gov.au
+go2.me
 godrk.de
 gofund.me
 gomomento.co
@@ -549,6 +555,7 @@ hubs.ly
 huffp.st
 hulu.tv
 huma.na
+hurl.it
 hyperurl.co
 hyperx.gg
 i-d.co
@@ -881,7 +888,6 @@ pdxint.at
 pe.ga
 pens.pe
 peoplem.ag
-pepsi.co
 pesc.pw
 petrobr.as
 pew.org
@@ -1154,6 +1160,7 @@ t.me
 t.tl
 t1p.de
 ta.co
+ta.gd
 tabsoft.co
 taiwangov.com
 tanks.ly
