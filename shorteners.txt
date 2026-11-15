@@ -556,6 +556,7 @@ huffp.st
 hulu.tv
 huma.na
 hurl.it
+hurl.ws
 hyperurl.co
 hyperx.gg
 i-d.co
@@ -565,6 +566,7 @@ ibb.co
 ibf.tw
 ibm.biz
 ibm.co
+icanhaz.com
 icit.fr
 ick.li
 icks.ro
@@ -686,6 +688,7 @@ link.ac
 link.infini.fr
 link.to
 link.tubi.tv
+linkbun.ch
 linkbun.com
 linko.page
 linkopener.co
@@ -1285,7 +1288,6 @@ urla.ru
 urlgeni.us
 urli.ai
 urlify.cn
-urlin.it
 urlr.me
 urls.fr
 urly.co
@@ -1376,7 +1378,6 @@ wrctr.co
 wrd.cm
 wrem.it
 wtc.la
-wun.io
 ww7.fr
 wwf.to
 wwp.news

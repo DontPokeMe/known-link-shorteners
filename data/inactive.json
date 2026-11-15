@@ -1372,6 +1372,21 @@
     "notes": "HTTP 404"
   },
   {
+    "domain": "urlin.it",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-15",
+    "added_at": "2026-10-18",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/boutetnico/url-shorteners/master/list.txt",
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
+  },
+  {
     "domain": "urls.kr",
     "origin": "shortener",
     "last_status": "403",
@@ -1460,6 +1475,18 @@
     "last_status": "dns_error",
     "last_checked_at": "2026-10-01",
     "notes": "httpsconnectionpool(host='wndrfl.co', port=443): max retries exceeded with url: / (caused by nameresolutionerror(\"httpsconnection(host='wndrfl.co', port=443): failed to resolve 'wndrfl.co' ([errno -2]"
+  },
+  {
+    "domain": "wun.io",
+    "origin": "shortener",
+    "last_status": "dns_error",
+    "last_checked_at": "2026-11-15",
+    "added_at": "2026-02-20",
+    "source": "internal",
+    "evidence": [
+      "https://github.com/PeterDaveHello/url-shorteners"
+    ],
+    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "x.gd",

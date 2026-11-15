@@ -6164,6 +6164,19 @@
     "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.90, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
+    "domain": "hurl.ws",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-15",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
+  },
+  {
     "domain": "hyperurl.co",
     "type": "shortener",
     "status": "active",
@@ -6263,6 +6276,19 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "icanhaz.com",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-15",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "icit.fr",
@@ -7589,6 +7615,19 @@
       "https://github.com/PeterDaveHello/url-shorteners"
     ],
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
+  },
+  {
+    "domain": "linkbun.ch",
+    "type": "shortener",
+    "status": "active",
+    "added_at": "2026-11-15",
+    "source": "internal",
+    "evidence": [
+      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
+      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
+      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
+    ],
+    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
   },
   {
     "domain": "linkbun.com",
@@ -14279,20 +14318,6 @@
     "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
-    "domain": "urlin.it",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-10-18",
-    "source": "internal",
-    "evidence": [
-      "https://raw.githubusercontent.com/boutetnico/url-shorteners/master/list.txt",
-      "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/urlshortener-onlydomains.txt",
-      "https://raw.githubusercontent.com/sambokai/ShortURL-Services-List/master/shorturl-services-list.csv",
-      "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
-    ],
-    "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.85, models: llama3.1:8b, qwen2.5:7b). Pending human review."
-  },
-  {
     "domain": "urlr.me",
     "type": "shortener",
     "status": "active",
@@ -15296,17 +15321,6 @@
       "https://raw.githubusercontent.com/timleland/url-shorteners/master/list.txt"
     ],
     "notes": "Auto-ingested: 2 model(s) agree on shortener (confidence 0.80, models: llama3.1:8b, qwen2.5:7b). Pending human review."
-  },
-  {
-    "domain": "wun.io",
-    "type": "shortener",
-    "status": "active",
-    "added_at": "2026-02-20",
-    "source": "internal",
-    "evidence": [
-      "https://github.com/PeterDaveHello/url-shorteners"
-    ],
-    "notes": "Known Shortener - PeterDaveHello List (Sept 2025)"
   },
   {
     "domain": "ww7.fr",
